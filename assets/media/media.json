@@ -20,13 +20,6 @@
   "mb": 4.9,
   "src": "Jellyfish (Google Cloud)/Maureen_AIDroneChallenge-9x16.mp4"
  },
- "exec-daniel-walker-murray": {
-  "w": 720,
-  "h": 900,
-  "dur": 47,
-  "mb": 4.4,
-  "src": "Jellyfish (Google Cloud)/Daniel - WTMD - 4x5.mp4"
- },
  "exec-joana-deepmind": {
   "w": 720,
   "h": 900,
@@ -264,5 +257,12 @@
   "dur": 251,
   "mb": 28.3,
   "src": "Self-Employed (Content Creator)/Origin_Call_of_Duty_61000 views_6500engagement.mp4"
+ },
+ "masters-madrid-hello": {
+  "w": 1280,
+  "h": 720,
+  "dur": 58,
+  "mb": 7.7,
+  "src": "Riot Games/HELLO-MADRID-VALORANT-Masters-2024_001_1080p.mp4"
  }
 }

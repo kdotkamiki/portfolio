@@ -1,22 +1,29 @@
 """
 Portfolio content. Every figure here comes from the campaign notes, the
-CV, or on-screen data in the supplied assets. See _build/SOURCES.md for the
+CV, Ramtin's own notes in conversation, the Google Cloud account reports,
+or on-screen data in the supplied assets. See _build/SOURCES.md for the
 source of each number. Nothing is estimated.
 
 Media references:
-  ("v", "name")            -> assets/media/name.mp4 + name.webp poster
-  ("i", "name", "alt")     -> assets/img/work/name.webp
+  ("v", "name", "caption")   -> assets/media/name.mp4 + name.webp poster
+  ("i", "name", "caption")   -> assets/img/work/name.webp
 Each media group is a row; items sit side by side at equal height with no cropping.
+
+Text blocks (challenge, role, approach, idea) are lists of:
+  "a paragraph"
+  ("h", "a subheading")
+  ("list", ["<strong>Lead-in.</strong> bullet", ...])     bullets
+  ("steps", [("Step title", "what happened"), ...])        numbered steps
 """
 
 EMAIL = "redacted@example.com"
-LINKEDIN = ""  # TODO: paste your LinkedIn profile URL here; the link is hidden while empty
+LINKEDIN = "https://www.linkedin.com/in/rtotonchi4412"
 
 # --------------------------------------------------------------------------- positioning
 HOME_INTRO = (
-    "Social creative lead. I set the strategy, develop the idea, direct the content "
-    "and read how it performs. Organic social at the core, paid where it scales, "
-    "across culture, esports and B2B technology."
+    "Strategy that finds the moment. Ideas that own it. Content that earns the scroll. "
+    "I lead social-first creative for culture, esports and B2B tech brands: "
+    "organic at the core, paid to scale, judged on results."
 )
 
 ABOUT_LEDE = (
@@ -42,7 +49,7 @@ SERVICES = [
      "London Summit · VCT EMEA"),
     ("Creative direction", "vct24-kickoff-teaser",
      ["Campaign platforms and hero ideas", "Briefing agencies and studios", "Shoot direction and production", "Quality bar across every cut"],
-     "Season teasers · Push to Talk"),
+     "Season teasers · Masters Madrid"),
     ("Content and formats", "frenzy-fire-2023",
      ["Always-on series and franchises", "Short-form and vertical video", "Talent and player-led content", "Platform launches"],
      "Frenzy Fire · TikTok launch"),
@@ -53,10 +60,32 @@ SERVICES = [
 
 STATS = [  # (number, suffix, label) – all verified in SOURCES.md
     (15, "+", "Years in social, content and community"),
-    (4.1, "M", "Earned impressions, Google Cloud London Summit 2026"),
+    (5.1, "M", "Impressions on Google Cloud's core social channels in the account year to November 2025"),
     (100, "K", "TikTok followers in VCT EMEA's first year on the platform"),
     (2021, "", "Esports Creative Piece of the Year, G2 Esports × adidas"),
 ]
+
+# Account-level results for Google Cloud social (Jellyfish). High-level numbers only.
+ACCOUNT_RESULTS = dict(
+    title="Google Cloud social, at Jellyfish",
+    intro="Account-level results across the Google Cloud channels I work on, as reported by the account team. The 2025 period is the account year in which I joined Jellyfish, in March 2025.",
+    periods=[
+        dict(name="Account year to November 2025",
+             scope="LinkedIn (global), Instagram (global) and X (UK)",
+             stats=[("5.1M", "Impressions", "+12.6% year on year"),
+                    ("601.7K", "Engagements", "+28.8% year on year"),
+                    ("265.6K", "Weighted engagements", "+54.1% year on year"),
+                    ("11.8%", "Engagement rate", "up from 10.4%")],
+             note="Followers across the three accounts grew by 106,534 to 777,064."),
+        dict(name="H1 2026 vs H1 2025",
+             scope="All Google Cloud channels in the report, global and regional",
+             stats=[("4.87M", "Impressions", "+18.7% year on year"),
+                    ("461.1K", "Engagements", "−6.7% year on year"),
+                    ("210.1K", "Weighted engagements", "+0.3% year on year"),
+                    ("9.5%", "Engagement rate", "12.1% in H1 2025")],
+             note="Delivered from 32% fewer posts than H1 2025 (1,113 vs 1,641). Global LinkedIn engagement rate rose to 20.3%, up 43%."),
+    ],
+)
 
 EXPERIENCE = [
     ("Jellyfish", "Social Content Manager, on the Google Cloud account", "2025–now", "london-summit-sizzle"),
@@ -68,6 +97,14 @@ EXPERIENCE = [
 
 BRANDS = ["Google Cloud", "The FA", "Riot Games", "VALORANT Esports", "adidas", "Ralph Lauren", "Logitech G",
           "Red Bull", "Aim Lab", "Cougar", "Paysafecard", "Unilumin", "OMEN by HP", "Intel", "Snickers"]
+
+# --------------------------------------------------------------------------- shared role copy
+JF = ("As Social Content Manager at Jellyfish and Social Content Lead on the Google Cloud account, I own content output end to end, "
+      "from brief ingestion and creative direction through production, approvals and publishing, across Google Cloud and its partner portfolio.")
+ED = ("As Social & Content Lead at Edelman on the Riot Games account, I owned the creative and content pipeline for VALORANT Esports across "
+      "EMEA: shaping briefs, setting creative direction, steering production partners and reporting performance back to senior stakeholders across nine markets.")
+RG = ("As Social Media Strategist, EMEA at Riot Games, I owned the social and creative strategy for VALORANT Esports in the region, "
+      "connecting audience insight with global brand objectives and taking campaigns from brief to launch to measurement.")
 
 # --------------------------------------------------------------------------- case studies
 # via: how Ramtin was involved: employer or agency, so client and employer are never confused
@@ -84,18 +121,23 @@ P.append(dict(
                "Every major cloud provider was making that claim, to the same audience of technical and business decision-makers.",
                "Event content usually peaks on the day and disappears. The challenge was to turn one summit into authority that "
                "showed up in owned channels, in people's own feeds, and in trade media."],
-    role=["As Social Content Lead on the Google Cloud account at Jellyfish, I owned the Summit's social content from brief through to execution, "
-          "working with the Google Cloud team, Jellyfish strategists and production partners."],
-    approach=["We split the job into three layers, each with its own purpose and measure:",
-              ("list", ["<strong>Owned, to build authority.</strong> LinkedIn, X, Instagram and Facebook, measured on weighted engagement.",
-                        "<strong>Earned, to build trust.</strong> Halo (Google Cloud's employee advocacy platform), influencers and the executives in the Luminary Programme, measured on share of voice and reach.",
-                        "<strong>Paid, to build scale.</strong> TechTarget and Condé Nast, measured on impressions and sentiment."]),
-              "That structure meant the same moment from the stage could appear as a brand post, an executive's own LinkedIn update, an employee share and a paid placement, each doing a different job."],
+    role=[JF,
+          "On the Summit, I led the social content workstream: translating the mission statement into a channel plan, "
+          "aligning the Google Cloud team, Jellyfish strategists and production partners on one content roadmap, "
+          "briefing the on-site capture, and keeping executive, advocacy and brand content moving at the speed of a live event. "
+          "After the day, I tracked performance against the KPIs for each layer and fed the learnings into the next activation."],
+    approach=["A full-funnel social ecosystem, with every layer given its own job and its own KPI:",
+              ("steps", [("Define the job", "One mission: authority in AI and data cloud in the UK. Every asset had to ladder up to it."),
+                         ("Owned builds authority", "LinkedIn, X, Instagram and Facebook carry the brand narrative, measured on weighted engagement rather than vanity reach."),
+                         ("Earned builds trust", "Employee advocacy through Halo, creators and the executives in the Luminary Programme put real voices behind the message, measured on share of voice and reach."),
+                         ("Paid builds scale", "TechTarget and Condé Nast extend the story to in-market decision-makers, measured on impressions and sentiment."),
+                         ("Capture once, publish everywhere", "On-site capture designed for every layer at once, so one moment from the stage becomes a brand post, an executive update, an employee share and a paid placement."),
+                         ("Read and optimise", "Live monitoring on the day, then a full read-out against target to sharpen the next event.")])],
     idea=["Treat the Summit as a content studio, not just a stage. Executives, speakers and Gemini masterclass sessions were captured on the day "
           "as platform-native video and stories, then distributed through every layer above. The campaign's own line put it simply: "
           "don't just capture your event, scale it."],
     delivered=["Owned, earned and paid channel strategy with a KPI per layer",
-               "Executive monologue video filmed at the Summit",
+               "Executive and speaker videos filmed at the Summit",
                "Live and on-the-day content across LinkedIn, X, Instagram and Facebook, including Instagram Stories",
                "Employee advocacy and executive amplification through Halo and the Luminary Programme",
                "Results reel summarising the campaign"],
@@ -108,23 +150,29 @@ P.append(dict(
     results_note="Figures as reported in the campaign's results reel.",
     skills=["B2B social strategy", "Owned, earned and paid planning", "Event content", "Executive and employee advocacy", "Performance measurement"],
     media={"hero": [("v", "london-summit-sizzle", "Results reel, London Summit 2026")],
-           "after_approach": [("v", "london-summit-alex-rutter", "Executive monologue filmed at the Summit: Alex Rutter, EMEA Managing Director, AI, Google Cloud")]},
+           "after_approach": [("v", "london-summit-alex-rutter", "Alex Rutter, EMEA Managing Director, AI, Google Cloud, filmed at the Summit"),
+                              ("v", "exec-maureen-drone-challenge", "Maureen Costello on drone technology and supply chains"),
+                              ("v", "exec-joana-deepmind", "Joana Carrasqueira, Google DeepMind, on vibe coding")]},
 ))
 
 P.append(dict(
     slug="the-fa-x-google-cloud", featured=True,
-    title="The FA × Google Cloud", client="The FA · Google Cloud", via="At Jellyfish", year=None,
+    title="The FA × Google Cloud", client="The FA · Google Cloud", via="At Jellyfish", year="2026",
     platforms="Vertical social video (9:16)", cat="Partnership content",
     thumb=("composite", ["fa-roboball", "fa-creative-agent", "fa-get-to-know"]), quote="Robot football, powered by Gemini.",
     summary="A vertical video series that put England players in front of Google Cloud's AI tools, so football fans could see what Gemini does by watching players compete with it.",
     challenge=["AI products are abstract, and sports partnership content often ends up as players standing next to a logo. "
                "This had to engage a football audience in a conversation about AI, and feel high-energy and playful rather than like a product demo."],
-    role=["Social Content Lead on the Google Cloud account at Jellyfish. I was part of the team that developed the hero concepts below, "
-          "with responsibility for how they would play on social and for carrying the series through to delivery."],
-    approach=["Lead with play, not product. Each format turns one Gemini capability into a game the players genuinely want to win, "
-              "so the technology is understood by watching it work.",
-              "Two hero films carry the product story. Lighter quick-fire formats keep the players' personalities front and centre "
-              "and give the series frequency between the bigger pieces."],
+    role=[JF,
+          "On this partnership I was part of the core team that developed the hero concepts: pressure-testing each idea for social, "
+          "shaping the formats around what talent time allowed, and owning how the series would land on platform. I then steered the work "
+          "through production, edit and approvals with the client, The FA and our production partners."],
+    approach=["Product-led storytelling, disguised as play:",
+              ("steps", [("Find the tension", "Football fans don't care about AI features, but they love competition, banter and seeing players off-guard."),
+                         ("Make the product the game", "Each hero concept turns one Gemini capability into a challenge, so the tech is understood by watching it work, not by being told."),
+                         ("Build a content system", "Two hero films carry the product story; lighter quick-fire formats deliver personality, frequency and cut-downs between them."),
+                         ("Design for the feed", "Vertical-first, hook in the opening seconds, split screens, stat cards, captions and sound design built for sound-off and sound-on viewing."),
+                         ("One shoot, many assets", "Plan the formats around a single block of player access to maximise output per minute of talent time.")])],
     idea=[("h", "AI RoboBall"),
           "Robot football powered by Gemini. Each robot starts with a basic Python program. The players improve it by telling Gemini how the robot should play, "
           "and Gemini Code Assist turns their instructions into code using its knowledge of the game and the robot's API. "
@@ -151,11 +199,16 @@ P.append(dict(
     challenge=["Senior leaders are the most trusted voices a B2B brand has, and the hardest to get publishing. Executive content tends to be sporadic, "
                "drift off-message, or sit in a folder approved but never posted.",
                "The measure that matters isn't how many assets get made. It's how many get published, by the right person, at the moment the business needs them."],
-    role=["I lead the programme end to end at Jellyfish: planning, content, executive relationships and publishing."],
-    approach=[("list", ["<strong>Zero self-briefing.</strong> Executives don't have to come up with ideas or write anything. The programme brings them ready-to-publish content in their own voice.",
-                        "<strong>Aligned to the business calendar.</strong> Product launches, priority company announcements, customer stories, partner milestones, regional news and key field and industry events.",
-                        "<strong>Native publishing.</strong> Posts go out from the executives' own profiles, managed by Jellyfish in Sprinklr with the right permissions, scheduling and milestones in place.",
-                        "<strong>Adoption over output.</strong> Success means published and adopted, not just produced."])],
+    role=["I lead the Luminary Programme end to end at Jellyfish. That covers programme strategy and editorial planning, "
+          "executive onboarding and relationship management, voice-of-leader copywriting and creative, governance and permissions in Sprinklr, "
+          "scheduling and native publishing, and reporting on adoption and performance back to the Google Cloud team.",
+          "Day to day, I'm the single point of contact between the executives' teams and the content engine, which is what makes zero self-briefing possible."],
+    approach=["A thought-leadership operating model built for adoption, not output:",
+              ("steps", [("Map the voices", "Match each executive to the themes, products, regions and audiences they can credibly own."),
+                         ("Plug into the business calendar", "Align the editorial plan with product launches, priority company announcements, customer stories, partner milestones, regional news and field and industry events."),
+                         ("Remove the friction", "Zero self-briefing: executives receive ready-to-publish posts and creative in their own voice, with nothing to write or brief."),
+                         ("Publish natively", "Posts go out from executives' own profiles, managed by Jellyfish in Sprinklr with the right permissions, scheduling and milestones."),
+                         ("Measure adoption", "Track what was published and adopted, not just produced, and refine angles and cadence from the data.")])],
     idea=["One moment, many credible voices. Around a launch like Gemini at Work '26, each executive takes the angle that fits their remit: "
           "productivity for the UK, Ireland and Sub-Saharan Africa CEO, financial services for the EMEA AI lead, engineering, security and digital sovereignty for others. "
           "The audience gets five different reasons to care instead of one press release repeated five times."],
@@ -163,33 +216,33 @@ P.append(dict(
                "Native publishing on executives' own profiles via Sprinklr", "Coordination with each executive's point of contact",
                "Amplification of launches, customer stories, partner milestones and regional moments"],
     results=[],
-    results_note="Programme metrics weren't included in the supplied material. The evidence shown is the published work: coordinated posts from five Google Cloud executives around Gemini at Work '26.",
+    results_note="Programme-level metrics weren't included in the supplied material. The evidence shown is the published work: coordinated posts from five Google Cloud executives around Gemini at Work '26.",
     skills=["Executive social", "Thought leadership", "B2B LinkedIn", "Programme management", "Stakeholder management", "Sprinklr"],
     media={"hero": [("i", "luminary-1", "LinkedIn post by Maureen Costello, Google Cloud, about Gemini at Work"),
                     ("i", "luminary-4", "LinkedIn post by Alex Rutter, Google Cloud, about Lloyds Banking Group and Gemini Enterprise"),
                     ("i", "luminary-2", "LinkedIn post by Chris Lindsay, Google Cloud, about Merck and Gemini Enterprise")],
            "after_approach": [("i", "luminary-3", "LinkedIn post by Dr. Marianne Janik, Google Cloud, about digital sovereignty"),
-                              ("i", "luminary-5", "LinkedIn post by Ben Cabanas, Google Cloud, about Gemini agent")],
-           "extra_title": "More executive-led video from the Google Cloud account",
-           "extra_note": "Not part of the Luminary Programme case study above. Shown here as further examples of executive-fronted content on the account.",
-           "extra": [("v", "exec-maureen-drone-challenge", "Maureen Costello on drone technology and supply chains"),
-                     ("v", "exec-daniel-walker-murray", "Daniel Walker-Murray on Gemini Enterprise"),
-                     ("v", "exec-joana-deepmind", "Joana Carrasqueira, Google DeepMind, on vibe coding")]},
+                              ("i", "luminary-5", "LinkedIn post by Ben Cabanas, Google Cloud, about Gemini agent")]},
 ))
 
 P.append(dict(
     slug="vct-emea-2024-season-teasers", featured=True,
-    title="VCT EMEA 2024: Season Teasers", client="Riot Games", via="At Edelman", year="2024",
+    title="VCT EMEA 2024: Season Teasers", client="Riot Games", via="At Edelman", year="2024–25",
     platforms="YouTube, X, Instagram, TikTok", cat="Tentpole campaign films",
     thumb=("v", "vct24-kickoff-teaser"), quote="New meta. New faces. New ambitions.",
     summary="The films that opened, restarted and closed VALORANT's EMEA league in its biggest year so far, each built around what was new at that point in the season.",
     challenge=["2024 brought a new Kickoff tournament, a new team promoted through Ascension, and a season split into stages. "
                "Each stage needed its own reason to tune in, without repeating the same hype formula the audience had already seen."],
-    role=["Social & Content Lead on the Riot Games account at Edelman, leading creative development across YouTube, X, Instagram and TikTok "
-          "and working with video studio partners on the teasers."],
-    approach=["Treat each teaser as a chapter with its own story, not a reskin of the last one. Kickoff was about change, Stage 2 introduced a new visual language, "
-              "and the Grand Finals teaser had one job: make the biggest weekend of the year feel unmissable.",
-              "Every film was cut for each platform rather than posted once and shared everywhere."],
+    role=[ED,
+          "On the season teasers I led creative development and campaign planning: writing and shaping the creative briefs, "
+          "working with video studio partners from concept to final cut, aligning Riot's product, brand and game teams, "
+          "and building the cross-platform rollout. On the 2025 Kickoff teaser, my role was creative input and social campaign planning."],
+    approach=["A tentpole system that makes every chapter of the season feel like an event:",
+              ("steps", [("Find the story of the moment", "Kickoff is about change, Stage 2 about a new look and new stakes, the Grand Finals about legacy."),
+                         ("Give each chapter a distinct creative world", "New visual language and tone each time, so the audience never feels they've seen it before."),
+                         ("Build on the 2024 brand", "Use the league's new colours and imagery as the connective tissue across every film."),
+                         ("Cut natively for every platform", "Bespoke edits for YouTube, X, Instagram and TikTok rather than one asset shared everywhere."),
+                         ("Launch, read, iterate", "Track reach, engagement and sentiment per teaser and carry the learnings into the next chapter.")])],
     idea=[("h", "New meta, new faces, new ambitions"),
           "The Kickoff teaser introduced the new tournament, the new team and the stakes of a new season.",
           ("h", "You are not ready"),
@@ -210,6 +263,30 @@ P.append(dict(
 ))
 
 P.append(dict(
+    slug="valorant-masters-madrid", featured=True,
+    title="VALORANT Masters Madrid", client="Riot Games", via="At Edelman", year="2024",
+    platforms="YouTube, X, Instagram, TikTok", cat="International event hype",
+    thumb=("v", "masters-madrid-hello"), quote="Hello, Madrid.",
+    summary="Creative direction for the hype campaign around VALORANT Masters Madrid 2024, the first international event of the season, as it arrived in a new host city.",
+    challenge=["International events compete with every other moment in the esports calendar. The job was to generate hype for Madrid: "
+               "make the event feel unmissable to existing fans and give the host city a role in the story."],
+    role=[ED,
+          "On Masters Madrid my role was creative direction: setting the creative vision, briefing and guiding the production team, "
+          "reviewing cuts against the brief and making sure the finished film was built to perform on social."],
+    approach=["Hype built on a sense of place:",
+              ("steps", [("Start from the city", "Make Madrid itself a character, not just a backdrop for logos and dates."),
+                         ("Bridge the season", "Connect the EMEA league to the international stage so fans feel the jump in stakes."),
+                         ("Build to the reveal", "Pace the film towards the Masters Madrid moment and the event branding."),
+                         ("Distribute natively", "Cut and sequence the film for each platform in the run-up to the event.")])],
+    idea=["Hello, Madrid: a journey into the host city that lands on the Masters Madrid reveal, announcing that VALORANT's international stage has arrived."],
+    delivered=["Creative direction on the Hello Madrid hype film", "Social rollout in the run-up to the event"],
+    results=[],
+    results_note="Performance data for this film wasn't part of the material supplied, so none is shown here.",
+    skills=["Creative direction", "Event marketing", "Brand storytelling", "Video production"],
+    media={"hero": [("v", "masters-madrid-hello", "Hello Madrid: VALORANT Masters Madrid 2024")]},
+))
+
+P.append(dict(
     slug="vct-emea-tiktok-launch", featured=True,
     title="VCT EMEA on TikTok", client="Riot Games", via="At Edelman", year="2024",
     platforms="TikTok", cat="Platform launch",
@@ -217,9 +294,14 @@ P.append(dict(
     summary="The launch of VCT EMEA's TikTok channel, built on native content captured with players and talent, which grew to 100,000 followers in its first year.",
     challenge=["A new channel starts at zero, and TikTok audiences scroll past anything that looks like a repurposed broadcast clip. "
                "Player time is limited across a season, so native content had to be planned rather than hoped for."],
-    role=["I was responsible for the TikTok launch campaign for social."],
-    approach=["Use media day, when the league captures its evergreen content for the year, to also capture TikTok-native shorts. "
-              "One access window with the players and talent produced a bank of content written for the platform from the start."],
+    role=[ED,
+          "I owned the TikTok launch campaign end to end: the channel strategy and content pillars, the shot lists and formats for media day, "
+          "on-site direction with players and talent, and the publishing cadence and optimisation through the first year."],
+    approach=["A platform-first launch playbook:",
+              ("steps", [("Start native", "No repurposed broadcast clips. Every launch asset is written for the For You page."),
+                         ("Piggyback on access", "Use media day, when evergreen content for the year is captured, to also capture TikTok-native shorts with players and talent."),
+                         ("Build content pillars", "Trends, personality and behind-the-scenes formats that can be repeated and scaled across the year."),
+                         ("Test, learn, double down", "Read what the algorithm rewards and put more behind the formats that break out.")])],
     idea=["Content that works on the For You page first and feels true to the people in it: short, self-aware formats and trends performed by the players and talent themselves."],
     delivered=["TikTok launch campaign", "Native shorts planned and captured at media day", "Ongoing organic publishing through the first year"],
     results=[("100K", "Followers in the first year", ""),
@@ -232,15 +314,20 @@ P.append(dict(
 ))
 
 P.append(dict(
-    slug="love-what-you-do", featured=False,
+    slug="love-what-you-do", featured=True,
     title="Love What You Do", client="Riot Games", via="At Edelman", year="2024",
     platforms="YouTube, X, Instagram", cat="Player documentary series",
     thumb=("v", "love-what-you-do-mimi"), quote="Players, at home.",
     summary="A series of mini-documentaries about players' lives in and outside VALORANT, starting with G2's Mimi in her hometown in Denmark.",
     challenge=["Fans know players through their gameplay, not as people. Reach-led formats grow numbers but rarely build lasting fandom for individual players."],
-    role=["Social & Content Lead on the Riot Games account at Edelman. We chose the players to feature deliberately, and I helped shape the series and its measurement."],
-    approach=["Choose a small number of players worth knowing better, go to where they're from, and judge the series on the right metric. "
-              "Documentary pieces tend to engage deeply rather than reach widely, so sentiment and engagement were the KPIs, not views."],
+    role=[ED,
+          "On this series I helped select the players worth featuring, shaped the editorial angle for each film, supported the on-location production "
+          "and set the measurement framework, putting sentiment and engagement ahead of reach."],
+    approach=["Depth over reach, by design:",
+              ("steps", [("Pick the right players", "Identify the people in the league with a story worth telling, not just the biggest names."),
+                         ("Go to the source", "Film in their hometowns, so the story is told through the places that shaped them."),
+                         ("Tell the whole career", "The highs and the lows, inside the game and outside it."),
+                         ("Measure what the format is for", "Sentiment and engagement as the KPIs, because documentary content builds affinity rather than raw reach.")])],
     idea=["Love What You Do: the ups and downs of a career, inside the game and outside it, told at home. For Mimi, that meant filming in her hometown in Denmark."],
     delivered=["Four player feature films", "On-location shoot in Denmark for the Mimi episode", "Social cutdowns and distribution"],
     results=[("99%+", "Positive sentiment", ""), ("8,000+", "Engagements across the four films", "")],
@@ -257,9 +344,14 @@ P.append(dict(
     summary="The launch films for the 2023 season of VCT EMEA, the first year of VALORANT's partnership league: Join Us, and the opening teaser.",
     challenge=["2023 was a new structure for VALORANT esports in EMEA, with ten partner teams and a new studio in Berlin. "
                "Fans needed a reason to commit to a league they hadn't seen yet."],
-    role=["As Social Media Strategist for EMEA at Riot Games, I set the social and creative strategy for the launch and directed the campaign across channels."],
-    approach=["Launch with people, not logos. Put the players in ordinary places around the city and let their personalities sell the league, "
-              "then follow with a cinematic opening teaser on the eve of the season."],
+    role=[RG,
+          "For the launch, I set the social and creative strategy, worked with the creative and production teams on the concept and shoot, "
+          "planned the content calendar and rollout across channels, and owned performance tracking after launch."],
+    approach=["A people-first launch campaign:",
+              ("steps", [("Lead with the players", "Personalities sell a new league faster than logos and formats do."),
+                         ("Make it local", "Put the players in ordinary places around Berlin, the league's new home."),
+                         ("Sequence the launch", "The Join Us film to invite fans in, then a cinematic opening teaser on the eve of the season."),
+                         ("Extend the shoot", "Photography from the same shoot to feed launch-week posts and always-on content.")])],
     idea=["Join Us: players in everyday Berlin, each with a character beat, inviting fans into the new league rather than announcing it at them."],
     delivered=["Join Us launch film", "Photography from the Join Us shoot", "VCT EMEA 2023 opening teaser"],
     results=[("1M", "Views, Join Us", "10K+ engagements"), ("100K", "Views, opening teaser", "3K engagements")],
@@ -278,9 +370,14 @@ P.append(dict(
     thumb=("v", "unlocked-fnatic"), quote="Ten teams, ten hometowns.",
     summary="A long-form documentary series that followed the ten partner teams through their hometowns ahead of the 2023 VCT EMEA launch.",
     challenge=["The league launch needed hype, but the teams were also new to a lot of the audience. Fans needed reasons to pick a side before the first match."],
-    role=["Social Media Strategist for EMEA at Riot Games, responsible for the series as part of the 2023 launch campaign."],
-    approach=["Make the launch about the teams' roots. A mini-documentary per partner team, released in the run-up to Kickoff, "
-              "introduces the players, their motivations, goals and what they're excited about, and grows each team's fandom as well as the league's."],
+    role=[RG,
+          "On Unlocked, I owned the series as part of the 2023 launch campaign: defining the format and editorial angle, coordinating with the ten partner teams, "
+          "working with production on the shoots and edits, and planning the YouTube release schedule and social cut-downs."],
+    approach=["Hype the league by growing every team's fandom:",
+              ("steps", [("One episode per partner team", "Every organisation gets the same platform, so no fanbase is left out."),
+                         ("Go to their roots", "Film in each team's hometown and headquarters."),
+                         ("Let the players talk", "Their motivations, their goals and what they're excited about this season."),
+                         ("Release into Kickoff", "Schedule episodes in the run-up to the league launch and cut them down for social.")])],
     idea=["Unlock each team: go to where the organisation is from and let the players show you around."],
     delivered=["Ten-episode documentary series, one per partner team", "Episode one: Fnatic"],
     results=[("~600K", "Total views", ""), ("~40K", "Engagements", "")],
@@ -297,10 +394,15 @@ P.append(dict(
     summary="A sponsored series I created with Logitech G: mic-check content that lets fans hear players talk in and out of the game as they prepare, set up and compete.",
     challenge=["Sponsor content in esports is easy to skip. Logitech needed an integration that made sense for a headset and microphone brand "
                "and that fans would actually want to watch."],
-    role=["I created the series and worked hand in hand with Logitech to build a format that fit their brand and our audience. "
-          "I led it in 2023 at Riot Games and evolved it in 2024 at Edelman."],
-    approach=["Start from the product's truth. Logitech makes the headsets and microphones players use, so the content should be about what you hear through them. "
-              "Logitech sponsored the series and put paid support behind it."],
+    role=["I created Push to Talk and owned it end to end: the format, the partnership pitch and working relationship with Logitech, "
+          "comms capture and edit direction, publishing, and performance reporting to the partner. "
+          "I launched it at Riot Games in 2023 and redesigned the format, structure and layout at Edelman in 2024."],
+    approach=["Branded content where the product is the point of view:",
+              ("steps", [("Start from the product truth", "Logitech makes the headsets and microphones players use, so the content should be about what you hear through them."),
+                         ("Make the integration the format", "Mic-check content can't exist without the product, so the brand never feels bolted on."),
+                         ("Give fans something new", "Comms, calls and banter they can't get from the broadcast alone."),
+                         ("Amplify with paid", "Logitech sponsored the series and put paid support behind it."),
+                         ("Iterate the format", "A redesigned structure and layout in year two, built on what the 2023 data told us.")])],
     idea=["Push to Talk: a mic-check format. Player comms, banter and calls during matches, cut together so fans hear the game the way the players do."],
     delivered=["Seven-episode series in 2023", "A redesigned format, structure and layout in 2024", "Paid support in partnership with Logitech"],
     results=[("300K", "Views, 2023 series", "7 episodes"), ("21K", "Engagements, 2023 series", ""), ("~50%", "Better performance in 2024", "vs the 2023 series")],
@@ -317,9 +419,14 @@ P.append(dict(
     thumb=("v", "frenzy-fire-2023"), quote="How well do pros know their own game?",
     summary="A quick-fire quiz series that tests VCT EMEA pros on their own game and league, and became one of the league's most popular formats.",
     challenge=["The league needed always-on content between broadcasts that showed players' personalities, was efficient to produce, and worked in clips across platforms."],
-    role=["Part of the VCT EMEA content slate I led at Riot Games in 2023, then continued and grown in 2024 at Edelman."],
-    approach=["A simple, repeatable quiz format that works with any player, produces a full series and cuts down into short clips for every platform. "
-              "In 2024 the format moved on, with players guessing which pro said a given quote."],
+    role=["Frenzy Fire was part of the VCT EMEA content slate I led at Riot Games in 2023: I owned the format's place in the content strategy, "
+          "planned the question sets and player line-ups with production, and managed publishing and cut-downs across platforms.",
+          "At Edelman in 2024, I carried the series forward, evolving the format and tracking its year-on-year growth."],
+    approach=["An always-on franchise engineered for repeatability and reach:",
+              ("steps", [("Keep the format simple", "Quick-fire questions, a scoreboard and players who really want to win."),
+                         ("Make it work with any player", "The same format scales across the whole league, every week."),
+                         ("Build for clipping", "Every round is a standalone moment for Shorts, Reels, TikTok and X."),
+                         ("Evolve in season two", "New mechanics in 2024, with players guessing which pro said a given quote.")])],
     idea=["Quick-fire questions, bold graphics, a scoreboard and players who really want to win."],
     delivered=["Seven-episode 2023 series", "2024 series, including He Said That?"],
     results=[("500K", "Views, 2023 series", "7 videos"), ("70K", "Engagements, 2023 series", ""), ("+25%", "Views and engagement in 2024", "vs 2023")],
@@ -336,8 +443,14 @@ P.append(dict(
     thumb=("v", "lock-your-tickets"), quote="Sell out a studio that didn't exist yet.",
     summary="A paid and organic campaign to sell tickets for VCT EMEA's new studio, built from the ground up at Messe Berlin in 2023.",
     challenge=["A brand-new venue with no track record, and an audience used to watching online. The campaign had to turn viewers into ticket buyers, and prove it."],
-    role=["As Social Media Strategist for EMEA, I owned the social campaign: the trailer rollout and the paid set-up, with ticket clicks and purchases tracked through UTMs."],
-    approach=["Build the trailer as a piece of hype content first, then put paid behind it with UTM tracking, so creative performance could be read against real ticket demand rather than views alone."],
+    role=[RG,
+          "On Lock Your Tickets I owned the social campaign: the creative brief for the trailer, the organic rollout, and the paid set-up with our media partners, "
+          "with UTM tracking on every link so ticket clicks and purchases could be attributed back to the creative."],
+    approach=["A conversion-led, full-funnel ticketing campaign:",
+              ("steps", [("Lead with hype", "A trailer that makes the live room feel like the place the season happens."),
+                         ("Put paid behind it", "Paid social to reach in-market fans beyond the organic audience."),
+                         ("Track every click", "UTMs on all links, so performance is read against ticket demand, not just views."),
+                         ("Optimise on conversion", "Shift spend and messaging towards what was actually selling tickets.")])],
     idea=["Lock Your Tickets: a fast, red-drenched trailer that makes the live room feel like the place the season happens."],
     delivered=["Ticketing trailer", "Paid social campaign with UTM tracking", "Organic launch posts"],
     results=[("~600K", "Views", ""), ("~10%", "Conversion rate on UTM clicks", ""), ("527.2K", "Views on the launch post on X", "")],
@@ -347,24 +460,54 @@ P.append(dict(
 ))
 
 P.append(dict(
+    slug="vct-emea-bootcamp", featured=True,
+    title="VCT EMEA Bootcamp", client="Riot Games", via="In-house", year="2023",
+    platforms="X, Instagram, YouTube · paid social", cat="Paid and organic sign-up campaign",
+    thumb=("v", "vct-bootcamp"), quote="80,000 fans, matched with the pros.",
+    summary="A personalised fan experience that turned each player's own VALORANT data into a bespoke Bootcamp video and matched them with a VCT EMEA pro, driven by a joint social, media and paid campaign.",
+    challenge=["The goal was simple and measurable: get as many people as possible to sign up for their bespoke Bootcamp data, "
+               "in a feed already crowded with esports content."],
+    role=[RG,
+          "On Bootcamp my role was creative input and social campaign planning: shaping how the experience would be presented on social, "
+          "building the organic rollout and reminders, and working jointly with the media and paid teams so organic and paid pushed toward one sign-up goal."],
+    approach=["A personalisation-led acquisition campaign:",
+              ("steps", [("Make the fan the hero", "Each person gets a video built from their own data, which is worth sharing."),
+                         ("Give them a pro to compare with", "Matching fans with a VCT EMEA pro links the experience back to the league."),
+                         ("Run organic and paid as one", "Joint planning with media and paid, with every touchpoint driving to the sign-up page."),
+                         ("Use urgency", "Last-chance reminders before the experience closed.")])],
+    idea=["VCT EMEA Bootcamp: create your personalised video and compare yourself with the pros."],
+    delivered=["Social campaign plan and organic rollout", "Creative input on the experience and launch assets", "Joint campaign with media and paid", "Reminder posts ahead of close"],
+    results=[("80K+", "Sign-ups for a bespoke Bootcamp video", ""), ("23.4K", "Views on a single last-chance reminder post on X", "")],
+    results_note="",
+    skills=["Paid and organic", "Personalisation", "Acquisition", "Campaign planning", "Cross-team collaboration"],
+    media={"hero": [("v", "vct-bootcamp", "VCT EMEA Bootcamp"), ("i", "bootcamp-tweet", "VALORANT Esports EMEA post on X: last chance to create your #VCTBOOTCAMP2023 personalised video")]},
+))
+
+P.append(dict(
     slug="gekko-truck-and-fan-wall", featured=True,
     title="Gekko's Bubble Tea Truck & the Fan Wall", client="Riot Games", via="In-house", year="2023",
     platforms="IRL, X, Instagram", cat="Experiential",
     thumb=("i", "gekko-5"), hero=("i", "gekko-1"), quote="Free bubble tea. Fans asked for it back.",
-    summary="Two in-person moments for VALORANT fans in Berlin: Gekko's bubble tea truck, and a signed wall that made the fans part of the league's history.",
-    challenge=["The studio in Berlin gave the league a physical home. The opportunity was to give fans things to do there that they'd share, and remember."],
-    role=["The fan wall was my idea, planned as both a social moment and a piece of VCT EMEA history. "
-          "Both activations were part of the 2023 studio experience and its social coverage."],
-    approach=["IRL first, social second. Make experiences worth photographing, and the content follows."],
+    summary="Two in-person moments for VALORANT fans in Berlin: Gekko's bubble tea truck, part of a wider out-of-home campaign, and a signed wall that made the fans part of the league's history.",
+    challenge=["The studio in Berlin gave the league a physical home. The opportunity was to give fans things to do there, and around the city, that they'd share and remember."],
+    role=[RG,
+          "The Gekko bubble tea truck was part of a larger out-of-home campaign, and I managed the social side of it end to end: "
+          "the content plan, capture on site, community engagement and reporting on sentiment and reach. "
+          "The fan wall was my idea, planned from the start as both a social moment and a piece of VCT EMEA history."],
+    approach=["Experiential, designed to be shared:",
+              ("steps", [("IRL first", "Build experiences people genuinely want to be part of."),
+                         ("Social by design", "Make every activation photographable and give fans a reason to post it."),
+                         ("Extend the reach", "Turn the truck's run around Berlin and its time in the studio into social content for fans who weren't there."),
+                         ("Leave something behind", "A fan wall that lives on after the event as part of the league's story.")])],
     idea=[("h", "Gekko's bubble tea truck"),
-          "A VALORANT-branded bubble tea truck themed on the agent Gekko, for bubble tea fans and VALORANT fans alike. It first ran near Alexanderplatz in Berlin in 2021, for three weekends only. "
-          "In 2023 it came into the studio, where visitors used the tokens they got on entry to redeem a free drink.",
+          "A VALORANT-branded bubble tea truck themed on the agent Gekko, for bubble tea fans and VALORANT fans alike, as part of a wider 2023 out-of-home campaign. "
+          "It was parked near Alexanderplatz in Berlin for three weekends only, then came into the studio, where visitors used the tokens they got on entry to redeem a free drink.",
           ("h", "The fan wall"),
           "A VCT EMEA-branded wall at the Coliseum where fans could sign their names and leave their mark on the league's history."],
-    delivered=["Bubble tea truck activation in the studio, with token redemption", "Fan wall design and activation", "Social content from both"],
+    delivered=["Social campaign for the Gekko truck, end to end", "Fan wall concept and activation", "Social content from both"],
     results=[("2,000+", "Free bubble teas served", "")],
     results_note="The truck was measured on sentiment and reach. It was one of the most popular activations of the year, and fans asked for it to come back.",
-    skills=["Experiential", "Fan engagement", "Social-first activation", "Community"],
+    skills=["Experiential", "Out-of-home", "Fan engagement", "Social-first activation", "Community"],
     media={"hero": [("i", "gekko-5", "Gekko's bubble tea truck in Berlin")],
            "after_approach": [("i", "gekko-6", "Serving bubble tea from the truck"), ("i", "gekko-3", "VALORANT-themed bubble tea")],
            "after_idea": [("i", "gekko-9", "The truck in the VCT EMEA studio"), ("i", "gekko-8", "Gekko artwork on the truck"), ("i", "gekko-tweet", "VALORANT Esports EMEA post on X about the Gekko truck")],
@@ -373,14 +516,21 @@ P.append(dict(
 ))
 
 P.append(dict(
-    slug="vct-emea-2023-content-slate", featured=False,
+    slug="vct-emea-2023-content-slate", featured=True,
     title="The 2023 Content Slate", client="Riot Games", via="In-house", year="2023",
     platforms="YouTube, X, Instagram, TikTok", cat="Always-on content",
     thumb=("v", "ascension-promo"), quote="A season's worth of reasons to watch.",
     summary="The always-on series, promos and programmes that carried VCT EMEA through its first partnership season, alongside the tentpole campaigns.",
     challenge=["A league season runs for months. Between the big moments, the channels needed a steady rhythm of content that grew fandom for teams, players and the competition itself."],
-    role=["As Social Media Strategist for EMEA, I set the content strategy and led delivery across the slate, working with agencies, production vendors, influencers and broadcast talent."],
-    approach=["Give every kind of fan a format: rivalries for the competitive, nostalgia for long-time fans, personality for new ones, and creators to bring the league to their own communities."],
+    role=[RG,
+          "Across the slate I set the content strategy and led delivery: briefing and managing agencies and production vendors, building content calendars, "
+          "running the influencer programme with creators on the ground in the studio, and reporting performance to optimise the mix. "
+          "On the Game Changers promo, my role was creative input and social campaign planning."],
+    approach=["A content ecosystem with a format for every kind of fan:",
+              ("steps", [("Segment the audience", "Competitive fans, long-time fans, new fans and creators' communities all want different things."),
+                         ("Assign a format to each", "Rivalries for the competitive, nostalgia for long-time fans, personality for new ones, creators to bring the league to their own communities."),
+                         ("Set a rhythm", "Weekly series between the tentpoles so the channels never go quiet."),
+                         ("Optimise the mix", "Track each format and put more behind what's working.")])],
     idea=None,
     slate=[
         ("Showstopper", "showstopper", "v", "Two-to-three-minute films about the rivalries between regions, countries and teams, promoting each week's broadcast.", "260K views · ~7K engagements"),
@@ -390,11 +540,10 @@ P.append(dict(
         ("Talent announcement", "talent-announcement", "v", "An unconventional talent announcement: a video instead of a static graphic, crossing over with the League of Legends LEC studio and talent.", "~10K reach · ~700 engagements, above average for this kind of announcement"),
         ("Admission forms", "admission-form", "i", "Players filled in admission forms with personal facts and quirky drawings, inspired by how Formula 1 and other top sports present athletes.", "~100K reach · ~6K engagements"),
         ("Influencer watch parties", "influencer-watch-parties", "i", "Weekly watch parties hosted by creators, plus on-the-ground content with them in the studio.", "1M+ reach across hundreds of influencers"),
-        ("VCT EMEA Bootcamp", "vct-bootcamp", "v", "A personalised video experience where fans compared themselves with VCT EMEA pros.", ""),
-        ("Game Changers EMEA promo", "game-changers-promo", "v", "Promo film for VCT Game Changers EMEA 2023.", ""),
+        ("Game Changers EMEA promo", "game-changers-promo", "v", "Promo film for VCT Game Changers EMEA 2023. My role: creative input and social campaign planning.", ""),
     ],
     delivered=["Showstopper rivalry series", "Ascension promo", "First Champs", "Do It Yourself series", "Talent announcement film",
-               "Player admission forms", "Influencer watch party programme", "VCT EMEA Bootcamp", "Game Changers EMEA promo"],
+               "Player admission forms", "Influencer watch party programme", "Game Changers EMEA promo"],
     results=[("1M+", "Reach through the influencer programme", ""), ("260K", "Views, Showstopper", ""), ("100K", "Views, Do It Yourself", "")],
     results_note="Per-item figures are shown with each piece above.",
     partners=["Logitech G", "Aim Lab", "Cougar", "Red Bull"],
@@ -410,9 +559,15 @@ P.append(dict(
     summary="The integrated social launch of adidas as G2 Esports' official sports apparel partner, which won Esports Creative Piece of the Year in 2021.",
     challenge=["Announcing a kit partner is usually a logo lockup and a press release. adidas joining the #G2ARMY meant a pro jersey, a lifestyle collaboration and new content, "
                "and the launch had to feel as big as that, for gaming fans and sportswear fans at the same time."],
-    role=["I developed the integrated social creative campaign for the launch, across organic and paid social."],
-    approach=["Blend athletic and gaming-inspired creative, and tell the story natively on each platform instead of pushing one asset everywhere. "
-              "Back the main film with behind-the-scenes content on YouTube and a jersey reveal for the 2021 pro kit."],
+    role=["As Social Media Manager at G2 Esports, I developed the integrated social creative campaign for the launch across organic and paid social: "
+          "the campaign platform, the rollout across X, YouTube and Instagram, coordination with the adidas team and G2's creative and partnerships teams, "
+          "and community management and reporting through launch."],
+    approach=["An integrated launch that respects both fanbases:",
+              ("steps", [("Find the overlap", "Blend athletic and gaming-inspired creative so the partnership feels native to both worlds."),
+                         ("Make it an event", "A cinematic announcement film as the centrepiece."),
+                         ("Go native on every platform", "Tell the story the way each platform works, not one asset pushed everywhere."),
+                         ("Extend the moment", "Behind-the-scenes films on YouTube and a 2021 pro jersey reveal to keep the story going after day one."),
+                         ("Organic and paid together", "Paid support to take the launch beyond the existing #G2ARMY.")])],
     idea=["Treat the partnership like breaking news in G2's world: a cinematic announcement film, with the tie-up written up as a front-page headline."],
     delivered=["Announcement film", "2021 pro jersey reveal video", "Behind-the-scenes films on YouTube", "Campaign photography", "Organic and paid social rollout"],
     results=[("2.7M", "Views", "X, YouTube and two behind-the-scenes films"), ("60K+", "Engagements", "Likes, reposts, comments and bookmarks"), ("2.2%", "Engagement rate", "Engagements ÷ views"), ("2021", "Esports Creative Piece of the Year", "")],
@@ -425,16 +580,20 @@ P.append(dict(
 ))
 
 P.append(dict(
-    slug="pink-pony-streamathon", featured=False,
+    slug="pink-pony-streamathon", featured=True,
     title="Pink Pony Streamathon", client="G2 Esports · Ralph Lauren", via="In-house", year="2021",
     platforms="Twitch, X, Instagram", cat="Charity live event",
     thumb=("i", "pink-pony-team"), quote="552K live viewers for a good cause.",
     summary="The first Pink Pony Streamathon: a three-hour live charity event from Berlin with G2 Esports and Ralph Lauren, supporting young people with cancer at The Royal Marsden.",
     challenge=["A new addition to Ralph Lauren's long-running Pink Pony campaign, so there was no previous event to build on. It needed a live audience big enough to matter "
                "and a tone that respected the cause while still feeling like a G2 stream."],
-    role=["I managed the social campaign and the broadcast operations."],
-    approach=["Promote it like a G2 event, with players, hosts and music announced in the run-up, then make the stream itself the content, "
-              "with donations open throughout the evening."],
+    role=["As Social Media Manager at G2 Esports, I managed both the social campaign and the broadcast operations: the promotional rollout and line-up announcements, "
+          "run-of-show and live production coordination on the night, real-time community management, and post-event highlights and reporting to the partner."],
+    approach=["A cause-led live event, run like a flagship broadcast:",
+              ("steps", [("Build anticipation", "Announce players, hosts and music in the run-up, like any G2 event."),
+                         ("Make the stream the content", "Player challenges, live music and hosts in one three-hour show."),
+                         ("Keep the cause visible", "Donations open throughout the evening, with the purpose front and centre."),
+                         ("Extend the moment", "Highlights content after the event to thank the community and the partner.")])],
     idea=["A streamathon: G2 players competing in challenges live from LVL World of Gaming in Berlin, with live music, hosts and donations, on 27 October 2021."],
     delivered=["Social promotion campaign and line-up announcements", "Broadcast operations for the three-hour live show on Twitch", "Highlights content after the event"],
     results=[("552K", "Live unique viewers", ""), ("£5,971.44", "Raised with the #G2ARMY", ""), ("10K", "Engagements", "")],
@@ -452,8 +611,14 @@ P.append(dict(
     thumb=("v", "origin"), quote="Before the brands, the audience.",
     summary="Twelve years making my own content, from gaming montages to full-time streaming. It's where I learned what makes people watch, share and come back.",
     challenge=["As an independent creator there's no media budget and no brand to borrow attention from. Every view has to be earned through the work itself, and the community has to want to come back."],
-    role=["Everything: concept, capture, edit, publishing, community and brand partnerships with OMEN by HP, Intel and Snickers. I also competed at events including TwitchCon and EGX."],
-    approach=["Make each piece an event in its own right, build a community on Discord, YouTube and X, and grow year on year."],
+    role=["Creator, producer, editor and community lead, all at once: concept, capture, edit, publishing, scheduling and the whole content pipeline, "
+          "plus community building across Discord, YouTube and X and brand partnerships with OMEN by HP, Intel and Snickers. "
+          "I also competed at events including TwitchCon and EGX."],
+    approach=["Audience growth without a media budget:",
+              ("steps", [("Make every piece an event", "Montages edited to be watched, rewatched and shared."),
+                         ("Build a home for the community", "Discord, YouTube and X as places people come back to, not just channels."),
+                         ("Show up consistently", "380 streams and 2,187 hours live in 2018 alone."),
+                         ("Grow year on year", "Use the data to see what's working and do more of it.")])],
     idea=["Origin, a Call of Duty montage that was groundbreaking for its time and got the attention of notable creators including KSI."],
     delivered=["Origin and other gaming montages", "Live streaming: 380 streams in 2018", "Community across Discord, YouTube and X", "Brand relationships with OMEN by HP, Intel and Snickers"],
     results=[("61K", "Views, Origin", "6,500 engagements"), ("49K", "Views, Blood // Water", "1,400 likes"), ("25K", "Views, Gears of War 3 Montage #1", "800 likes")],

@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "4"  # bump to bust caches for CSS/JS
+VER = "5"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -139,7 +139,7 @@ def make_thumb(proj):
             src = _source(spec)
             ar = src.width / src.height
             # Video frames often carry on-screen text: never crop them for a card, letterbox on a blur instead.
-            if folder == "thumbs" and spec[0] in ("v", "frame") and abs(ar - W / H) > 0.05:
+            if spec[0] in ("v", "frame") and abs(ar - W / H) > (0.05 if folder == "thumbs" else 0.15):
                 canvas = _contain_on_blur(src, W, H)
             else:
                 canvas = _cover(src, W, H)
@@ -309,6 +309,13 @@ def build_work():
     (ROOT / "work.html").write_text(out)
 
 
+def acct_period(pd):
+    tiles = "".join(f'<div class="stat reveal" data-delay="{j % 3}"><p class="stat__n">{e(n)}</p><p class="stat__l">{e(l)}</p><p class="stat__d">{e(d)}</p></div>'
+                    for j, (n, l, d) in enumerate(pd["stats"]))
+    return (f'<div class="acct-period"><p class="acct-name">{e(pd["name"])}<span>{e(pd["scope"])}</span></p>'
+            f'<div class="cs-results acct-grid">{tiles}</div><p class="cs-note">{e(pd["note"])}</p></div>')
+
+
 def build_about():
     stack = []
     for i, (name, vid, items, eg) in enumerate(C.SERVICES):
@@ -331,12 +338,13 @@ def build_about():
     xp = "\n".join(f'      <li class="xp-row" data-preview="assets/media/{img}.webp"><div><span class="c1">{e(c)}</span><span class="c2">{e(r)}</span><span class="c3">{e(y)}</span></div></li>' for c, r, y, img in C.EXPERIENCE)
     body = "\n".join(f'        <p class="reveal">{e(t)}</p>' for t in C.ABOUT_BODY)
     brands = "".join(f"<li>{e(b)}</li>" for b in C.BRANDS)
+    marquee = '<div class="marquee__group">' + "".join(f'<span class="wm wm--{i % 5}">{e(b)}</span>' for i, b in enumerate(C.BRANDS)) + "</div>"
     out = head("About — Ramtin Totonchi", DESC, "", "about", canonical="about.html") + header("", "about") + f"""<main id="main">
   <section class="split-hero split-hero--scroll" data-dark aria-label="Introduction">
     <div class="split-hero__sticky">
       <h1 class="visually-hidden">About Ramtin Totonchi</h1>
       <span class="split-hero__word split-hero__word--l" aria-hidden="true">About</span>
-      <div class="split-hero__media"><img src="assets/img/work/g2-adidas-onset.webp" alt="A monitor on set during the G2 Esports × adidas shoot" width="2000" height="1333"></div>
+      <div class="split-hero__media split-hero__media--portrait"><img src="assets/img/work/ramtin-portrait.webp" alt="Ramtin Totonchi in the VCT EMEA studio" width="{IMAGES['ramtin-portrait']['w']}" height="{IMAGES['ramtin-portrait']['h']}"></div>
       <span class="split-hero__word split-hero__word--r" aria-hidden="true">Ramtin</span>
     </div>
   </section>
@@ -373,6 +381,14 @@ def build_about():
     </div>
   </section>
 
+  <section class="section section--tight grid-12" aria-labelledby="acct-h">
+    <div class="section-head"><h2 class="label label--accent" id="acct-h">{e(C.ACCOUNT_RESULTS['title'])}</h2></div>
+    <div class="section-body">
+      <p class="acct-intro reveal">{e(C.ACCOUNT_RESULTS['intro'])}</p>
+      {''.join(acct_period(pd) for pd in C.ACCOUNT_RESULTS['periods'])}
+    </div>
+  </section>
+
   <section class="section section--tight grid-12" aria-labelledby="xp-h">
     <div class="section-head section-head--full"><h2 class="label" id="xp-h">Experience</h2></div>
     <ul class="xp">
@@ -380,10 +396,14 @@ def build_about():
     </ul>
   </section>
 
-  <section class="section section--tight grid-12" aria-labelledby="brands-h">
-    <div class="section-head"><h2 class="label" id="brands-h">Brands and partners</h2></div>
-    <div class="section-body"><ul class="brands reveal">{brands}</ul></div>
+  <section class="section section--tight section--label grid-12" aria-labelledby="brands-h">
+    <div class="section-head section-head--full"><h2 class="label" id="brands-h">Brands I've worked with</h2></div>
   </section>
+  <div class="marquee">
+    <ul class="visually-hidden">{brands}</ul>
+    <div class="marquee__track" aria-hidden="true">{marquee}{marquee}</div>
+  </div>
+  <div class="marquee-gap"></div>
 
   <section class="section section--tight grid-12" aria-labelledby="work-h">
     <div class="section-head section-head--full section-head--split"><h2 class="label" id="work-h">Selected work</h2><a class="link" href="work.html">All work →</a></div>
@@ -442,6 +462,8 @@ def paras(blocks):
             out.append('<ul class="cs-bullets">' + "".join(f"<li>{x}</li>" for x in b[1]) + "</ul>")
         elif isinstance(b, tuple) and b[0] == "h":
             out.append(f'<h3 class="cs-sub">{e(b[1])}</h3>')
+        elif isinstance(b, tuple) and b[0] == "steps":
+            out.append('<ol class="cs-steps">' + "".join(f'<li><strong>{e(t)}</strong><span>{e(d)}</span></li>' for t, d in b[1]) + "</ol>")
         else:
             out.append(f"<p>{e(b)}</p>")
     return "\n".join(out)
