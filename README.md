@@ -28,7 +28,7 @@ assets/img/           Placeholder art (replace with your own)
 - Every stat on `about.html` (15+ years, 40M+ peak reported reach, 9 markets, Creative Piece of the Year 2021) is taken from your notes/CV. Confirm each one and where it came from.
 - "Esports Creative Piece of The Year 2021" is attributed to the G2 project. Move it if it belongs elsewhere.
 - Project titles such as "Partners Fans Didn't Skip" are working titles. Rename freely.
-- In `404.html`, set `<base href="/">` to `/repo-name/` if the site is a project repo (e.g. `username.github.io/portfolio`).
+- The site is served from the custom domain `ramtintotonchi.com` (see `CNAME`), so `404.html` uses `<base href="/">`.
 
 ## Deploy to GitHub Pages
 
