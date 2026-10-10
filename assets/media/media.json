@@ -1,0 +1,268 @@
+{
+ "london-summit-sizzle": {
+  "w": 1280,
+  "h": 720,
+  "dur": 42,
+  "mb": 7.2,
+  "src": "Jellyfish (Google Cloud)/GOCL london summit sizzle reel.mp4"
+ },
+ "london-summit-alex-rutter": {
+  "w": 720,
+  "h": 900,
+  "dur": 43,
+  "mb": 4.9,
+  "src": "Jellyfish (Google Cloud)/Exec_Monologue_Video_Alex_Rutter_4x5.mp4"
+ },
+ "exec-maureen-drone-challenge": {
+  "w": 720,
+  "h": 1280,
+  "dur": 46,
+  "mb": 4.9,
+  "src": "Jellyfish (Google Cloud)/Maureen_AIDroneChallenge-9x16.mp4"
+ },
+ "exec-daniel-walker-murray": {
+  "w": 720,
+  "h": 900,
+  "dur": 47,
+  "mb": 4.4,
+  "src": "Jellyfish (Google Cloud)/Daniel - WTMD - 4x5.mp4"
+ },
+ "exec-joana-deepmind": {
+  "w": 720,
+  "h": 900,
+  "dur": 86,
+  "mb": 8.3,
+  "src": "Jellyfish (Google Cloud)/Joana_DeepMind_4x5.mp4"
+ },
+ "fa-roboball": {
+  "w": 720,
+  "h": 1280,
+  "dur": 83,
+  "mb": 9.5,
+  "src": "Jellyfish (Google Cloud)/E996_724729_GOCL_FAxGoogleRoboBall_80_EN_9x16_V3_3 subs.mp4"
+ },
+ "fa-creative-agent": {
+  "w": 720,
+  "h": 1280,
+  "dur": 91,
+  "mb": 10.2,
+  "src": "Jellyfish (Google Cloud)/E996_724729_GOCL_FAxGoogleCreativeAgent_90_EN_9x16_Subs_V3_4.mp4"
+ },
+ "fa-over-under": {
+  "w": 720,
+  "h": 1280,
+  "dur": 23,
+  "mb": 2.1,
+  "src": "Jellyfish (Google Cloud)/E996_724731_GOCL_FAxGoogle_OverUnder v2_2.mp4"
+ },
+ "fa-get-to-know": {
+  "w": 720,
+  "h": 1280,
+  "dur": 73,
+  "mb": 8.8,
+  "src": "Jellyfish (Google Cloud)/E996_724732_GOCL_FAxGoogle_Get to Know v4_3.mp4"
+ },
+ "fa-quickfire-numbers": {
+  "w": 720,
+  "h": 1280,
+  "dur": 62,
+  "mb": 7.6,
+  "src": "Jellyfish (Google Cloud)/E996_724733_GOCL_FAxGoogle_GtP part1 v3_2.mp4"
+ },
+ "vct24-kickoff-teaser": {
+  "w": 1280,
+  "h": 720,
+  "dur": 62,
+  "mb": 12.9,
+  "src": "Edelman/New-meta-new-faces-new-ambitions-VCT-EMEA-Kickoff-Teaser-2024_001_1080p.mp4"
+ },
+ "vct24-stage2-teaser": {
+  "w": 1280,
+  "h": 720,
+  "dur": 65,
+  "mb": 13.5,
+  "src": "Edelman/YOU-ARE-NOT-READY-STAGE-2-VCT-EMEA-24-TEASER_001_1080p.mp4"
+ },
+ "vct24-grand-finals-teaser": {
+  "w": 1280,
+  "h": 720,
+  "dur": 61,
+  "mb": 12.5,
+  "src": "Edelman/vct-emea-2024 grand finals.mp4"
+ },
+ "vct25-kickoff-teaser": {
+  "w": 1280,
+  "h": 720,
+  "dur": 133,
+  "mb": 10.7,
+  "src": "Edelman/TAKE WHAT'S YOURS VCT EMEA 2025 Kickoff Teaser_1080p.mp4"
+ },
+ "vct24-splashx": {
+  "w": 1280,
+  "h": 720,
+  "dur": 66,
+  "mb": 13.0,
+  "src": "Edelman/Bringing the Pressure with SplashX VCT EMEA_1080p.mp4"
+ },
+ "tiktok-clip-1": {
+  "w": 720,
+  "h": 1280,
+  "dur": 26,
+  "mb": 6.1,
+  "src": "Edelman/igclip3.mp4"
+ },
+ "tiktok-clip-2": {
+  "w": 720,
+  "h": 1280,
+  "dur": 23,
+  "mb": 5.5,
+  "src": "Edelman/igclip4.mp4"
+ },
+ "love-what-you-do-mimi": {
+  "w": 1280,
+  "h": 720,
+  "dur": 373,
+  "mb": 26.0,
+  "src": "Edelman/LOVE-what-YOU-DO-G2-MIMI-PLAYER-FEATURE-VCT-GAME-CHANGERS-EMEA-2023_001_1080p.mp4"
+ },
+ "join-us": {
+  "w": 1280,
+  "h": 720,
+  "dur": 92,
+  "mb": 8.1,
+  "src": "Riot Games/Join_Us.mp4"
+ },
+ "vct23-opening-teaser": {
+  "w": 1280,
+  "h": 720,
+  "dur": 133,
+  "mb": 19.1,
+  "src": "Riot Games/VCT-EMEA-IS-HERE-2023-OPENING-TEASER_001_1080p.mp4"
+ },
+ "unlocked-fnatic": {
+  "w": 1280,
+  "h": 720,
+  "dur": 214,
+  "mb": 12.6,
+  "src": "Riot Games/UNLOCKED-FNATIC-I-VCT-EMEA_001_1080p.mp4"
+ },
+ "push-to-talk-2023": {
+  "w": 1280,
+  "h": 720,
+  "dur": 39,
+  "mb": 4.9,
+  "src": "Riot Games/pushtotalk.mp4"
+ },
+ "push-to-talk-2024": {
+  "w": 1280,
+  "h": 720,
+  "dur": 535,
+  "mb": 45.3,
+  "src": "Edelman/Push To Talk.mp4"
+ },
+ "frenzy-fire-2023": {
+  "w": 1280,
+  "h": 720,
+  "dur": 232,
+  "mb": 14.4,
+  "src": "Riot Games/Frenzyfire.mp4"
+ },
+ "frenzy-fire-2024": {
+  "w": 1280,
+  "h": 720,
+  "dur": 425,
+  "mb": 32.3,
+  "src": "Edelman/HE-SAID-THAT-REALLY-VCT-PROS-GUESS-VCT-QUOTES-FRENZY-FIRE-4-VCT-EMEA-2024_001_1080p.mp4"
+ },
+ "lock-your-tickets": {
+  "w": 1280,
+  "h": 720,
+  "dur": 55,
+  "mb": 8.0,
+  "src": "Riot Games/Lock_your_tickets.mp4"
+ },
+ "showstopper": {
+  "w": 1280,
+  "h": 720,
+  "dur": 195,
+  "mb": 16.9,
+  "src": "Riot Games/showstopper.mp4"
+ },
+ "ascension-promo": {
+  "w": 1280,
+  "h": 720,
+  "dur": 69,
+  "mb": 5.9,
+  "src": "Riot Games/ASCENDING-VCT-ASCENSION-EMEA-2023-PROMO_001_1080p.mp4"
+ },
+ "first-champs": {
+  "w": 1280,
+  "h": 720,
+  "dur": 52,
+  "mb": 3.5,
+  "src": "Riot Games/First_Champs.mp4"
+ },
+ "do-it-yourself": {
+  "w": 1280,
+  "h": 720,
+  "dur": 172,
+  "mb": 19.4,
+  "src": "Riot Games/Do it yourself.mp4"
+ },
+ "talent-announcement": {
+  "w": 1280,
+  "h": 720,
+  "dur": 88,
+  "mb": 10.9,
+  "src": "Riot Games/Talent-announcement-2022.mp4"
+ },
+ "vct-bootcamp": {
+  "w": 720,
+  "h": 720,
+  "dur": 33,
+  "mb": 2.1,
+  "src": "Riot Games/vct-emea-bootcamp.mp4"
+ },
+ "game-changers-promo": {
+  "w": 1280,
+  "h": 720,
+  "dur": 68,
+  "mb": 6.6,
+  "src": "Riot Games/GREATNESS-COMES-FROM-WITHIN-VCT-GAME-CHANGERS-EMEA-2023-PROMO_001_1080p.mp4"
+ },
+ "g2-adidas-film": {
+  "w": 1332,
+  "h": 720,
+  "dur": 113,
+  "mb": 14.5,
+  "src": "G2 Esports/g2xadidas announcement.mp4"
+ },
+ "g2-adidas-jersey": {
+  "w": 1280,
+  "h": 720,
+  "dur": 125,
+  "mb": 9.6,
+  "src": "G2 Esports/g2 jersey video.mp4"
+ },
+ "pink-pony-promo": {
+  "w": 720,
+  "h": 720,
+  "dur": 12,
+  "mb": 0.9,
+  "src": "G2 Esports/pinkpony_promo.mp4"
+ },
+ "pink-pony-highlights": {
+  "w": 1280,
+  "h": 720,
+  "dur": 40,
+  "mb": 5.1,
+  "src": "G2 Esports/pinkpony highlights.mp4"
+ },
+ "origin": {
+  "w": 1280,
+  "h": 720,
+  "dur": 251,
+  "mb": 28.3,
+  "src": "Self-Employed (Content Creator)/Origin_Call_of_Duty_61000 views_6500engagement.mp4"
+ }
+}

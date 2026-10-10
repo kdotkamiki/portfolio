@@ -12,284 +12,269 @@
   /* ---------- London clock ---------- */
   const clocks = $$("[data-clock]");
   if (clocks.length) {
-    const fmt = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Europe/London", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
-    });
-    const tick = () => {
-      const now = new Date();
-      clocks.forEach((c) => {
-        c.textContent = fmt.format(now);
-        c.setAttribute("datetime", now.toISOString());
-      });
-    };
-    tick();
-    setInterval(tick, 1000);
+    const fmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
+    const tick = () => { const now = new Date(); clocks.forEach((c) => { c.textContent = fmt.format(now); c.setAttribute("datetime", now.toISOString()); }); };
+    tick(); setInterval(tick, 1000);
   }
-
-  /* ---------- Footer year ---------- */
   $$("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
+
+  /* ---------- Header: solid after scrolling, light over dark heroes ---------- */
+  const header = $(".site-header");
+  if (header) {
+    const darkHeroes = $$("[data-dark]");
+    const update = () => {
+      const h = header.offsetHeight;
+      const overDark = darkHeroes.some((el) => { const r = el.getBoundingClientRect(); return r.top <= 0 && r.bottom > h; });
+      const scrolled = window.scrollY > 8;
+      header.classList.toggle("on-dark", overDark);
+      header.classList.toggle("is-solid", scrolled && !overDark);
+    };
+    let t = false;
+    window.addEventListener("scroll", () => { if (!t) { t = true; requestAnimationFrame(() => { update(); t = false; }); } }, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  }
 
   /* ---------- Mobile menu ---------- */
   const menuBtn = $(".menu-toggle");
   const menu = $(".mobile-menu");
   if (menuBtn && menu) {
-    const setOpen = (open) => {
+    const setOpen = (open, focusBack) => {
       doc.classList.toggle("menu-open", open);
       menuBtn.setAttribute("aria-expanded", String(open));
       menuBtn.querySelector(".menu-label").textContent = open ? "Close" : "Menu";
       menu.inert = !open;
-      if (open) menu.querySelector("a")?.focus();
+      if (open) menu.querySelector("a")?.focus({ preventScroll: true });
+      else if (focusBack) menuBtn.focus();
     };
     menu.inert = true;
     menuBtn.addEventListener("click", () => setOpen(!doc.classList.contains("menu-open")));
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && doc.classList.contains("menu-open")) { setOpen(false); menuBtn.focus(); }
-    });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && doc.classList.contains("menu-open")) setOpen(false, true); });
     $$("a", menu).forEach((a) => a.addEventListener("click", () => setOpen(false)));
+    window.matchMedia("(min-width: 761px)").addEventListener?.("change", (m) => { if (m.matches) setOpen(false); });
   }
 
-  /* ---------- Split text into words ---------- */
-  const splitWords = (el) => {
-    const words = el.textContent.trim().split(/\s+/);
-    el.setAttribute("aria-label", el.textContent.trim());
-    el.innerHTML = words
-      .map((w, i) => `<span class="w" aria-hidden="true" style="--i:${i}"><span>${w}</span></span>`)
-      .join(" ");
-  };
-  $$(".split-words").forEach(splitWords);
-
-  /* ---------- Reveal on scroll ---------- */
+  /* ---------- Word split + reveal ---------- */
+  $$(".split-words").forEach((el) => {
+    const text = el.textContent.trim();
+    el.setAttribute("aria-label", text);
+    el.innerHTML = text.split(/\s+/).map((w, i) => `<span class="w" aria-hidden="true" style="--i:${i}"><span>${w}</span></span>`).join(" ");
+  });
   const revealables = $$(".reveal, .split-words");
   if ("IntersectionObserver" in window && !reduceMotion) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
-      });
-    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 });
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
+    }), { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
     revealables.forEach((el) => {
-      // Anything already on screen at load animates in straight away
       const r = el.getBoundingClientRect();
       if (r.top < window.innerHeight && r.bottom > 0) requestAnimationFrame(() => el.classList.add("is-in"));
       else io.observe(el);
     });
-  } else {
-    revealables.forEach((el) => el.classList.add("is-in"));
-  }
+  } else revealables.forEach((el) => el.classList.add("is-in"));
 
   /* ---------- Rolling digit counter ---------- */
-  const makeRoller = (el, value) => {
+  const makeRoller = (el) => {
     el.innerHTML = "";
-    const digits = String(value).padStart(2, "0").split("");
-    const cols = digits.map((d) => {
-      const wrap = document.createElement("span");
-      wrap.className = "digit";
+    const cols = [0, 1].map(() => {
+      const wrap = document.createElement("span"); wrap.className = "digit";
       const strip = document.createElement("span");
-      strip.innerHTML = "0123456789".split("").map((n) => `<span style="display:block">${n}</span>`).join("");
-      wrap.appendChild(strip);
-      el.appendChild(wrap);
-      return strip;
+      strip.innerHTML = "0123456789".split("").map((n) => `<span>${n}</span>`).join("");
+      wrap.appendChild(strip); el.appendChild(wrap); return strip;
     });
-    const set = (v) => {
-      String(v).padStart(2, "0").split("").forEach((d, i) => {
-        cols[i].style.transform = `translateY(${-Number(d) * 10}%)`;
-      });
-    };
-    set(value);
-    return set;
+    return (v) => String(v).padStart(2, "0").split("").forEach((d, i) => { cols[i].style.transform = `translateY(${-Number(d) * 10}%)`; });
   };
 
-  /* ---------- Home: 3D ring carousel ---------- */
+  /* ==========================================================================
+     Home carousel
+     A ring of cards. State is a single number, `pos` (in slides), that eases
+     toward an integer `target`. Every input changes `target` by whole slides,
+     except dragging, which moves `pos` directly and snaps on release.
+     ========================================================================== */
   const stage = $("[data-carousel]");
   if (stage) {
     const ring = $(".ring", stage);
     const cards = $$(".card", ring);
     const N = cards.length;
     const step = 360 / N;
-    const nowEl = $(".counter--now");
     const live = $("[data-carousel-live]");
-    const setCounter = nowEl ? makeRoller(nowEl, 1) : () => {};
+    const nowEl = $(".counter--now");
+    const setCounter = nowEl ? makeRoller(nowEl) : () => {};
     const mqVertical = window.matchMedia("(max-width: 760px)");
+    const mod = (n, m) => ((n % m) + m) % m;
 
-    let rot = 0;          // current rotation (deg)
-    let target = 0;       // where we're easing to
-    let radius = 600;
-    let vertical = mqVertical.matches;
-    let paused = false;   // hover / focus / drag
-    let dragging = false;
-    let lastPos = 0;
-    let idleTimer = 0;
-    let front = -1;
-    let gridMode = false;
-    let raf = 0;
+    let pos = 0, target = 0, radius = 600, vertical = mqVertical.matches;
+    let raf = 0, last = 0, front = -1, gridMode = false;
 
-    cards.forEach((c, i) => c.style.setProperty("--i", i));
+    cards.forEach((c, i) => { c.style.setProperty("--i", i); c.querySelector("a").draggable = false; });
 
     const measure = () => {
       vertical = mqVertical.matches;
-      const r = cards[0].getBoundingClientRect();
-      const w = cards[0].offsetWidth;
-      const h = cards[0].offsetHeight || r.height;
-      const size = vertical ? h + 56 : w + 36;
+      const c = cards[0];
+      const size = vertical ? c.offsetHeight + 28 : c.offsetWidth + 32;
       radius = size / (2 * Math.tan(Math.PI / N));
     };
 
-    const normalize = (a) => ((a % 360) + 540) % 360 - 180;
-
     const render = () => {
-      let best = 0, bestCos = -2;
-      cards.forEach((card, i) => {
-        const a = normalize(i * step + rot);
-        const rad = (a * Math.PI) / 180;
-        const cos = Math.cos(rad);
-        const rotate = vertical ? `rotateX(${-a}deg)` : `rotateY(${a}deg)`;
-        card.style.transform =
-          `translate(-50%, -50%) translateZ(${radius}px) ${rotate} translateZ(${-radius}px)`;
-        const vis = vertical
-          ? Math.max(0, Math.min(1, (cos - 0.6) / 0.3))
-          : Math.max(0, Math.min(1, (cos - 0.05) / 0.35));
-        card.style.opacity = vis.toFixed(3);
+      for (let i = 0; i < N; i++) {
+        let rel = i - pos;
+        rel = mod(rel + N / 2, N) - N / 2;           // shortest offset, -N/2..N/2
+        const a = rel * step;
+        const cos = Math.cos((a * Math.PI) / 180);
+        const card = cards[i];
+        const rot = vertical ? `rotateX(${a}deg)` : `rotateY(${-a}deg)`;   // next slide sits right / below
+        card.style.transform = `translate(-50%, -50%) translateZ(${radius}px) ${rot} translateZ(${-radius}px)`;
+        const vis = (cos - 0.62) / 0.24;   // front ±1 fully visible, the rest fade out
+        card.style.opacity = Math.max(0, Math.min(1, vis)).toFixed(3);
         card.style.zIndex = String(Math.round(cos * 100) + 100);
-        card.style.pointerEvents = cos > 0.75 ? "auto" : "none";
-        card.querySelector("a").tabIndex = cos > 0.75 ? 0 : -1;
-        if (cos > bestCos) { bestCos = cos; best = i; }
-      });
-      if (best !== front) {
+        const near = Math.abs(rel) < 0.5;
+        const reachable = Math.abs(rel) < 1.5;
+        card.style.pointerEvents = reachable ? "auto" : "none";
+        card.querySelector("a").tabIndex = near ? 0 : -1;
+        card.setAttribute("aria-hidden", near ? "false" : "true");
+      }
+      const f = mod(Math.round(pos), N);
+      if (f !== front) {
         cards[front]?.classList.remove("card--front");
-        cards[best].classList.add("card--front");
-        front = best;
-        setCounter(best + 1);
-        if (live) live.textContent = `Project ${best + 1} of ${N}: ${cards[best].dataset.title}`;
+        cards[f].classList.add("card--front");
+        front = f;
+        setCounter(f + 1);
       }
     };
 
-    const snap = () => { target = Math.round(target / step) * step; };
+    const announce = () => { if (live) live.textContent = `Project ${front + 1} of ${N}: ${cards[front].dataset.title}`; };
 
-    const loop = () => {
-      if (!paused && !dragging && !reduceMotion) target -= 0.045;   // slow drift
-      rot += (target - rot) * (reduceMotion ? 1 : 0.075);
+    const loop = (t) => {
+      const dt = Math.min(64, t - (last || t)); last = t;
+      const k = reduceMotion ? 1 : 1 - Math.exp(-dt / 110);   // frame-rate independent easing
+      if (!dragging) pos += (target - pos) * k;
+      if (!dragging && Math.abs(target - pos) < 0.0005) { pos = target; render(); raf = 0; last = 0; announce(); return; }
       render();
       raf = requestAnimationFrame(loop);
     };
-
-    const goTo = (index) => {
-      // shortest path to bring card[index] to the front
-      const desired = -index * step;
-      const diff = normalize(desired - target);
-      target += diff;
-    };
-    const nudge = (dir) => { snap(); target -= dir * step; };
-
-    const scheduleSnap = () => {
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(snap, 180);
+    const kick = () => { if (!raf && !gridMode) raf = requestAnimationFrame(loop); };
+    const go = (delta) => { target = Math.round(target) + delta; kick(); };
+    const goTo = (i) => {
+      const cur = mod(Math.round(target), N);
+      let d = i - cur; d = mod(d + N / 2, N) - N / 2;
+      target = Math.round(target) + Math.round(d); kick();
     };
 
-    // Wheel / trackpad
+    // Wheel / trackpad. A mouse notch moves one slide. A trackpad swipe moves one slide per
+    // gesture: the gesture ends after a short quiet gap, so momentum can't skip slides.
+    let wheelAcc = 0, wheelUsed = false, lastWheel = 0, notchLock = 0;
     stage.addEventListener("wheel", (e) => {
       if (gridMode) return;
       e.preventDefault();
       const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      target -= d * 0.06;
-      scheduleSnap();
+      const now = performance.now();
+      const notch = e.deltaMode === 1 || (Math.abs(d) >= 50 && Number.isInteger(d));
+      if (notch) { if (now > notchLock) { go(Math.sign(d)); notchLock = now + 260; } lastWheel = now; return; }
+      if (now - lastWheel > 220) { wheelUsed = false; wheelAcc = 0; }
+      lastWheel = now;
+      if (wheelUsed) return;
+      wheelAcc += d;
+      if (Math.abs(wheelAcc) > 30) { go(Math.sign(wheelAcc)); wheelUsed = true; wheelAcc = 0; }
     }, { passive: false });
 
-    // Drag (mouse + touch)
-    let moved = 0;
+    // Pointer drag / swipe
+    let dragging = false, startP = 0, startPos = 0, moved = 0, lastP = 0, lastT = 0, vel = 0, pid = null;
+    const pxPerSlide = () => (vertical ? cards[0].offsetHeight + 28 : cards[0].offsetWidth + 32);
     stage.addEventListener("pointerdown", (e) => {
-      if (gridMode || e.button !== 0) return;
-      dragging = true; moved = 0;
-      lastPos = vertical ? e.clientY : e.clientX;
+      if (gridMode || (e.pointerType === "mouse" && e.button !== 0)) return;
+      dragging = true; moved = 0; vel = 0; pid = e.pointerId;
+      startP = lastP = vertical ? e.clientY : e.clientX; lastT = performance.now(); startPos = pos;
+      stage.classList.add("is-dragging");
     });
-    window.addEventListener("pointermove", (e) => {
-      if (!dragging) return;
+    stage.addEventListener("pointermove", (e) => {
+      if (!dragging || e.pointerId !== pid) return;
       const p = vertical ? e.clientY : e.clientX;
-      const d = p - lastPos;
-      lastPos = p;
-      moved += Math.abs(d);
-      target += d * (vertical ? -0.12 : 0.12);
+      const now = performance.now();
+      moved = Math.max(moved, Math.abs(p - startP));
+      if (moved > 6 && !stage.hasPointerCapture(pid)) { try { stage.setPointerCapture(pid); } catch (_) {} }
+      vel = (p - lastP) / Math.max(1, now - lastT); lastP = p; lastT = now;
+      pos = startPos - (p - startP) / pxPerSlide();
+      if (!raf) { render(); }
     });
-    window.addEventListener("pointerup", () => {
-      if (!dragging) return;
-      dragging = false;
-      snap();
-    });
-    // Don't follow a link at the end of a drag
-    stage.addEventListener("click", (e) => { if (moved > 8) { e.preventDefault(); moved = 0; } }, true);
+    const endDrag = (e) => {
+      if (!dragging || (e && e.pointerId !== pid)) return;
+      dragging = false; stage.classList.remove("is-dragging");
+      if (moved > 6) {
+        let t = Math.round(pos);
+        if (Math.abs(vel) > 0.35 && t === Math.round(startPos)) t -= Math.sign(vel);   // a flick always moves one slide
+        target = t; kick();
+      }
+    };
+    stage.addEventListener("pointerup", endDrag);
+    stage.addEventListener("pointercancel", endDrag);
+    stage.addEventListener("lostpointercapture", endDrag);
 
-    // Pause drift on hover / focus
-    stage.addEventListener("pointerenter", () => (paused = true));
-    stage.addEventListener("pointerleave", () => { paused = false; });
-    stage.addEventListener("focusin", (e) => {
-      paused = true;
-      const card = e.target.closest(".card");
-      if (card && !gridMode) goTo(cards.indexOf(card));
+    // Clicks: a drag never opens a link; a side card comes to the front instead of opening.
+    stage.addEventListener("click", (e) => {
+      const a = e.target.closest(".card a");
+      if (!a || gridMode) return;
+      if (moved > 6) { e.preventDefault(); moved = 0; return; }
+      const i = cards.indexOf(a.closest(".card"));
+      if (i !== front) { e.preventDefault(); goTo(i); }
     });
-    stage.addEventListener("focusout", () => (paused = false));
+    stage.addEventListener("dragstart", (e) => e.preventDefault());
 
     // Keyboard
     stage.addEventListener("keydown", (e) => {
       if (gridMode) return;
-      const next = vertical ? "ArrowDown" : "ArrowRight";
-      const prev = vertical ? "ArrowUp" : "ArrowLeft";
-      if (e.key === next) { e.preventDefault(); nudge(1); }
-      if (e.key === prev) { e.preventDefault(); nudge(-1); }
-      if (e.key === "Enter" && e.target === stage) cards[front]?.querySelector("a").click();
+      const next = ["ArrowRight", "ArrowDown"], prev = ["ArrowLeft", "ArrowUp"];
+      if (next.includes(e.key)) { e.preventDefault(); go(1); }
+      else if (prev.includes(e.key)) { e.preventDefault(); go(-1); }
+      else if (e.key === "Home") { e.preventDefault(); goTo(0); }
+      else if (e.key === "End") { e.preventDefault(); goTo(N - 1); }
+      else if (e.key === "Enter" && e.target === stage) cards[front]?.querySelector("a").click();
     });
-    $$("[data-step]").forEach((b) => b.addEventListener("click", () => nudge(Number(b.dataset.step))));
+    stage.addEventListener("focusin", (e) => { const c = e.target.closest(".card"); if (c && !gridMode) goTo(cards.indexOf(c)); });
+    $$("[data-step]").forEach((b) => b.addEventListener("click", () => go(Number(b.dataset.step))));
 
-    // Carousel / Grid toggle
+    // Carousel / Grid
     const toggles = $$("[data-view]");
     const setView = (view) => {
       gridMode = view === "grid";
       stage.classList.toggle("is-grid", gridMode);
       toggles.forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.view === view)));
       $$("[data-step]").forEach((b) => (b.hidden = gridMode));
+      stage.setAttribute("aria-roledescription", gridMode ? "grid" : "carousel");
       if (gridMode) {
-        cancelAnimationFrame(raf);
-        cards.forEach((c) => { c.querySelector("a").tabIndex = 0; });
-      } else {
-        measure(); render(); raf = requestAnimationFrame(loop);
-      }
+        cancelAnimationFrame(raf); raf = 0;
+        cards.forEach((c) => { c.querySelector("a").tabIndex = 0; c.removeAttribute("aria-hidden"); });
+      } else { measure(); render(); }
     };
     toggles.forEach((t) => t.addEventListener("click", () => setView(t.dataset.view)));
 
-    // Pause when tab hidden
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) cancelAnimationFrame(raf);
-      else if (!gridMode) raf = requestAnimationFrame(loop);
-    });
+    const onResize = () => { if (!gridMode) { measure(); render(); } };
+    window.addEventListener("resize", onResize);
+    mqVertical.addEventListener?.("change", onResize);
 
-    window.addEventListener("resize", () => { measure(); render(); });
-    mqVertical.addEventListener?.("change", () => { measure(); render(); });
-
-    measure();
-    render();
-    if (reduceMotion) setView("grid"); else raf = requestAnimationFrame(loop);
+    measure(); render(); announce();
+    if (reduceMotion) setView("grid");
   }
 
-  /* ---------- Work index: grid / list toggle ---------- */
+  /* ---------- Work index: grid / list ---------- */
   const workIndex = $(".work-index");
   if (workIndex) {
     const btns = $$("[data-layout]", workIndex);
     btns.forEach((b) => b.addEventListener("click", () => {
-      const list = b.dataset.layout === "list";
-      workIndex.classList.toggle("is-list", list);
+      workIndex.classList.toggle("is-list", b.dataset.layout === "list");
       btns.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
     }));
   }
 
-  /* ---------- Scroll-driven effects (one rAF-throttled listener) ---------- */
+  /* ---------- Scroll-driven effects ---------- */
   const heroes = $$(".split-hero--scroll");
   const lits = $$(".scroll-lit");
   const parallax = $(".cs-hero__img img");
-
   lits.forEach((el) => {
-    const words = el.textContent.trim().split(/\s+/);
-    el.setAttribute("aria-label", el.textContent.trim());
-    el.innerHTML = words.map((w) => `<span class="w" aria-hidden="true">${w}</span>`).join(" ");
+    const text = el.textContent.trim();
+    el.setAttribute("aria-label", text);
+    el.innerHTML = text.split(/\s+/).map((w) => `<span class="w" aria-hidden="true">${w}</span>`).join(" ");
   });
-
   if (!reduceMotion && (heroes.length || lits.length || parallax)) {
+    const mqMobile = window.matchMedia("(max-width: 760px)");
     let ticking = false;
     const onScroll = () => {
       const vh = window.innerHeight;
@@ -297,88 +282,76 @@
         const r = h.getBoundingClientRect();
         const p = Math.min(1, Math.max(0, -r.top / (r.height - vh)));
         const eased = 1 - Math.pow(1 - p, 2);
-        const media = $(".split-hero__media", h);
-        media.style.setProperty("--p", eased.toFixed(4));
+        $(".split-hero__media", h).style.setProperty("--p", eased.toFixed(4));
         const l = $(".split-hero__word--l", h), rr = $(".split-hero__word--r", h);
-        if (l && rr && !window.matchMedia("(max-width: 760px)").matches) {
-          l.style.transform = `translate(${-eased * 6}vw, -50%)`;
-          rr.style.transform = `translate(${eased * 6}vw, -50%)`;
+        if (l && rr) {
+          if (mqMobile.matches) { l.style.transform = ""; rr.style.transform = ""; }
+          else { l.style.transform = `translate(${-eased * 6}vw, -50%)`; rr.style.transform = `translate(${eased * 6}vw, -50%)`; }
         }
       });
       lits.forEach((el) => {
         const r = el.getBoundingClientRect();
         const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
-        const ws = el.children;
-        const on = Math.round(p * ws.length);
+        const ws = el.children; const on = Math.round(p * ws.length);
         for (let i = 0; i < ws.length; i++) ws[i].classList.toggle("on", i < on);
       });
-      if (parallax) {
-        const y = Math.min(window.scrollY, vh);
-        parallax.style.setProperty("--parallax", `${-y * 0.12}px`);
-      }
+      if (parallax) parallax.style.setProperty("--parallax", `${-Math.min(window.scrollY, vh) * 0.1}px`);
       ticking = false;
     };
-    window.addEventListener("scroll", () => {
-      if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
-    }, { passive: true });
+    window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+    window.addEventListener("resize", onScroll);
     onScroll();
   }
 
-  /* ---------- Hover preview image that follows the cursor ---------- */
+  /* ---------- Hover preview that follows the cursor (mouse only) ---------- */
   const previewRows = $$("[data-preview]");
-  if (previewRows.length && window.matchMedia("(hover: hover)").matches) {
+  if (previewRows.length && window.matchMedia("(hover: hover) and (pointer: fine)").matches && !reduceMotion) {
     const box = document.createElement("div");
-    box.className = "hover-preview";
-    box.setAttribute("aria-hidden", "true");
-    box.innerHTML = '<img alt="">';
+    box.className = "hover-preview"; box.setAttribute("aria-hidden", "true"); box.innerHTML = '<img alt="">';
     document.body.appendChild(box);
     const img = box.firstChild;
-    let x = 0, y = 0, cx = 0, cy = 0, running = false;
+    let x = 0, y = 0, cx = 0, cy = 0, running = false, active = false;
     const follow = () => {
-      cx += (x - cx) * 0.18; cy += (y - cy) * 0.18;
-      box.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%) scale(${box.classList.contains("on") ? 1 : 0.85})`;
-      if (running) requestAnimationFrame(follow);
+      cx += (x - cx) * 0.2; cy += (y - cy) * 0.2;
+      box.style.transform = `translate(${cx + 24}px, ${cy - 90}px)`;
+      if (active || Math.abs(x - cx) > 0.5) requestAnimationFrame(follow); else running = false;
     };
     previewRows.forEach((row) => {
       row.addEventListener("pointerenter", (e) => {
-        img.src = row.dataset.preview;
-        x = cx = e.clientX; y = cy = e.clientY;
-        box.classList.add("on");
-        if (!running) { running = true; requestAnimationFrame(follow); }
+        if (e.pointerType !== "mouse") return;
+        img.src = row.dataset.preview; x = cx = e.clientX; y = cy = e.clientY; active = true;
+        box.classList.add("on"); if (!running) { running = true; requestAnimationFrame(follow); }
       });
       row.addEventListener("pointermove", (e) => { x = e.clientX; y = e.clientY; });
-      row.addEventListener("pointerleave", () => { box.classList.remove("on"); setTimeout(() => { if (!box.classList.contains("on")) running = false; }, 400); });
+      row.addEventListener("pointerleave", () => { active = false; box.classList.remove("on"); });
     });
+    window.addEventListener("scroll", () => { active = false; box.classList.remove("on"); }, { passive: true });
   }
 
   /* ---------- Count-up numbers ---------- */
   const counters = $$("[data-count]");
   if (counters.length) {
     const run = (el) => {
-      const end = parseFloat(el.dataset.count);
-      const suffix = el.dataset.suffix || "";
-      if (reduceMotion) { el.textContent = end + suffix; return; }
-      const dur = 1400, t0 = performance.now();
-      const frame = (t) => {
-        const k = Math.min(1, (t - t0) / dur);
-        const e = 1 - Math.pow(1 - k, 3);
-        el.textContent = Math.round(end * e) + suffix;
-        if (k < 1) requestAnimationFrame(frame);
-      };
+      const end = parseFloat(el.dataset.count), suffix = el.dataset.suffix || "";
+      const dec = (String(end).split(".")[1] || "").length;
+      if (reduceMotion) { el.textContent = end.toFixed(dec) + suffix; return; }
+      const dur = 1300, t0 = performance.now();
+      const frame = (t) => { const k = Math.min(1, (t - t0) / dur); const v = end * (1 - Math.pow(1 - k, 3)); el.textContent = v.toFixed(dec) + suffix; if (k < 1) requestAnimationFrame(frame); };
       requestAnimationFrame(frame);
     };
     if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver((ens) => ens.forEach((en) => {
-        if (en.isIntersecting) { run(en.target); io.unobserve(en.target); }
-      }), { threshold: 0.5 });
+      const io = new IntersectionObserver((ens) => ens.forEach((en) => { if (en.isIntersecting) { run(en.target); io.unobserve(en.target); } }), { threshold: 0.5 });
       counters.forEach((c) => io.observe(c));
     } else counters.forEach(run);
   }
 
-  /* ---------- Contact form → opens the visitor's email app ----------
-     GitHub Pages can't run server code. This builds a pre-filled email.
-     To collect submissions instead, point the form's action at a form
-     service (e.g. Formspree) and delete this block. */
+  /* ---------- Only one video plays at a time ---------- */
+  const videos = $$("video");
+  videos.forEach((v) => v.addEventListener("play", () => videos.forEach((o) => { if (o !== v && !o.paused) o.pause(); })));
+
+  /* ---------- Contact form → visitor's email app ----------
+     GitHub Pages can't run server code. To collect submissions instead,
+     point the form at a form service (e.g. Formspree) and delete this block. */
   const form = $("[data-mailto-form]");
   if (form) {
     form.addEventListener("submit", (e) => {
@@ -386,12 +359,11 @@
       if (!form.reportValidity()) return;
       const d = new FormData(form);
       const name = `${d.get("first-name")} ${d.get("last-name")}`.trim();
-      const subject = `${d.get("topic")} — ${name}`;
-      const body = `${d.get("message")}\n\n${name}\n${d.get("email")}`;
       const to = form.dataset.mailtoForm;
-      window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const href = `mailto:${to}?subject=${encodeURIComponent(`${d.get("topic")} — ${name}`)}&body=${encodeURIComponent(`${d.get("message")}\n\n${name}\n${d.get("email")}`)}`;
+      window.location.href = href;
       const status = $(".form-status", form);
-      if (status) status.textContent = "Opening your email app… If nothing happens, email " + to + " directly.";
+      if (status) status.textContent = `Opening your email app. If nothing happens, email ${to} directly.`;
     });
   }
 })();
