@@ -66,7 +66,12 @@
         if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
       });
     }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 });
-    revealables.forEach((el) => io.observe(el));
+    revealables.forEach((el) => {
+      // Anything already on screen at load animates in straight away
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) requestAnimationFrame(() => el.classList.add("is-in"));
+      else io.observe(el);
+    });
   } else {
     revealables.forEach((el) => el.classList.add("is-in"));
   }
