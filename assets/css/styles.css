@@ -89,7 +89,7 @@ strong { font-weight: 600; }
   transition: background-color 0.35s var(--ease), color 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
 .site-header.is-solid { background: rgba(243, 241, 236, 0.94); box-shadow: 0 1px 0 var(--line); }
-@supports (backdrop-filter: blur(8px)) { .site-header.is-solid { background: rgba(243, 241, 236, 0.82); backdrop-filter: blur(12px) saturate(1.2); } }
+@supports (backdrop-filter: blur(8px)) { .site-header.is-solid { background: rgba(243, 241, 236, 0.9); backdrop-filter: blur(12px) saturate(1.2); } }
 .site-header.on-dark { color: #fff; }
 .site-header.on-dark::before {
   content: ""; position: absolute; inset: 0 0 -24px 0; z-index: -1; pointer-events: none;
