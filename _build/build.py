@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "10"  # bump to bust caches for CSS/JS
+VER = "11"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -236,6 +236,7 @@ def work_card(proj, p):
         <div class="work-card__top"><span>{e(proj['year'] or proj['via'])}</span><span>{e(proj['cat'])}</span></div>
         <figure><img src="{thumb(proj, p)}" alt="" width="1600" height="1000" loading="lazy" decoding="async"></figure>
         <div class="work-card__bottom"><h3 class="work-card__title">{e(proj['title'])}</h3><span class="work-card__client">{e(proj['client'])}<br><span class="muted">{e(proj['via'])}</span></span></div>
+        <p class="work-card__line">{e(proj['line'])}</p>
       </a>
     </li>"""
 

@@ -612,3 +612,29 @@ P.append(dict(
     media={"hero": [("v", "origin", "Origin")],
            "after_idea": [("i", "origin-ksi-comment", "KSI's comment on Origin"), ("i", "montage-fortnite", "Blood // Water, a Fortnite montage: 49K views, 1,400 likes"), ("i", "montage-gow3", "Gears of War 3 Montage #1: 25K views, 800 likes")]},
 ))
+
+
+# One-line overview shown under the title and labels on work cards. Each is a
+# condensed version of the project's own summary above, so no new claims.
+LINES = {
+    "google-cloud-london-summit": "Social coverage that kept Google Cloud's London Summit working after the keynote.",
+    "the-fa-x-google-cloud": "A vertical video series putting England players up against Google Cloud's AI tools.",
+    "luminary-programme": "An always-on LinkedIn programme keeping Google Cloud's leaders visible and credible.",
+    "vct-emea-2024-season-teasers": "The films that opened, restarted and closed VALORANT's EMEA league in 2024.",
+    "valorant-masters-madrid": "Creative direction for the hype campaign around VALORANT's first 2024 international.",
+    "vct-emea-tiktok-launch": "Launching VCT EMEA on TikTok with native content: 100,000 followers in a year.",
+    "love-what-you-do": "Mini-documentaries about players' lives in and outside VALORANT.",
+    "join-us-vct-emea-2023": "The launch films for the first season of VALORANT's partnership league in EMEA.",
+    "unlocked": "A documentary series following the ten partner teams through their hometowns.",
+    "push-to-talk": "A Logitech G series that lets fans hear players talk in and out of the game.",
+    "frenzy-fire": "A quick-fire quiz series testing VCT EMEA pros on their own game and league.",
+    "lock-your-tickets": "A paid and organic campaign to sell tickets for VCT EMEA's new studio in Berlin.",
+    "vct-emea-bootcamp": "A personalised fan experience turning each player's VALORANT data into a video.",
+    "gekko-truck-and-fan-wall": "Two in-person moments for fans in Berlin: a bubble tea truck and a signed fan wall.",
+    "vct-emea-2023-content-slate": "The always-on series that carried VCT EMEA through its first partnership season.",
+    "g2-esports-x-adidas": "The social launch of adidas as G2 Esports' official apparel partner.",
+    "pink-pony-streamathon": "A three-hour live charity stream from Berlin supporting young people with cancer.",
+    "origin-and-the-creator-years": "Twelve years of making my own content, from gaming montages to full-time streaming.",
+}
+for _p in P:
+    _p["line"] = LINES[_p["slug"]]
