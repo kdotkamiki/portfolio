@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "5"  # bump to bust caches for CSS/JS
+VER = "6"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -433,10 +433,12 @@ def build_contact():
     <div class="section-body">
       <p class="contact-copy reveal">I'm open to senior social and creative leadership roles, and to the occasional project with a sharp brief. Tell me what you're working on, where it's at, and the part you haven't cracked yet.</p>
       <div class="contact-direct reveal"><a class="link" href="mailto:{C.EMAIL}">{C.EMAIL}</a>{li}</div>
-      <form class="form" data-mailto-form="{C.EMAIL}" novalidate>
-        <div class="field"><label for="f-first">First name</label><input id="f-first" name="first-name" autocomplete="given-name" required></div>
-        <div class="field"><label for="f-last">Last name</label><input id="f-last" name="last-name" autocomplete="family-name"></div>
-        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      <form class="form" action="https://formspree.io/f/xyekjory" method="POST" data-formspree novalidate>
+        <input type="hidden" name="_subject" value="New message from ramtintotonchi.com">
+        <div class="hp" aria-hidden="true"><label for="f-gotcha">Leave this empty</label><input id="f-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+        <div class="field"><label for="f-first">First name</label><input id="f-first" name="first_name" autocomplete="given-name" required aria-describedby="e-first_name" data-fs-field><span class="field-error" id="e-first_name" data-error-for="first_name"></span></div>
+        <div class="field"><label for="f-last">Last name <span class="opt">(optional)</span></label><input id="f-last" name="last_name" autocomplete="family-name"></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email" data-fs-field><span class="field-error" id="e-email" data-error-for="email"></span></div>
         <div class="field"><label for="f-topic">What's it about?</label>
           <select id="f-topic" name="topic">
             <option>A full-time role</option>
@@ -444,10 +446,15 @@ def build_contact():
             <option>Creative direction</option>
             <option>Something else</option>
           </select></div>
-        <div class="field field--full"><label for="f-msg">Message</label><textarea id="f-msg" name="message" required placeholder="A few lines is plenty."></textarea></div>
-        <p class="form-status" role="status"></p>
-        <button class="btn" type="submit">Send <span class="arrow" aria-hidden="true">→</span></button>
+        <div class="field field--full"><label for="f-msg">Message</label><textarea id="f-msg" name="message" required minlength="10" placeholder="A few lines is plenty." aria-describedby="e-message" data-fs-field></textarea><span class="field-error" id="e-message" data-error-for="message"></span></div>
+        <p class="form-status" role="status" aria-live="polite"></p>
+        <button class="btn" type="submit"><span class="btn-label">Send</span> <span class="arrow" aria-hidden="true">→</span></button>
       </form>
+      <div class="form-success" tabindex="-1" hidden>
+        <p class="form-success__title">Thanks, your message is on its way.</p>
+        <p>I'll get back to you at the email you gave, usually within a couple of working days.</p>
+        <button class="link" type="button" data-form-reset>Send another message →</button>
+      </div>
     </div>
   </section>
 </main>

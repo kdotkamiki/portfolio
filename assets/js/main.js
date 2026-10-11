@@ -349,21 +349,73 @@
   const videos = $$("video");
   videos.forEach((v) => v.addEventListener("play", () => videos.forEach((o) => { if (o !== v && !o.paused) o.pause(); })));
 
-  /* ---------- Contact form → visitor's email app ----------
-     GitHub Pages can't run server code. To collect submissions instead,
-     point the form at a form service (e.g. Formspree) and delete this block. */
-  const form = $("[data-mailto-form]");
+  /* ---------- Contact form → Formspree (AJAX) ----------
+     Without JavaScript the form still posts to Formspree normally.
+     With it, we validate inline, submit with fetch and show the result in place. */
+  const form = $("[data-formspree]");
   if (form) {
-    form.addEventListener("submit", (e) => {
+    const status = $(".form-status", form);
+    const btn = $("button[type=submit]", form);
+    const label = $(".btn-label", btn);
+    const success = form.parentElement.querySelector(".form-success");
+    const fallback = 'Something went wrong sending your message. Please try again, or email <a href="mailto:redacted@example.com">redacted@example.com</a>.';
+    const messages = {
+      first_name: { valueMissing: "Please add your first name." },
+      email: { valueMissing: "Please add your email so I can reply.", typeMismatch: "That email address doesn't look quite right." },
+      message: { valueMissing: "Please add a short message.", tooShort: "A little more detail, please (10 characters or more)." },
+    };
+    const setError = (name, msg) => {
+      const field = form.elements[name];
+      const slot = $(`[data-error-for="${name}"]`, form);
+      if (field) field.setAttribute("aria-invalid", msg ? "true" : "false");
+      if (slot) slot.textContent = msg || "";
+    };
+    const validate = () => {
+      let first = null;
+      Object.keys(messages).forEach((name) => {
+        const f = form.elements[name]; const v = f.validity; let msg = "";
+        for (const k of Object.keys(messages[name])) if (v[k]) { msg = messages[name][k]; break; }
+        setError(name, msg);
+        if (msg && !first) first = f;
+      });
+      if (first) first.focus();
+      return !first;
+    };
+    Object.keys(messages).forEach((name) => form.elements[name].addEventListener("input", () => {
+      if (form.elements[name].getAttribute("aria-invalid") === "true" && form.elements[name].checkValidity()) setError(name, "");
+    }));
+    const setBusy = (busy) => { btn.disabled = busy; form.setAttribute("aria-busy", String(busy)); label.textContent = busy ? "Sending…" : "Send"; };
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      if (!form.reportValidity()) return;
-      const d = new FormData(form);
-      const name = `${d.get("first-name")} ${d.get("last-name")}`.trim();
-      const to = form.dataset.mailtoForm;
-      const href = `mailto:${to}?subject=${encodeURIComponent(`${d.get("topic")} — ${name}`)}&body=${encodeURIComponent(`${d.get("message")}\n\n${name}\n${d.get("email")}`)}`;
-      window.location.href = href;
-      const status = $(".form-status", form);
-      if (status) status.textContent = `Opening your email app. If nothing happens, email ${to} directly.`;
+      status.textContent = ""; status.classList.remove("is-error");
+      if (!validate()) return;
+      const data = new FormData(form);
+      const name = `${data.get("first_name")} ${data.get("last_name") || ""}`.trim();
+      data.set("_subject", `${data.get("topic")}: message from ${name} via ramtintotonchi.com`);
+      setBusy(true);
+      try {
+        const res = await fetch(form.action, { method: "POST", body: data, headers: { Accept: "application/json" } });
+        if (res.ok) {
+          form.reset(); form.hidden = true;
+          if (success) { success.hidden = false; success.focus(); }
+          return;
+        }
+        const body = await res.json().catch(() => ({}));
+        const errs = Array.isArray(body.errors) ? body.errors : [];
+        let shown = false;
+        errs.forEach((er) => { if (er.field && messages[er.field]) { setError(er.field, er.message); shown = true; } });
+        const general = errs.filter((er) => !er.field || !messages[er.field]).map((er) => er.message).join(" ");
+        status.classList.add("is-error");
+        status.innerHTML = general ? `${general} <a href="mailto:redacted@example.com">Email me instead</a>.` : (shown ? "Please check the highlighted fields." : fallback);
+      } catch (_) {
+        status.classList.add("is-error");
+        status.innerHTML = fallback;
+      } finally { setBusy(false); }
+    });
+
+    $("[data-form-reset]", success || document)?.addEventListener("click", () => {
+      success.hidden = true; form.hidden = false; form.elements.first_name.focus();
     });
   }
 })();

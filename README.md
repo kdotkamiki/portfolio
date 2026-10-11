@@ -42,7 +42,7 @@ Set `LINKEDIN` in `_build/content.py` to your profile URL and rebuild. The link 
 
 ## Contact form
 
-GitHub Pages can't run server code, so the form opens the visitor's email app with a pre-filled message. To collect submissions in an inbox instead, create a free Formspree form, set `action="https://formspree.io/f/XXXX" method="POST"` on the `<form>` in `contact.html` (via `build.py`), and remove `data-mailto-form`.
+The form on `contact.html` posts to Formspree (`https://formspree.io/f/xyekjory`). With JavaScript it validates inline, submits with `fetch` and shows a thank-you message in place; without JavaScript it posts normally and Formspree shows its own confirmation page. A hidden `_gotcha` field catches spam bots, and `_subject` sets the email subject to the topic and sender's name. Manage submissions, notifications and spam settings in the Formspree dashboard.
 
 ## Deploying
 
