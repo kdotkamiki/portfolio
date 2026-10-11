@@ -52,7 +52,7 @@ STATS = [  # (number, suffix, label) – all verified in SOURCES.md
 # Account-level results for Google Cloud social (Jellyfish). High-level numbers only.
 ACCOUNT_RESULTS = dict(
     title="Google Cloud social, at Jellyfish",
-    intro="Account-level results across the Google Cloud channels I work on, as reported by the account team. The 2025 period is the account year in which I joined Jellyfish, in March 2025.",
+    intro="Account-level results across Google Cloud\u2019s global LinkedIn and Instagram, plus its UK X channel.",
     periods=[
         dict(name="Account year to November 2025",
              scope="LinkedIn (global), Instagram (global) and X (UK)",
@@ -61,13 +61,6 @@ ACCOUNT_RESULTS = dict(
                     ("265.6K", "Weighted engagements", "+54.1% year on year"),
                     ("11.8%", "Engagement rate", "up from 10.4%")],
              note="Followers across the three accounts grew by 106,534 to 777,064."),
-        dict(name="H1 2026 vs H1 2025",
-             scope="All Google Cloud channels in the report, global and regional",
-             stats=[("4.87M", "Impressions", "+18.7% year on year"),
-                    ("461.1K", "Engagements", "−6.7% year on year"),
-                    ("210.1K", "Weighted engagements", "+0.3% year on year"),
-                    ("9.5%", "Engagement rate", "12.1% in H1 2025")],
-             note="Delivered from 32% fewer posts than H1 2025 (1,113 vs 1,641). Global LinkedIn engagement rate rose to 20.3%, up 43%."),
     ],
 )
 

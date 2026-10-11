@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "15"  # bump to bust caches for CSS/JS
+VER = "16"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -331,7 +331,7 @@ def build_work():
 def acct_period(pd):
     tiles = "".join(f'<div class="stat reveal" data-delay="{j % 3}"><p class="stat__n">{e(n)}</p><p class="stat__l">{e(l)}</p><p class="stat__d">{e(d)}</p></div>'
                     for j, (n, l, d) in enumerate(pd["stats"]))
-    return (f'<div class="acct-period"><p class="acct-name">{e(pd["name"])}<span>{e(pd["scope"])}</span></p>'
+    return (f'<div class="acct-period">'
             f'<div class="cs-results acct-grid">{tiles}</div><p class="cs-note">{e(pd["note"])}</p></div>')
 
 
