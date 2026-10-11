@@ -44,8 +44,8 @@ ABOUT_BODY = [
 
 STATS = [  # (number, suffix, label) – all verified in SOURCES.md
     (15, "+", "Years in social, content and community"),
-    (5.1, "M", "Impressions on Google Cloud's core social channels in the account year to November 2025"),
-    (100, "K", "TikTok followers in VCT EMEA's first year on the platform"),
+    (1000, "+", "Videos delivered between 2020 and 2026"),
+    (100, "K", "Scaled a newly launched YouTube channel to 100K subscribers in year one, earning the Silver Creator Award."),
     (2021, "", "Esports Creative Piece of the Year, G2 Esports × adidas"),
 ]
 

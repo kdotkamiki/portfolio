@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "13"  # bump to bust caches for CSS/JS
+VER = "15"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -341,7 +341,7 @@ def build_about():
         if n == 2021:
             num = '<span>2021</span>'
         else:
-            num = f'<span data-count="{n}" data-suffix="{suf}">{n}{suf}</span>'
+            num = f'<span data-count="{n}" data-suffix="{suf}">{n:,}{suf}</span>'
         stats.append(f'<div class="stat reveal" data-delay="{i}"><p class="stat__n">{num}</p><p class="stat__l">{e(label)}</p></div>')
     xp = "\n".join(f'      <li class="xp-row" data-preview="assets/media/{img}.webp"><div><span class="c1">{e(c)}</span><span class="c2">{e(r)}</span><span class="c3">{e(y)}</span></div></li>' for c, r, y, img in C.EXPERIENCE)
     body = "\n".join(f'        <p class="reveal">{e(t)}</p>' for t in C.ABOUT_BODY)

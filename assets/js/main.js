@@ -329,10 +329,11 @@
   if (counters.length) {
     const run = (el) => {
       const end = parseFloat(el.dataset.count), suffix = el.dataset.suffix || "";
+      const fmt = (x) => x.toLocaleString("en-GB", { minimumFractionDigits: dec, maximumFractionDigits: dec });
       const dec = (String(end).split(".")[1] || "").length;
-      if (reduceMotion) { el.textContent = end.toFixed(dec) + suffix; return; }
+      if (reduceMotion) { el.textContent = fmt(end) + suffix; return; }
       const dur = 1300, t0 = performance.now();
-      const frame = (t) => { const k = Math.min(1, (t - t0) / dur); const v = end * (1 - Math.pow(1 - k, 3)); el.textContent = v.toFixed(dec) + suffix; if (k < 1) requestAnimationFrame(frame); };
+      const frame = (t) => { const k = Math.min(1, (t - t0) / dur); const v = end * (1 - Math.pow(1 - k, 3)); el.textContent = fmt(v) + suffix; if (k < 1) requestAnimationFrame(frame); };
       requestAnimationFrame(frame);
     };
     if ("IntersectionObserver" in window) {

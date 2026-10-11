@@ -455,6 +455,7 @@ strong { font-weight: 600; }
 .stats { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); }
 .stat { border-top: 1px solid var(--ink); padding-top: 16px; min-width: 0; }
 .stat__n { font-family: var(--font-display); font-weight: 300; font-size: var(--step-4); letter-spacing: -0.06em; line-height: 0.95; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.stats .stat__n { font-size: calc(var(--step-4) * 0.86); }  /* leaves room for 1,000+ beside its neighbours */
 .stat__l { margin-top: 12px; max-width: 20rem; font-size: 0.9375rem; font-weight: 500; }
 .stat__d { margin-top: 4px; color: var(--muted); font-size: 0.875rem; }
 @media (max-width: 900px) { .stats { grid-template-columns: 1fr 1fr; row-gap: 40px; } }
