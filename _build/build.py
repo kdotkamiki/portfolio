@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "6"  # bump to bust caches for CSS/JS
+VER = "7"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -193,7 +193,7 @@ def header(p, current=""):
       <li><a href="{p}contact.html"{cur('contact')}>Contact</a></li>
     </ul>
   </nav>
-  <div class="mobile-menu__foot"><span>London · <time data-clock>--:--:--</time></span><a href="mailto:{C.EMAIL}">Email me</a></div>
+  <div class="mobile-menu__foot"><span>London · <time data-clock>--:--:--</time></span><a href="{p}contact.html">Get in touch →</a></div>
 </div>
 """
 
@@ -203,7 +203,7 @@ def footer(p):
     return f"""<footer class="site-footer">
   <p class="copy">© <span data-year>2026</span> Ramtin Totonchi</p>
   <ul class="social">
-    <li><a class="link" href="mailto:{C.EMAIL}">{C.EMAIL}</a></li>
+    <li><a class="link" href="{p}contact.html">Contact</a></li>
     {li}
   </ul>
   <a class="top link" href="#main">Back to top ↑</a>
@@ -419,20 +419,15 @@ def build_about():
 def build_contact():
     li = f'<a class="link" href="{e(C.LINKEDIN)}">LinkedIn →</a>' if C.LINKEDIN else ""
     out = head("Contact — Ramtin Totonchi", "Get in touch with Ramtin Totonchi about senior social and creative leadership roles or projects.", "", "contact", canonical="contact.html") + header("", "contact") + f"""<main id="main">
-  <section class="split-hero split-hero--static" data-dark aria-labelledby="contact-h">
-    <div class="split-hero__sticky">
-      <h1 class="visually-hidden" id="contact-h">Contact</h1>
-      <span class="split-hero__word split-hero__word--l" aria-hidden="true">Say</span>
-      <div class="split-hero__media"><img src="assets/img/work/gekko-6.webp" alt="" width="2000" height="1125"></div>
-      <span class="split-hero__word split-hero__word--r" aria-hidden="true">Hello</span>
-    </div>
+  <section class="say-hello" data-dark aria-labelledby="contact-h">
+    <h1 class="say-hello__title split-words" id="contact-h">Say Hello</h1>
   </section>
 
   <section class="section grid-12" aria-labelledby="contact-copy-h">
     <div class="section-head"><h2 class="label" id="contact-copy-h">Contact</h2></div>
     <div class="section-body">
-      <p class="contact-copy reveal">I'm open to senior social and creative leadership roles, and to the occasional project with a sharp brief. Tell me what you're working on, where it's at, and the part you haven't cracked yet.</p>
-      <div class="contact-direct reveal"><a class="link" href="mailto:{C.EMAIL}">{C.EMAIL}</a>{li}</div>
+      <p class="contact-copy reveal">I’m interested in ambitious teams, creative challenges, and work that makes people pay attention. If you’re looking for someone who connects strategy, culture and creativity to create work that cuts through, let’s talk.</p>
+      <div class="contact-direct reveal">{li}</div>
       <form class="form" action="https://formspree.io/f/xyekjory" method="POST" data-formspree novalidate>
         <input type="hidden" name="_subject" value="New message from ramtintotonchi.com">
         <div class="hp" aria-hidden="true"><label for="f-gotcha">Leave this empty</label><input id="f-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>

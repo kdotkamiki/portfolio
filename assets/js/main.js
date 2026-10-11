@@ -358,7 +358,7 @@
     const btn = $("button[type=submit]", form);
     const label = $(".btn-label", btn);
     const success = form.parentElement.querySelector(".form-success");
-    const fallback = 'Something went wrong sending your message. Please try again, or email <a href="mailto:redacted@example.com">redacted@example.com</a>.';
+    const fallback = 'Something went wrong sending your message. Please try again, or message me on <a href="https://www.linkedin.com/in/rtotonchi4412">LinkedIn</a>.';
     const messages = {
       first_name: { valueMissing: "Please add your first name." },
       email: { valueMissing: "Please add your email so I can reply.", typeMismatch: "That email address doesn't look quite right." },
@@ -407,7 +407,7 @@
         errs.forEach((er) => { if (er.field && messages[er.field]) { setError(er.field, er.message); shown = true; } });
         const general = errs.filter((er) => !er.field || !messages[er.field]).map((er) => er.message).join(" ");
         status.classList.add("is-error");
-        status.innerHTML = general ? `${general} <a href="mailto:redacted@example.com">Email me instead</a>.` : (shown ? "Please check the highlighted fields." : fallback);
+        status.innerHTML = general ? `${general} You can also message me on <a href="https://www.linkedin.com/in/rtotonchi4412">LinkedIn</a>.` : (shown ? "Please check the highlighted fields." : fallback);
       } catch (_) {
         status.classList.add("is-error");
         status.innerHTML = fallback;

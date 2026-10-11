@@ -16,7 +16,6 @@ Text blocks (challenge, role, approach, idea) are lists of:
   ("steps", [("Step title", "what happened"), ...])        numbered steps
 """
 
-EMAIL = "redacted@example.com"
 LINKEDIN = "https://www.linkedin.com/in/rtotonchi4412"
 
 # --------------------------------------------------------------------------- positioning
