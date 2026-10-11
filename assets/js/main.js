@@ -287,7 +287,9 @@
       });
       lits.forEach((el) => {
         const r = el.getBoundingClientRect();
-        const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
+        // Starts as the block enters the viewport (top at 100%) and is fully lit once its bottom reaches 82%,
+        // so it is always finished before the section that follows it appears.
+        const p = Math.min(1, Math.max(0, (vh - r.top) / (r.height + vh * 0.18)));
         const ws = el.querySelectorAll(".w"); const on = Math.round(p * ws.length);
         for (let i = 0; i < ws.length; i++) ws[i].classList.toggle("on", i < on);
       });
