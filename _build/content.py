@@ -31,15 +31,15 @@ ABOUT_LEDE = (
 )
 
 ABOUT_BODY = [
-    "I spent twelve years building my own audience as a creator before I ran social for anyone else. "
-    "Since then I've led social for G2 Esports, set the EMEA social and creative strategy for VALORANT Esports "
-    "at Riot Games, and carried that work on at Edelman across nine markets.",
-    "Today I'm Social Content Manager at Jellyfish, where I lead social content on the Google Cloud account: "
-    "turning complex technology into content that executives, engineers and broader audiences actually stop for, "
-    "and running the Luminary Programme, which keeps Google Cloud leaders visible on LinkedIn.",
-    "The through-line is the same in B2B and B2C. Find the cultural moment a brand has a right to be in, build one idea "
-    "strong enough to travel across platforms and markets, make each version feel native to where it lands, "
-    "then measure honestly and make the next one better.",
+    "I spent twelve years building my own audience as a creator before owning social for anyone else. "
+    "Since then, I\u2019ve run social at G2 Esports, shaped EMEA social and creative strategy for VALORANT Esports "
+    "at Riot Games, and continued that work at Edelman across nine markets.",
+    "Today, I lead social content for Google Cloud at Jellyfish: turning complex technology into work that "
+    "executives, engineers and wider audiences actually stop for. I also own the Luminary Programme, "
+    "keeping Google Cloud leaders visible and credible on LinkedIn.",
+    "The through-line is the same in B2B and B2C: find the cultural moment a brand has a right to own, "
+    "build one idea strong enough to travel across platforms and markets, make every version feel native "
+    "to where it lands, then measure honestly and make the next one better.",
 ]
 
 SERVICES = [
