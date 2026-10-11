@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "7"  # bump to bust caches for CSS/JS
+VER = "8"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -317,17 +317,6 @@ def acct_period(pd):
 
 
 def build_about():
-    stack = []
-    for i, (name, vid, items, eg) in enumerate(C.SERVICES):
-        lis = "".join(f"<li>{e(x)}</li>" for x in items)
-        stack.append(f"""      <article class="stack-card" style="--i:{i}">
-        <div class="stack-card__foot"><span class="stack-card__num">{i+1:02d}/{len(C.SERVICES):02d}</span><span class="muted">{e(eg)}</span></div>
-        <figure class="stack-card__media"><img src="assets/media/{vid}.webp" alt=""  width="{MEDIA.get(vid, {'w': 1280})['w']}" height="{MEDIA.get(vid, {'h': 720})['h']}" loading="lazy" decoding="async"></figure>
-        <div class="stack-card__body">
-          <ul class="stack-card__list">{lis}</ul>
-          <h3 class="stack-card__title">{e(name)}</h3>
-        </div>
-      </article>""")
     stats = []
     for i, (n, suf, label) in enumerate(C.STATS):
         if n == 2021:
@@ -357,13 +346,6 @@ def build_about():
 {body}
       </div>
       <p class="reveal about-cta"><a class="btn" href="contact.html">Get in touch <span class="arrow" aria-hidden="true">→</span></a> <a class="link" href="work.html">See the work →</a></p>
-    </div>
-  </section>
-
-  <section class="grid-12" aria-labelledby="services-h">
-    <div class="section-head section-head--full"><h2 class="label" id="services-h">What I do</h2></div>
-    <div class="stack">
-{chr(10).join(stack)}
     </div>
   </section>
 

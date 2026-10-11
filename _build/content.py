@@ -42,21 +42,6 @@ ABOUT_BODY = [
     "to where it lands, then measure honestly and make the next one better.",
 ]
 
-SERVICES = [
-    ("Social strategy", "london-summit-sizzle",
-     ["Channel and platform strategy", "Owned, earned and paid planning", "Audience and cultural insight", "KPIs, reporting and optimisation"],
-     "London Summit · VCT EMEA"),
-    ("Creative direction", "vct24-kickoff-teaser",
-     ["Campaign platforms and hero ideas", "Briefing agencies and studios", "Shoot direction and production", "Quality bar across every cut"],
-     "Season teasers · Masters Madrid"),
-    ("Content and formats", "frenzy-fire-2023",
-     ["Always-on series and franchises", "Short-form and vertical video", "Talent and player-led content", "Platform launches"],
-     "Frenzy Fire · TikTok launch"),
-    ("Executives and communities", "london-summit-alex-rutter",
-     ["Executive social programmes", "Employee advocacy", "Influencer and creator programmes", "Live and IRL fan moments"],
-     "Luminary · Influencer watch parties"),
-]
-
 STATS = [  # (number, suffix, label) – all verified in SOURCES.md
     (15, "+", "Years in social, content and community"),
     (5.1, "M", "Impressions on Google Cloud's core social channels in the account year to November 2025"),
