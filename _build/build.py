@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "12"  # bump to bust caches for CSS/JS
+VER = "13"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -405,13 +405,6 @@ def build_about():
     <div class="marquee__track" aria-hidden="true">{marquee}{marquee}</div>
   </div>
   <div class="marquee-gap"></div>
-
-  <section class="section section--tight grid-12" aria-labelledby="work-h">
-    <div class="section-head section-head--full section-head--split"><h2 class="label" id="work-h">Selected work</h2><a class="link" href="work.html">All work →</a></div>
-    <ul class="work-grid">
-{chr(10).join(work_card(pr, '') for pr in FEATURED[:4])}
-    </ul>
-  </section>
 </main>
 """ + footer("")
     (ROOT / "about.html").write_text(out)

@@ -283,11 +283,7 @@
         const p = Math.min(1, Math.max(0, -r.top / (r.height - vh)));
         const eased = 1 - Math.pow(1 - p, 2);
         $(".split-hero__media", h).style.setProperty("--p", eased.toFixed(4));
-        const l = $(".split-hero__word--l", h), rr = $(".split-hero__word--r", h);
-        if (l && rr) {
-          if (mqMobile.matches) { l.style.transform = ""; rr.style.transform = ""; }
-          else { l.style.transform = `translate(${-eased * 6}vw, -50%)`; rr.style.transform = `translate(${eased * 6}vw, -50%)`; }
-        }
+        h.style.setProperty("--wp", eased.toFixed(4));
       });
       lits.forEach((el) => {
         const r = el.getBoundingClientRect();

@@ -385,6 +385,22 @@ strong { font-weight: 600; }
 .split-hero__word--r { right: var(--gutter); }
 .split-hero--static .split-hero__sticky { position: relative; height: auto; min-height: 72vh; padding: calc(var(--header-h) + 8vh) 0 10vh; }
 .split-hero--static .split-hero__media { width: min(52vw, 760px); height: auto; aspect-ratio: 16/9; }
+/* About hero: as the photo opens to full bleed, the two words never leave the screen. They shrink and
+   settle into the bottom corners as a caption, over a soft scrim. --wp is the scroll progress (0 to 1). */
+.split-hero { --wp: 0; }
+@media (min-width: 761px) {
+  .split-hero--scroll .split-hero__word {
+    --fs: var(--step-5);
+    top: auto; transform: scale(calc(1 - 0.62 * var(--wp)));
+    bottom: calc((50% - 0.425 * var(--fs)) * (1 - var(--wp)) + clamp(20px, 4.5vh, 44px) * var(--wp));
+  }
+  .split-hero--scroll .split-hero__word--l { transform-origin: left bottom; }
+  .split-hero--scroll .split-hero__word--r { transform-origin: right bottom; }
+  .split-hero--scroll .split-hero__sticky::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: var(--wp);
+    background: linear-gradient(to top, rgba(8,8,8,.7) 0%, rgba(8,8,8,.32) 24%, rgba(8,8,8,0) 48%);
+  }
+}
 @media (max-width: 760px) {
   .split-hero__word { font-size: clamp(3.25rem, 17vw, 5rem); }
   .split-hero__word--l { top: calc(var(--header-h) + 6vh); transform: none; }
