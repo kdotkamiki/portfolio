@@ -177,5 +177,15 @@
  "ramtin-portrait": {
   "w": 2000,
   "h": 1341
+ },
+ "pink-pony-together": {
+  "w": 2000,
+  "h": 1125,
+  "kb": 341
+ },
+ "frenzy-fire-ninja-defuse": {
+  "w": 1280,
+  "h": 720,
+  "kb": 129
  }
 }

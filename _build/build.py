@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "11"  # bump to bust caches for CSS/JS
+VER = "12"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -128,6 +128,22 @@ def _composite(spec, W, H):
     return canvas
 
 
+def _grid(spec, W, H):
+    """2x2 collage of video stills / images on a dark ground, for projects that are a slate of pieces."""
+    from PIL import ImageDraw
+    names = spec[1]
+    ims = [_load("v" if n in MEDIA else "i", n) for n in names]
+    pad = round(H * 0.03); gap = round(H * 0.02)
+    cw = (W - 2 * pad - gap) // 2; ch = (H - 2 * pad - gap) // 2
+    canvas = Image.new("RGB", (W, H), (18, 18, 18))
+    for i, im in enumerate(ims[:4]):
+        tile = _cover(im, cw, ch)
+        mask = Image.new("L", tile.size, 0)
+        ImageDraw.Draw(mask).rounded_rectangle((0, 0, cw - 1, ch - 1), radius=round(H * 0.014), fill=255)
+        canvas.paste(tile, (pad + (i % 2) * (cw + gap), pad + (i // 2) * (ch + gap)), mask)
+    return canvas
+
+
 def make_thumb(proj):
     """Card thumbnail (1920x1200) and case-study hero (1920x1080) for a project."""
     for folder, (W, H), spec in (("thumbs", (1920, 1200), proj["thumb"]), ("hero", (1920, 1080), proj.get("hero", proj["thumb"]))):
@@ -135,6 +151,8 @@ def make_thumb(proj):
         out.parent.mkdir(parents=True, exist_ok=True)
         if spec[0].startswith("composite"):
             canvas = _composite(spec, W, H)
+        elif spec[0] == "grid":
+            canvas = _grid(spec, W, H)
         else:
             src = _source(spec)
             ar = src.width / src.height
@@ -622,6 +640,18 @@ def build_404():
     (ROOT / "404.html").write_text(out)
 
 
+REDIRECTS = {"love-what-you-do": "meet-the-player"}  # old slug -> new slug
+
+
+def build_redirect(new):
+    return f"""<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><title>Moved</title>
+<meta name="robots" content="noindex"><link rel="canonical" href="{SITE}/work/{new}.html">
+<meta http-equiv="refresh" content="0; url={new}.html"></head>
+<body><p><a href="{new}.html">This case study has moved.</a></p></body></html>
+"""
+
+
 def build_sitemap():
     urls = ["", "work.html", "about.html", "contact.html"] + [f"work/{p['slug']}.html" for p in PROJECTS]
     (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
@@ -643,4 +673,6 @@ if __name__ == "__main__":
     build_home(); build_work(); build_about(); build_contact(); build_404(); build_sitemap()
     for i, pr in enumerate(PROJECTS):
         (work_dir / f"{pr['slug']}.html").write_text(build_case(i, pr))
+    for old, new in REDIRECTS.items():
+        (work_dir / f"{old}.html").write_text(build_redirect(new))
     print("built", len(PROJECTS), "case studies")

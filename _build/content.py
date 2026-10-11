@@ -98,7 +98,7 @@ P.append(dict(
     slug="google-cloud-london-summit", featured=True,
     title="London Summit 2026", client="Google Cloud", via="At Jellyfish", year="2026",
     platforms="LinkedIn, X, Instagram, Facebook", cat="B2B event campaign",
-    thumb=("frame", "london-summit-sizzle", 21), quote="From live event to week-long conversation.",
+    thumb=("v", "london-summit-sizzle"), quote="From live event to week-long conversation.",
     summary="An earned and owned social campaign built to make Google Cloud's London Summit the UK's reference point for AI and data cloud, "
             "and to make the day's content keep working long after the keynote ended.",
     challenge=["The brief was explicit: establish Google Cloud as the leading authority in AI and data cloud in the UK market. "
@@ -298,8 +298,8 @@ P.append(dict(
 ))
 
 P.append(dict(
-    slug="love-what-you-do", featured=True,
-    title="Love What You Do", client="Riot Games", via="At Edelman", year="2024",
+    slug="meet-the-player", featured=True,
+    title="Meet the Player", client="Riot Games", via="At Edelman", year="2024",
     platforms="YouTube, X, Instagram", cat="Player documentary series",
     thumb=("v", "love-what-you-do-mimi"), quote="Players, at home.",
     summary="A series of mini-documentaries about players' lives in and outside VALORANT, starting with G2's Mimi in her hometown in Denmark.",
@@ -312,19 +312,19 @@ P.append(dict(
                          ("Go to the source", "Film in their hometowns, so the story is told through the places that shaped them."),
                          ("Tell the whole career", "The highs and the lows, inside the game and outside it."),
                          ("Measure what the format is for", "Sentiment and engagement as the KPIs, because documentary content builds affinity rather than raw reach.")])],
-    idea=["Love What You Do: the ups and downs of a career, inside the game and outside it, told at home. For Mimi, that meant filming in her hometown in Denmark."],
+    idea=["Meet the Player: the ups and downs of a career, inside the game and outside it, told at home. For Mimi, that meant filming in her hometown in Denmark."],
     delivered=["Four player feature films", "On-location shoot in Denmark for the Mimi episode", "Social cutdowns and distribution"],
     results=[("99%+", "Positive sentiment", ""), ("8,000+", "Engagements across the four films", "")],
     results_note="",
     skills=["Documentary storytelling", "Talent development", "Sentiment-led measurement", "Video production"],
-    media={"hero": [("v", "love-what-you-do-mimi", "Love What You Do: G2 Mimi")]},
+    media={"hero": [("v", "love-what-you-do-mimi", "Meet the Player: G2 Mimi")]},
 ))
 
 P.append(dict(
     slug="join-us-vct-emea-2023", featured=True,
     title="Join Us: VCT EMEA 2023", client="Riot Games", via="In-house", year="2023",
     platforms="YouTube, X, Instagram, TikTok", cat="League launch",
-    thumb=("i", "join-us-still-1"), quote="A new league, introduced by its players.",
+    thumb=("v", "join-us"), quote="A new league, introduced by its players.",
     summary="The launch films for the 2023 season of VCT EMEA, the first year of VALORANT's partnership league: Join Us, and the opening teaser.",
     challenge=["2023 was a new structure for VALORANT esports in EMEA, with ten partner teams and a new studio in Berlin. "
                "Fans needed a reason to commit to a league they hadn't seen yet."],
@@ -374,7 +374,7 @@ P.append(dict(
     slug="push-to-talk", featured=True,
     title="Push to Talk × Logitech G", client="Riot Games · Logitech G", via="In-house, then at Edelman", year="2023–24",
     platforms="YouTube, X", cat="Sponsored series",
-    thumb=("v", "push-to-talk-2023"), quote="Hear the game the players hear.",
+    thumb=("v", "push-to-talk-2023"), hero=("v", "push-to-talk-2024"), quote="Hear the game the players hear.",
     summary="A sponsored series I created with Logitech G: mic-check content that lets fans hear players talk in and out of the game as they prepare, set up and compete.",
     challenge=["Sponsor content in esports is easy to skip. Logitech needed an integration that made sense for a headset and microphone brand "
                "and that fans would actually want to watch."],
@@ -400,7 +400,7 @@ P.append(dict(
     slug="frenzy-fire", featured=True,
     title="Frenzy Fire", client="Riot Games", via="In-house, then at Edelman", year="2023–24",
     platforms="YouTube, X, Instagram, TikTok", cat="Quiz series",
-    thumb=("v", "frenzy-fire-2023"), quote="How well do pros know their own game?",
+    thumb=("i", "frenzy-fire-ninja-defuse"), quote="How well do pros know their own game?",
     summary="A quick-fire quiz series that tests VCT EMEA pros on their own game and league, and became one of the league's most popular formats.",
     challenge=["The league needed always-on content between broadcasts that showed players' personalities, was efficient to produce, and worked in clips across platforms."],
     role=["Frenzy Fire was part of the VCT EMEA content slate I led at Riot Games in 2023: I owned the format's place in the content strategy, "
@@ -503,7 +503,7 @@ P.append(dict(
     slug="vct-emea-2023-content-slate", featured=True,
     title="The 2023 Content Slate", client="Riot Games", via="In-house", year="2023",
     platforms="YouTube, X, Instagram, TikTok", cat="Always-on content",
-    thumb=("v", "ascension-promo"), quote="A season's worth of reasons to watch.",
+    thumb=("grid", ["showstopper", "do-it-yourself", "first-champs", "ascension-promo"]), quote="A season's worth of reasons to watch.",
     summary="The always-on series, promos and programmes that carried VCT EMEA through its first partnership season, alongside the tentpole campaigns.",
     challenge=["A league season runs for months. Between the big moments, the channels needed a steady rhythm of content that grew fandom for teams, players and the competition itself."],
     role=[RG,
@@ -567,7 +567,7 @@ P.append(dict(
     slug="pink-pony-streamathon", featured=True,
     title="Pink Pony Streamathon", client="G2 Esports · Ralph Lauren", via="In-house", year="2021",
     platforms="Twitch, X, Instagram", cat="Charity live event",
-    thumb=("i", "pink-pony-team"), quote="552K live viewers for a good cause.",
+    thumb=("i", "pink-pony-together"), quote="552K live viewers for a good cause.",
     summary="The first Pink Pony Streamathon: a three-hour live charity event from Berlin with G2 Esports and Ralph Lauren, supporting young people with cancer at The Royal Marsden.",
     challenge=["A new addition to Ralph Lauren's long-running Pink Pony campaign, so there was no previous event to build on. It needed a live audience big enough to matter "
                "and a tone that respected the cause while still feeling like a G2 stream."],
@@ -623,7 +623,7 @@ LINES = {
     "vct-emea-2024-season-teasers": "The films that opened, restarted and closed VALORANT's EMEA league in 2024.",
     "valorant-masters-madrid": "Creative direction for the hype campaign around VALORANT's first 2024 international.",
     "vct-emea-tiktok-launch": "Launching VCT EMEA on TikTok with native content: 100,000 followers in a year.",
-    "love-what-you-do": "Mini-documentaries about players' lives in and outside VALORANT.",
+    "meet-the-player": "Mini-documentaries about players' lives in and outside VALORANT.",
     "join-us-vct-emea-2023": "The launch films for the first season of VALORANT's partnership league in EMEA.",
     "unlocked": "A documentary series following the ten partner teams through their hometowns.",
     "push-to-talk": "A Logitech G series that lets fans hear players talk in and out of the game.",

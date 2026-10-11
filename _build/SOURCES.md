@@ -10,7 +10,7 @@ Source folder: `Documents/Website` on Ramtin's computer. Nothing on the site is 
 | Luminary Programme | Zero self-briefing, end-to-end ownership, Sprinklr, adoption over output | `The main campaigns for Google Cloud.txt`, CV. No metrics supplied. |
 | VCT EMEA 2024 teasers | Kickoff 1M+ views, 15K+ engagements; Stage 2 600K+ reach, 7K engagements; best finals teaser; Grand Finals 160K+ concurrent viewers | `Edelman/Campaigns at Edelman.txt` |
 | TikTok launch | 100K followers in year one; top video ~4M views; ~10M views; 380K engagements | `Campaigns at Edelman.txt` |
-| Love What You Do | 99%+ positive sentiment; 8,000+ engagements across four films | `Campaigns at Edelman.txt` |
+| Meet the Player (formerly Love What You Do) | 99%+ positive sentiment; 8,000+ engagements across four films | `Campaigns at Edelman.txt` |
 | Join Us | 1M views, 10K+ engagements; opening teaser 100K views, 3K engagements | `Riot Games/The main campaigns for Riot Games a.txt` |
 | Unlocked | ~600K views, ~40K engagements | Riot notes |
 | Push to Talk | 2023: 7 episodes, 300K views, 21K engagements; 2024 ~50% more successful | Riot notes, Edelman notes |
