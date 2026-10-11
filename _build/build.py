@@ -129,8 +129,8 @@ def _composite(spec, W, H):
 
 
 def make_thumb(proj):
-    """Card thumbnail (1600x1000) and case-study hero (1920x1080) for a project."""
-    for folder, (W, H), spec in (("thumbs", (1600, 1000), proj["thumb"]), ("hero", (1920, 1080), proj.get("hero", proj["thumb"]))):
+    """Card thumbnail (1920x1200) and case-study hero (1920x1080) for a project."""
+    for folder, (W, H), spec in (("thumbs", (1920, 1200), proj["thumb"]), ("hero", (1920, 1080), proj.get("hero", proj["thumb"]))):
         out = ROOT / "assets/img" / folder / f"{proj['slug']}.webp"
         out.parent.mkdir(parents=True, exist_ok=True)
         if spec[0].startswith("composite"):
@@ -222,7 +222,7 @@ def carousel_card(proj, i):
     return f"""      <li class="card" data-title="{e(proj['title'])}">
         <a href="work/{proj['slug']}.html" draggable="false">
           <figure>
-            <img src="{thumb(proj, '')}" alt="" width="1600" height="1000" loading="{'eager' if i < 3 or i > len(FEATURED) - 3 else 'lazy'}" decoding="async" draggable="false">
+            <img src="{thumb(proj, '')}" alt="" width="1920" height="1200" loading="{'eager' if i < 3 or i > len(FEATURED) - 3 else 'lazy'}" decoding="async" draggable="false">
             <span class="card-quote" aria-hidden="true">{e(proj['quote'])}</span>
           </figure>
           <span class="card-meta"><span>{e(proj['title'])}</span><span>{e(proj['client'].split(' · ')[0])}</span></span>
@@ -234,7 +234,7 @@ def work_card(proj, p):
     return f"""    <li class="work-card reveal">
       <a href="{p}work/{proj['slug']}.html">
         <div class="work-card__top"><span>{e(proj['year'] or proj['via'])}</span><span>{e(proj['cat'])}</span></div>
-        <figure><img src="{thumb(proj, p)}" alt="" width="1600" height="1000" loading="lazy" decoding="async"></figure>
+        <figure><img src="{thumb(proj, p)}" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
         <div class="work-card__bottom"><h3 class="work-card__title">{e(proj['title'])}</h3><span class="work-card__client">{e(proj['client'])}<br><span class="muted">{e(proj['via'])}</span></span></div>
         <p class="work-card__line">{e(proj['line'])}</p>
       </a>

@@ -32,7 +32,7 @@ Every figure on the site is traceable in `_build/SOURCES.md`. Keep it that way.
 
 ## Adding media
 
-- Videos: H.264 MP4, 720p, with a `.webp` poster of the same name in `assets/media/`, then add an entry to `assets/media/media.json` (width, height, duration).
+- Videos: H.264 MP4 at 1080p (or the source resolution if that is lower; never upscale), with a `.webp` poster of the same name in `assets/media/`, then add an entry to `assets/media/media.json` (width, height, duration).
 - Images: WebP in `assets/img/work/`, plus an entry in `assets/img/work/images.json`.
 - GitHub rejects files over 100MB. Keep videos well under that.
 
