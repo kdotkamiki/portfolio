@@ -37,9 +37,6 @@ ABOUT_BODY = [
     "Today, I lead social content for Google Cloud at Jellyfish: turning complex technology into work that "
     "executives, engineers and wider audiences actually stop for. I also own the Luminary Programme, "
     "keeping Google Cloud leaders visible and credible on LinkedIn.",
-    "The through-line is the same in B2B and B2C: find the cultural moment a brand has a right to own, "
-    "build one idea strong enough to travel across platforms and markets, make every version feel native "
-    "to where it lands, then measure honestly and make the next one better.",
 ]
 
 STATS = [  # (number, suffix, label) – all verified in SOURCES.md
