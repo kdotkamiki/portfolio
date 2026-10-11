@@ -269,9 +269,9 @@
   const lits = $$(".scroll-lit");
   const parallax = $(".cs-hero__img img");
   lits.forEach((el) => {
-    const text = el.textContent.trim();
-    el.setAttribute("aria-label", text);
-    el.innerHTML = text.split(/\s+/).map((w) => `<span class="w" aria-hidden="true">${w}</span>`).join(" ");
+    const lines = el.innerHTML.split(/<br\s*\/?>/i);
+    el.setAttribute("aria-label", lines.join(" ").replace(/\s+/g, " ").trim());
+    el.innerHTML = lines.map((ln) => ln.trim().split(/\s+/).map((w) => `<span class="w" aria-hidden="true">${w}</span>`).join(" ")).join("<br>");
   });
   if (!reduceMotion && (heroes.length || lits.length || parallax)) {
     const mqMobile = window.matchMedia("(max-width: 760px)");
@@ -292,7 +292,7 @@
       lits.forEach((el) => {
         const r = el.getBoundingClientRect();
         const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
-        const ws = el.children; const on = Math.round(p * ws.length);
+        const ws = el.querySelectorAll(".w"); const on = Math.round(p * ws.length);
         for (let i = 0; i < ws.length; i++) ws[i].classList.toggle("on", i < on);
       });
       if (parallax) parallax.style.setProperty("--parallax", `${-Math.min(window.scrollY, vh) * 0.1}px`);

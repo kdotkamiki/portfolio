@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "9"  # bump to bust caches for CSS/JS
+VER = "10"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -352,8 +352,7 @@ def build_about():
   <section class="section grid-12" aria-labelledby="approach-h">
     <div class="section-head"><h2 class="label" id="approach-h">How I work</h2></div>
     <div class="section-body">
-      <h3 class="scroll-lit">Start with the audience, not the asset.</h3>
-      <p class="approach-body reveal">Find the cultural tension worth exploring. Build one big idea that travels across markets and platforms, then make it feel native to each. Measure what matters, learn what resonates, and make the next idea even stronger.</p>
+      <p class="scroll-lit">Start with the audience, not the asset.<br>Find the cultural tension worth exploring. Build one big idea that travels across markets and platforms, then make it feel native to each. Measure what matters, learn what resonates, and make the next idea even stronger.</p>
     </div>
   </section>
 
