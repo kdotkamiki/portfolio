@@ -46,7 +46,7 @@ STATS = [  # (number, suffix, label) – all verified in SOURCES.md
     (15, "+", "Years in social, content and community"),
     (1000, "+", "Videos delivered between 2020 and 2026"),
     (100, "K", "Scaled a newly launched YouTube channel to 100K subscribers in year one, earning the Silver Creator Award."),
-    (2021, "", "Esports Creative Piece of the Year, G2 Esports × adidas"),
+    (2021, "", "Esports Creative Piece of the Year, G2\u00a0Esports\u00a0×\u00a0adidas"),
 ]
 
 # Account-level results for Google Cloud social (Jellyfish). High-level numbers only.
