@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "20"  # bump to bust caches for CSS/JS
+VER = "21"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -550,6 +550,11 @@ def build_case(i, proj, template=False):
     if proj["results_note"]:
         results += f'<p class="cs-note reveal">{e(proj["results_note"])}</p>'
 
+    results_block = (f"""    <section class="cs-block grid-12" aria-labelledby="s-results">
+      <div class="section-head"><h2 id="s-results" class="label label--accent">Results</h2></div>
+      <div class="section-body">{results}</div>
+    </section>""" if results else "")
+
     delivered = '<ol class="cs-list">' + "".join(f"<li>{e(x)}</li>" for x in proj["delivered"]) + "</ol>"
     skills = '<ul class="cs-tags">' + "".join(f'<li class="tag">{e(x)}</li>' for x in proj["skills"]) + "</ul>"
     hero_img = f"{p}assets/img/hero/{proj['slug']}.webp"
@@ -593,10 +598,7 @@ def build_case(i, proj, template=False):
 {block('approach', 'Strategic approach', paras(proj['approach']))}{gallery('after_approach')}
 {block('idea', 'Creative idea', paras(proj['idea'])) if proj.get('idea') else ''}{gallery('after_idea')}{slate_html(proj, p) if proj.get('slate') else ''}
 {block('delivered', 'What I delivered', delivered)}{gallery('after_delivered')}
-    <section class="cs-block grid-12" aria-labelledby="s-results">
-      <div class="section-head"><h2 id="s-results" class="label label--accent">Results</h2></div>
-      <div class="section-body">{results}</div>
-    </section>{gallery('after_results')}{creator_charts() if proj.get('creator') else ''}
+{results_block}{gallery('after_results')}{creator_charts() if proj.get('creator') else ''}
 {block('skills', 'Skills demonstrated', skills)}{extra}
   </article>
 

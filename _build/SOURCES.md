@@ -26,6 +26,9 @@ Source folder: `Documents/Website` on Ramtin's computer. Nothing on the site is 
 | Streaming 2018 | All six tiles and deltas | `Self-Employed (Content Creator)/2018stats.png` |
 | Streaming charts | Redrawn from the two SullyGnome graphs (approximate) | `follower_trend2017-2018.png`, `viewershiptrend2017-2018.png` |
 | About: In numbers | 1,000+ videos delivered, 2020 to 2026; a newly launched YouTube channel scaled to 100K subscribers in year one, earning the Silver Creator Award | Ramtin, in conversation |
+| VALORANT Masters Tokyo | 1M impressions across static; 200K+ views across video; 10K+ engagements; rise in Japanese fan engagement and sentiment on X, YouTube community and Instagram; localisation with Riot Games' Tokyo office | Ramtin, in conversation |
+| Run It Back | 30K views and 1K engagements across five videos; 2023 and 2024 slates | Ramtin, in conversation |
+| 2024 Content Slate | Edelman; Frenzy Fire Blind Rankings (2024) | Ramtin, in conversation; video filename |
 | About page | 15+ years, 9 markets, job titles and dates | CV (2026) |
 | About: Google Cloud account, year to Nov 2025 | 5,080,801 impressions (+12.6%); 601,699 engagements (+28.8%); 265,625 weighted engagements (+54.1%); ER 11.84% vs 10.35%; followers +106,534 to 777,064. Scope: LinkedIn global, Instagram global, X UK | `EXT_Google Cloud _ EOY Results - ACCOUNT RESULTS CROSS-PLATFORM.pdf` |
 | (Removed from the site) Google Cloud account, H1 2026 vs H1 2025 | 4,868,104 impressions (+18.68%); 461,113 engagements (−6.67%); 210,133 weighted engagements (+0.26%); ER 9.47% vs 12.05%; posts 1,113 vs 1,641 (−32.18%); global LinkedIn ER 20.25% (+43.15%) | `Google Cloud _ H1 2026_H1 2025 data pull - H1 2026 vs H1 2025 Comparison.pdf` |

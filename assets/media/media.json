@@ -264,5 +264,40 @@
   "dur": 58,
   "mb": 14.8,
   "src": "Riot Games/HELLO-MADRID-VALORANT-Masters-2024_001_1080p.mp4"
+ },
+ "vct23-playoffs-teaser": {
+  "w": 1920,
+  "h": 1080,
+  "dur": 78,
+  "mb": 16.3,
+  "src": "ae004ccc-WHAT-WE-RE-MADE-OF-VCT-EMEA-2023-PLAYOFFS-TEASER_001_1080p.mp4"
+ },
+ "run-it-back-aslan": {
+  "w": 1920,
+  "h": 1080,
+  "dur": 129,
+  "mb": 31.0,
+  "src": "AsLan-RUN-IT-BACK-1-VCT-EMEA-2023_001_1080p__1_.mp4"
+ },
+ "run-it-back-amy": {
+  "w": 1920,
+  "h": 1080,
+  "dur": 135,
+  "mb": 31.0,
+  "src": "ACEND-Amy-RUN-IT-BACK-4-GC-EMEA-2023_001_1080p.mp4"
+ },
+ "road-to-masters-tokyo": {
+  "w": 1920,
+  "h": 1080,
+  "dur": 243,
+  "mb": 30.6,
+  "src": "ROAD-TO-MASTERS-TOKYO-VCT-EMEA-2023_001_1080p.mp4"
+ },
+ "frenzy-fire-blind-rankings": {
+  "w": 1920,
+  "h": 1080,
+  "dur": 456,
+  "mb": 60.0,
+  "src": "FRENZY-FIRE-BLIND-RANKINGS-WITH-VCT-PROS-FRENZY-FIRE-5-VCT-EMEA-2024_001_1080p.mp4"
  }
 }

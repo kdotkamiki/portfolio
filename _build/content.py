@@ -311,6 +311,69 @@ P.append(dict(
 ))
 
 P.append(dict(
+    slug="vct-emea-2024-content-slate", featured=True,
+    title="The 2024 Content Slate", client="Riot Games", via="At Edelman", year="2024",
+    platforms="YouTube, X, Instagram, TikTok", cat="Always-on content",
+    thumb=("v", "frenzy-fire-blind-rankings"), quote="Year two, always on.",
+    summary="The always-on content that carried VCT EMEA through its second year of partnership, building on the formats that worked in 2023.",
+    challenge=["Year two of a partnership league has a different job from year one: hold on to the audience the first season built, "
+               "and give returning fans new reasons to tune in between the tentpole moments."],
+    role=[ED,
+          "Across the 2024 slate I carried the league's always-on formats into their second season, refreshing the series fans had come back for in 2023."],
+    approach=["Build on what year one proved:",
+              ("steps", [("Keep what fans came back for", "The strongest 2023 formats returned for a second season."),
+                         ("Refresh, don't repeat", "New episodes and new angles, so returning fans got something they hadn't seen."),
+                         ("Keep the rhythm", "Always-on content between the tentpoles, so the channels never went quiet."),
+                         ("Learn from the data", "Use what the 2023 numbers said to decide where to put more weight.")])],
+    idea=None,
+    slate=[
+        ("Frenzy Fire: Blind Rankings", "frenzy-fire-blind-rankings", "v", "The fifth Frenzy Fire episode of 2024, with VCT EMEA pros taking on blind rankings.", ""),
+        ("Frenzy Fire: He Said That?", "frenzy-fire-2024", "v", "VCT pros guess who said which VCT quote.", ""),
+        ("Push to Talk", "push-to-talk-2024", "v", "The Logitech G mic-check series, redesigned for its second year.", ""),
+    ],
+    delivered=["Frenzy Fire, 2024 season", "Push to Talk, redesigned for 2024", "Always-on content across the 2024 season"],
+    results=[],
+    results_note="",
+    skills=["Content strategy", "Series development", "Always-on content", "Performance optimisation"],
+    media={},
+))
+
+P.append(dict(
+    slug="valorant-masters-tokyo", featured=True,
+    title="VALORANT Masters Tokyo", client="Riot Games", via="In-house", year="2023",
+    platforms="X, Instagram, YouTube", cat="International event campaign",
+    thumb=("grid", ["tokyo-fnatic", "tokyo-liquid", "tokyo-navi", "tokyo-fut"]), hero=("i", "tokyo-winners"),
+    quote="Drawn for Tokyo, written for its fans.",
+    summary="EMEA's social campaign for VALORANT Masters Tokyo 2023: bespoke anime-style artwork of the region's players, "
+            "and event coverage written with Japanese VALORANT slang, built with Riot Games' Tokyo office.",
+    challenge=["Masters Tokyo was the first VALORANT Masters held in Japan. EMEA's coverage had to rally fans behind the region's four teams, "
+               "and land with Japanese fans welcoming the event on home soil, without reading like a translation."],
+    role=[RG,
+          "On Masters Tokyo I led EMEA's social campaign: the illustrated team assets, the localisation work with Riot Games' Tokyo office, "
+          "and coverage across the event, from the Road to Masters film through to the winners' wallpaper for Fnatic. "
+          "It's the campaign I'm proudest of from my time on VALORANT Esports."],
+    approach=["Local first, so it could travel globally:",
+              ("steps", [("Partner with the local team", "We worked with Riot Games' Tokyo office so the campaign would land with Japanese audiences."),
+                         ("Build a shared vocabulary", "Together we compiled the phrases and slang the Japanese VALORANT community uses, each one approved by the Tokyo office."),
+                         ("Write it into everything", "That language ran through all of our social copy during event coverage, so Japanese fans saw their own community in it."),
+                         ("Give fans something to keep", "Desktop and mobile wallpapers of each team carried the event beyond match days."),
+                         ("Stay on through the final", "Always-on match coverage through to the final, and a winners' wallpaper when Fnatic took the title.")])],
+    idea=["Bespoke anime-style illustrations of EMEA's players at VALORANT Masters Tokyo: a visual language that belongs to the host city, "
+          "carried through the event in several forms, from team artwork and wallpapers to match-day coverage."],
+    delivered=["Road to Masters Tokyo hero film", "Anime-style artwork for Fnatic, Team Liquid, NAVI and FUT Esports",
+               "Desktop and mobile wallpapers", "Always-on match coverage assets",
+               "Japanese-localised social copy, approved with Riot Games' Tokyo office", "Winners' wallpaper for champions Fnatic"],
+    results=[("1M", "Impressions across static assets", ""), ("200K+", "Views across video", ""), ("10K+", "Engagements", "")],
+    results_note="Engagement and positive sentiment from Japanese fans rose sharply across X, YouTube community posts and Instagram. "
+                 "The campaign served the local community and the global one at the same time.",
+    skills=["Campaign strategy", "Localisation", "Cultural insight", "Cross-office collaboration", "Event coverage"],
+    media={"hero": [("v", "road-to-masters-tokyo", "Road to Masters Tokyo")],
+           "after_approach": [("i", "tokyo-fnatic", "Fnatic, illustrated for Masters Tokyo"), ("i", "tokyo-liquid", "Team Liquid, illustrated for Masters Tokyo")],
+           "after_idea": [("i", "tokyo-navi", "NAVI, illustrated for Masters Tokyo"), ("i", "tokyo-fut", "FUT Esports, illustrated for Masters Tokyo")],
+           "after_delivered": [("i", "tokyo-final", "Match-day coverage: the final, Fnatic vs EG"), ("i", "tokyo-winners-mobile", "Winners' mobile wallpaper for Fnatic")]},
+))
+
+P.append(dict(
     slug="join-us-vct-emea-2023", featured=True,
     title="Join Us: VCT EMEA 2023", client="Riot Games", via="In-house", year="2023",
     platforms="YouTube, X, Instagram, TikTok", cat="League launch",
@@ -408,6 +471,27 @@ P.append(dict(
     skills=["Format creation", "Always-on content", "Talent-led content", "Short-form clipping"],
     media={"hero": [("v", "frenzy-fire-2023", "Frenzy Fire, 2023")],
            "after_delivered": [("v", "frenzy-fire-2024", "Frenzy Fire 2024: He Said That?")]},
+))
+
+P.append(dict(
+    slug="run-it-back", featured=True,
+    title="Run It Back", client="Riot Games", via="In-house, then at Edelman", year="2023–24",
+    platforms="YouTube", cat="Play-analysis series",
+    thumb=("v", "run-it-back-aslan"), quote="Rewind the round, with the player.",
+    summary="A play-analysis series on the 2023 and 2024 content slates, with players from VCT EMEA and VCT Game Changers EMEA.",
+    challenge=["Highlights show what happened. The competitive audience also wants to know why, and the league needed a format that fed that appetite between broadcasts."],
+    role=["I ran Run It Back as part of the league's always-on slate: in-house at Riot Games in 2023, and at Edelman in 2024."],
+    approach=["A format for the competitive fan:",
+              ("steps", [("Pick the moment", "Start from plays fans are already talking about."),
+                         ("Put the player in the chair", "Play analysis with the player, not just over the top of them."),
+                         ("Cover both circuits", "Episodes with VCT EMEA and VCT Game Changers EMEA players.")])],
+    idea=None,
+    delivered=["Five episodes across the 2023 and 2024 slates", "Episodes with VCT EMEA and Game Changers EMEA players"],
+    results=[("30K", "Views", "across five videos"), ("1K", "Engagements", "across five videos")],
+    results_note="",
+    skills=["Series development", "Content strategy", "Community", "Production"],
+    media={"hero": [("v", "run-it-back-aslan", "Run It Back #1: AsLanM4shadow, VCT EMEA")],
+           "after_approach": [("v", "run-it-back-amy", "Run It Back #4: Amy, VCT Game Changers EMEA")]},
 ))
 
 P.append(dict(
@@ -509,6 +593,7 @@ P.append(dict(
     slate=[
         ("Showstopper", "showstopper", "v", "Two-to-three-minute films about the rivalries between regions, countries and teams, promoting each week's broadcast.", "260K views · ~7K engagements"),
         ("Ascension promo", "ascension-promo", "v", "A highly abstract promo for Ascension, where tier 2 teams compete for a place in the league. I co-created it with a Madrid-based studio.", "50K reach · 2K engagements"),
+        ("What We're Made Of", "vct23-playoffs-teaser", "v", "The teaser for the VCT EMEA 2023 Playoffs.", ""),
         ("First Champs", "first-champs", "v", "Reuniting the first-ever VCT champions, from EMEA, in a piece of league history fans could rally behind.", "40K reach · 2K engagements"),
         ("Do It Yourself", "do-it-yourself", "v", "A three-episode series.", "100K views · ~8K engagements"),
         ("Talent announcement", "talent-announcement", "v", "An unconventional talent announcement: a video instead of a static graphic, crossing over with the League of Legends LEC studio and talent.", "~10K reach · ~700 engagements, above average for this kind of announcement"),
@@ -516,7 +601,7 @@ P.append(dict(
         ("Influencer watch parties", "influencer-watch-parties", "i", "Weekly watch parties hosted by creators, plus on-the-ground content with them in the studio.", "1M+ reach across hundreds of influencers"),
         ("Game Changers EMEA promo", "game-changers-promo", "v", "Promo film for VCT Game Changers EMEA 2023. My role: creative input and social campaign planning.", ""),
     ],
-    delivered=["Showstopper rivalry series", "Ascension promo", "First Champs", "Do It Yourself series", "Talent announcement film",
+    delivered=["Showstopper rivalry series", "Ascension promo", "Playoffs teaser: What We're Made Of", "First Champs", "Do It Yourself series", "Talent announcement film",
                "Player admission forms", "Influencer watch party programme", "Game Changers EMEA promo"],
     results=[("1M+", "Reach through the influencer programme", ""), ("260K", "Views, Showstopper", ""), ("100K", "Views, Do It Yourself", "")],
     results_note="Per-item figures are shown with each piece above.",
@@ -621,7 +706,10 @@ LINES = {
     "lock-your-tickets": "A paid and organic campaign to sell tickets for VCT EMEA's new studio in Berlin.",
     "vct-emea-bootcamp": "A personalised fan experience turning each player's VALORANT data into a video.",
     "gekko-truck-and-fan-wall": "Two in-person moments for fans in Berlin: a bubble tea truck and a signed fan wall.",
-    "vct-emea-2023-content-slate": "The always-on series that carried VCT EMEA through its first partnership season.",
+    "vct-emea-2023-content-slate": "The always-on content that carried VCT EMEA through its first partnership season.",
+    "vct-emea-2024-content-slate": "The always-on content that carried VCT EMEA through its second year of partnership.",
+    "valorant-masters-tokyo": "Anime-style team art and Japanese-localised coverage for VALORANT Masters Tokyo.",
+    "run-it-back": "A play-analysis series with VCT EMEA and Game Changers EMEA players.",
     "g2-esports-x-adidas": "The social launch of adidas as G2 Esports' official apparel partner.",
     "pink-pony-streamathon": "A three-hour live charity stream from Berlin supporting young people with cancer.",
     "origin-and-the-creator-years": "Twelve years of making my own content, from gaming montages to full-time streaming.",
