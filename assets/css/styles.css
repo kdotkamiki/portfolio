@@ -407,6 +407,7 @@ strong { font-weight: 600; }
 .scroll-lit { font-family: var(--font-display); font-weight: 500; font-size: var(--step-3); letter-spacing: -0.035em; line-height: 1.08; }
 .scroll-lit .w { opacity: 0.18; transition: opacity 0.25s linear; }
 .scroll-lit .w.on { opacity: 1; }
+.approach-body { margin-top: 28px; max-width: 40rem; font-size: var(--step-1); line-height: 1.5; color: var(--ink-2); }
 
 .xp { grid-column: 1 / -1; }
 .xp-row { border-top: 1px solid var(--line); }
