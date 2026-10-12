@@ -254,7 +254,7 @@
     mqVertical.addEventListener?.("change", onResize);
 
     measure(); render(); announce();
-    if (reduceMotion) setView("grid");
+    // Reduced motion keeps the carousel layout; it just moves instantly (see the easing in loop() and the reduced-motion CSS).
   }
 
   /* ---------- Work index: grid / list ---------- */
