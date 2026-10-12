@@ -19,11 +19,7 @@ Text blocks (challenge, role, approach, idea) are lists of:
 LINKEDIN = "https://www.linkedin.com/in/rtotonchi4412"
 
 # --------------------------------------------------------------------------- positioning
-HOME_INTRO = (
-    "Strategy that finds the moment. Ideas that own it. Content that earns the scroll. "
-    "I lead social-first creative for culture, esports and B2B tech brands: "
-    "organic at the core, paid to scale, judged on results."
-)
+HOME_INTRO = "I bridge culture, creativity and strategy to shape ideas that stand out."
 
 ABOUT_LEDE = (
     "I lead social-first creative work: the strategy behind it, the idea at the centre of it, "
