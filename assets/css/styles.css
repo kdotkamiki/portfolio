@@ -296,6 +296,9 @@ strong { font-weight: 600; }
   font-family: var(--font-display); font-weight: 300; font-size: clamp(5rem, 2rem + 8vw, 10rem);
   letter-spacing: -0.06em; line-height: 0.8; font-variant-numeric: tabular-nums; pointer-events: none;
   transition: opacity 0.4s;
+  /* White + difference: the numbers invert whatever sits behind them, so they read as near-black on the page
+     and stay legible over light, dark or busy artwork as cards pass underneath. */
+  color: #fff; mix-blend-mode: difference;
 }
 .counter--now { left: calc(var(--gutter) * -0.4); }
 .counter--total { right: calc(var(--gutter) * -0.2); }

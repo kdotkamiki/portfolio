@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "21"  # bump to bust caches for CSS/JS
+VER = "22"  # bump to bust caches for CSS/JS
 
 
 def e(s):
