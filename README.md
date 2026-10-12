@@ -26,6 +26,8 @@ python3 _build/build.py     # rebuild every page
 python3 _build/build.py --thumbs   # also regenerate card thumbnails and heroes
 ```
 
+Hub pages (VCT EMEA 2023, VCT EMEA 2024, VALORANT Masters) use `chapters` instead of a single story: each chapter has feature `pieces` (title, text, role, stats, rows of media) and optional `compact` items, and the page gets an "On this page" index automatically. Old case-study URLs are kept alive by `REDIRECTS` in `build.py`, which points each one at the right section.
+
 `featured=True` puts a project in the homepage carousel. Media items are `("v", "video-name", "caption")` or `("i", "image-name", "caption")` and sit side by side at equal height without cropping.
 
 Every figure on the site is traceable in `_build/SOURCES.md`. Keep it that way.

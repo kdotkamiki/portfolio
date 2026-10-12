@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "22"  # bump to bust caches for CSS/JS
+VER = "23"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -520,6 +520,65 @@ def slate_html(proj, p):
     </section>"""
 
 
+def stat_tiles(stats, cls="cs-results"):
+    rs = "".join(f'<div class="stat reveal" data-delay="{j % 3}"><p class="stat__n">{e(s[0])}</p><p class="stat__l">{e(s[1])}</p>'
+                 f'{f"<p class=stat__d>{e(s[2])}</p>" if len(s) > 2 and s[2] else ""}</div>' for j, s in enumerate(stats))
+    return f'<div class="{cls}">{rs}</div>' if stats else ""
+
+
+def piece_html(pc, p):
+    """One piece of work inside a chapter of a hub page: text column, then full-width media rows."""
+    role = f'<div class="piece-role"><p class="label">My role</p><p>{e(pc["role"])}</p></div>' if pc.get("role") else ""
+    note = f'<p class="cs-note">{e(pc["note"])}</p>' if pc.get("note") else ""
+    rows = "".join(f'\n    <div class="cs-media grid-12 reveal">{media_row(r, p)}</div>' for r in pc.get("media", []))
+    return f"""
+    <article class="piece" id="{pc['id']}" aria-labelledby="{pc['id']}-h">
+      <div class="grid-12">
+        <div class="section-head"><p class="piece-kicker">{e(pc.get('kicker', ''))}</p></div>
+        <div class="section-body prose reveal"><h3 class="piece-title" id="{pc['id']}-h">{e(pc['title'])}</h3>{paras(pc.get('text'))}{role}{stat_tiles(pc.get('stats', []), 'cs-results piece-stats')}{note}</div>
+      </div>{rows}
+    </article>"""
+
+
+def chapters_html(proj, p):
+    out = []
+    for k, c in enumerate(proj["chapters"], 1):
+        pieces = "".join(piece_html(pc, p) for pc in c.get("pieces", []))
+        compact = ""
+        if c.get("compact"):
+            items = "".join(f"""<article class="slate-item reveal"{f' id="{it[5]}"' if len(it) > 5 else ''}>{figure((it[2], it[1], it[0]), p)}<div class="slate-text"><h3>{e(it[0])}</h3><p>{e(it[3])}</p>{f'<p class="slate-stat">{e(it[4])}</p>' if it[4] else ''}</div></article>"""
+                            for it in c["compact"])
+            partners = "".join(f"<li>{e(x)}</li>" for x in c.get("partners", []))
+            compact = f"""
+    <div class="grid-12 chapter-slate">
+      <div class="section-head"><p class="piece-kicker">{e(c.get('compact_label', 'Also in this chapter'))}</p></div>
+      <div class="section-body"><div class="slate">{items}</div>{f'<div class="partners"><p class="label">{e(c.get("partners_label", "Partners"))}</p><ul class="brands">{partners}</ul></div>' if partners else ''}</div>
+    </div>"""
+        related = ""
+        if c.get("related"):
+            links = " ".join(f'<a class="link" href="{s}.html">{e(t)} →</a>' for s, t in c["related"])
+            related = f'\n    <div class="grid-12 chapter-related"><div class="section-body"><p>{e(c.get("related_label", "See also"))}: {links}</p></div></div>'
+        out.append(f"""
+  <section class="chapter" id="{c['id']}" aria-labelledby="ch-{c['id']}">
+    <div class="grid-12 chapter-head reveal">
+      <div class="section-head"><p class="chapter-num" aria-hidden="true">{k:02d}</p></div>
+      <div class="section-body"><h2 class="chapter-title" id="ch-{c['id']}">{e(c['title'])}</h2><p class="chapter-intro">{e(c['intro'])}</p></div>
+    </div>{pieces}{compact}{related}
+  </section>""")
+    return "".join(out)
+
+
+def chapter_nav(proj):
+    lis = "".join(f"""<li><a href="#{c['id']}"><span class="cn-num">{k:02d}</span><span class="cn-title">{e(c['title'])}</span>"""
+                  f"""<span class="cn-items">{e(' · '.join([pc['title'] for pc in c.get('pieces', [])] + [it[0] for it in c.get('compact', [])]))}</span></a></li>"""
+                  for k, c in enumerate(proj["chapters"], 1))
+    return f"""
+    <nav class="cs-block grid-12 chapter-nav" aria-label="On this page">
+      <div class="section-head"><h2 class="label">On this page</h2></div>
+      <div class="section-body"><ol>{lis}</ol></div>
+    </nav>"""
+
+
 def build_case(i, proj, template=False):
     p = "../"
     nxt = PROJECTS[(i + 1) % len(PROJECTS)]
@@ -568,6 +627,24 @@ def build_case(i, proj, template=False):
     </section>
     <div class="cs-media grid-12 reveal">{media_row(M['extra'], p)}</div>"""
 
+    hub = bool(proj.get("chapters"))
+    if hub:
+        hub_top = (f"""
+    <section class="cs-block grid-12" aria-labelledby="s-highlights">
+      <div class="section-head"><h2 id="s-highlights" class="label label--accent">Highlights</h2></div>
+      <div class="section-body">{stat_tiles(proj['results'])}</div>
+    </section>""" if proj["results"] else "") + chapter_nav(proj)
+        body_rest = chapters_html(proj, p)
+    else:
+        hub_top = ""
+        body_rest = (f"""
+{block('idea', 'Creative idea', paras(proj['idea'])) if proj.get('idea') else ''}{gallery('after_idea')}{slate_html(proj, p) if proj.get('slate') else ''}
+{block('delivered', 'What I delivered', delivered) if proj['delivered'] else ''}{gallery('after_delivered')}
+{results_block}{gallery('after_results')}{creator_charts() if proj.get('creator') else ''}""")
+    related_block = ""
+    if proj.get("related"):
+        related_block = block("related", "Related projects", '<ul class="related-list">' + "".join(
+            f'<li><a class="link" href="{s}.html">{e(tt)} →</a></li>' for s, tt in proj["related"]) + "</ul>")
     others = "\n".join(f'      <li><a href="{o["slug"]}.html"><span>{e(o["title"])}</span><span>{e(o["client"].split(" · ")[0])}</span></a></li>' for o in PROJECTS if o is not proj)
     title = proj["title"]
     desc = proj["summary"][:155]
@@ -593,13 +670,11 @@ def build_case(i, proj, template=False):
       <div class="section-head"><h2 id="s-summary" class="label label--accent">Overview</h2></div>
       <div class="section-body"><p class="prose--big reveal">{e(proj['summary'])}</p></div>
     </section>{gallery('hero', 'is-hero')}
+{hub_top}
 {block('challenge', 'The challenge', paras(proj['challenge']))}
 {block('role', 'My role', paras(proj['role']))}
-{block('approach', 'Strategic approach', paras(proj['approach']))}{gallery('after_approach')}
-{block('idea', 'Creative idea', paras(proj['idea'])) if proj.get('idea') else ''}{gallery('after_idea')}{slate_html(proj, p) if proj.get('slate') else ''}
-{block('delivered', 'What I delivered', delivered)}{gallery('after_delivered')}
-{results_block}{gallery('after_results')}{creator_charts() if proj.get('creator') else ''}
-{block('skills', 'Skills demonstrated', skills)}{extra}
+{block('approach', 'Strategic approach', paras(proj['approach']))}{gallery('after_approach')}{body_rest}
+{block('skills', 'Skills demonstrated', skills)}{related_block}{extra}
   </article>
 
   <section class="next-project" aria-label="Next project">
@@ -635,15 +710,25 @@ def build_404():
     (ROOT / "404.html").write_text(out)
 
 
-REDIRECTS = {"love-what-you-do": "meet-the-player"}  # old slug -> new slug
+REDIRECTS = {  # old slug -> new page (and section) after the October 2026 restructure into year pages
+    "love-what-you-do": "vct-emea-2024#meet-the-player", "meet-the-player": "vct-emea-2024#meet-the-player",
+    "vct-emea-2024-season-teasers": "vct-emea-2024#teasers", "vct-emea-2024-content-slate": "vct-emea-2024#always-on",
+    "valorant-masters-madrid": "valorant-masters#madrid", "valorant-masters-tokyo": "valorant-masters#tokyo",
+    "join-us-vct-emea-2023": "vct-emea-2023#join-us", "unlocked": "vct-emea-2023#unlocked",
+    "frenzy-fire": "vct-emea-2023#frenzy-fire", "run-it-back": "vct-emea-2023#run-it-back",
+    "lock-your-tickets": "vct-emea-2023#lock-your-tickets", "gekko-truck-and-fan-wall": "vct-emea-2023#gekko",
+    "vct-emea-2023-content-slate": "vct-emea-2023#always-on",
+}
 
 
 def build_redirect(new):
+    page, _, anchor = new.partition("#")
+    frag = f"#{anchor}" if anchor else ""
     return f"""<!doctype html>
 <html lang="en-GB"><head><meta charset="utf-8"><title>Moved</title>
-<meta name="robots" content="noindex"><link rel="canonical" href="{SITE}/work/{new}.html">
-<meta http-equiv="refresh" content="0; url={new}.html"></head>
-<body><p><a href="{new}.html">This case study has moved.</a></p></body></html>
+<meta name="robots" content="noindex"><link rel="canonical" href="{SITE}/work/{page}.html">
+<meta http-equiv="refresh" content="0; url={page}.html{frag}"></head>
+<body><p><a href="{page}.html{frag}">This case study has moved.</a></p></body></html>
 """
 
 

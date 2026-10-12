@@ -1,5 +1,7 @@
 # Where every number on the site comes from
 
+> October 2026: the VALORANT Esports case studies were merged into three pages (VCT EMEA 2023, VCT EMEA 2024, VALORANT Masters). The figures below are unchanged and now appear in those pages' sections.
+
 Source folder: `Documents/Website` on Ramtin's computer. Nothing on the site is estimated. Where the source says "around" or "roughly", the site shows `~`.
 
 | Case study | Figure | Source |
