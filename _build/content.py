@@ -331,9 +331,13 @@ P.append(dict(
     platforms="YouTube, Twitch, X, Discord", cat="Creator and community",
     thumb=("v", "origin"), quote="Before the brands, the audience.",
     summary="Twelve years making my own content, from gaming montages to full-time streaming. It's where I learned what makes people watch, share and come back.",
-    challenge=["As an independent creator there's no media budget and no brand to borrow attention from. Every view has to be earned through the work itself, and the community has to want to come back."],
+    challenge=["The challenge was to be the best, and I knew I had what it took. I wanted people to see how good I was, so passion for gaming, "
+               "music and creation became the perfect storm, setting me on the path to where I am today.",
+               ("h", "Reflection"),
+               "As an independent creator there's no media budget and no brand to borrow attention from. Every view has to be earned through the "
+               "work itself, and the community has to want to come back."],
     role=["Creator, producer, editor and community lead, all at once: concept, capture, edit, publishing, scheduling and the whole content pipeline, "
-          "plus community building across Discord, YouTube and X and brand partnerships with OMEN by HP, Intel and Snickers. "
+          "plus community building across Twitch, Discord, YouTube and X and brand partnerships with OMEN by HP, Intel and Snickers. "
           "I also competed at events including TwitchCon and EGX."],
     approach=["Audience growth without a media budget:",
               ("steps", [("Make every piece an event", "Montages edited to be watched, rewatched and shared."),
