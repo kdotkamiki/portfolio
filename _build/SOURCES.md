@@ -35,7 +35,7 @@ Source folder: `Documents/Website` on Ramtin's computer. Nothing on the site is 
 | 2024: Bringing the Pressure with SplashX | 10K+ views; 1.2K+ engagements | Ramtin, in conversation |
 | 2023: Game Changers EMEA promo | 25K views; 1.5K engagements; 100% positive sentiment | Ramtin, in conversation |
 | 2023: What We're Made Of (Playoffs teaser) | 58K views; 1.4K engagements; 97% positive sentiment | Ramtin, in conversation |
-| The FA × Google Cloud | Results pending | Ramtin, in conversation |
+| The FA × Google Cloud; The Luminary Programme | Results pending | Ramtin, in conversation |
 | About page | 15+ years, 9 markets, job titles and dates | CV (2026) |
 | About: Google Cloud account, year to Nov 2025 | 5,080,801 impressions (+12.6%); 601,699 engagements (+28.8%); 265,625 weighted engagements (+54.1%); ER 11.84% vs 10.35%; followers +106,534 to 777,064. Scope: LinkedIn global, Instagram global, X UK | `EXT_Google Cloud _ EOY Results - ACCOUNT RESULTS CROSS-PLATFORM.pdf` |
 | (Removed from the site) Google Cloud account, H1 2026 vs H1 2025 | 4,868,104 impressions (+18.68%); 461,113 engagements (−6.67%); 210,133 weighted engagements (+0.26%); ER 9.47% vs 12.05%; posts 1,113 vs 1,641 (−32.18%); global LinkedIn ER 20.25% (+43.15%) | `Google Cloud _ H1 2026_H1 2025 data pull - H1 2026 vs H1 2025 Comparison.pdf` |

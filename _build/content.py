@@ -186,7 +186,7 @@ P.append(dict(
                "Native publishing on executives' own profiles via Sprinklr", "Coordination with each executive's point of contact",
                "Amplification of launches, customer stories, partner milestones and regional moments"],
     results=[],
-    results_note="Programme-level metrics weren't included in the supplied material. The evidence shown is the published work: coordinated posts from five Google Cloud executives around Gemini at Work '26.",
+    results_note="Results pending.",
     skills=["Executive social", "Thought leadership", "B2B LinkedIn", "Programme management", "Stakeholder management", "Sprinklr"],
     media={"hero": [("i", "luminary-1", "LinkedIn post by Maureen Costello, Google Cloud, about Gemini at Work"),
                     ("i", "luminary-4", "LinkedIn post by Alex Rutter, Google Cloud, about Lloyds Banking Group and Gemini Enterprise"),
