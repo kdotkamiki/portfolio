@@ -754,3 +754,17 @@ strong { font-weight: 600; }
   .chapter-num { font-size: var(--step-3); margin-bottom: 4px; }
   .piece-kicker { padding-top: 0; }
 }
+
+/* Work page: client filter */
+.index-controls { display: flex; align-items: center; gap: 8px 40px; flex-wrap: wrap; justify-content: flex-end; }
+.filter-group { flex-wrap: wrap; gap: 0 20px; }
+.filter-group .toggle sup { font-size: 0.6875rem; color: var(--muted); margin-left: 0.15em; align-self: flex-start; padding-top: 0.2em; }
+.work-index [data-group][hidden] { display: none !important; }
+@media (max-width: 760px) {
+  .index-controls { justify-content: flex-start; width: 100%; gap: 0; }
+  /* one swipeable row on phones, bleeding to the screen edge */
+  .filter-group { flex-wrap: nowrap; gap: 0 14px; width: calc(100% + var(--gutter)); margin-right: calc(var(--gutter) * -1);
+                  overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-right: var(--gutter); }
+  .filter-group::-webkit-scrollbar { display: none; }
+  .filter-group .toggle { flex: none; white-space: nowrap; }
+}

@@ -262,6 +262,16 @@
       workIndex.classList.toggle("is-list", b.dataset.layout === "list");
       btns.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
     }));
+    // Filter by client: hides cards in both the grid and the list
+    const fbtns = $$("[data-filter]", workIndex), status = $("[data-filter-status]", workIndex);
+    const items = $$("[data-group]", workIndex);
+    fbtns.forEach((b) => b.addEventListener("click", () => {
+      const f = b.dataset.filter;
+      fbtns.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      items.forEach((it) => { it.hidden = !(f === "all" || it.dataset.group === f); if (!it.hidden) it.classList.add("is-in"); });
+      const n = $$(".work-grid [data-group]:not([hidden])", workIndex).length;
+      if (status) status.textContent = `Showing ${n} project${n === 1 ? "" : "s"}${f === "all" ? "" : ": " + b.firstChild.textContent.trim()}`;
+    }));
   }
 
   /* ---------- Scroll-driven effects ---------- */

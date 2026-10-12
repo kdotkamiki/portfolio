@@ -414,7 +414,7 @@ P.append(dict(
 
 P.append(dict(
     slug="vct-emea-2024", featured=True,
-    title="VCT EMEA 2024", client="Riot Games", via="At Edelman", year="2024–25",
+    title="VCT EMEA 2024", client="Riot Games", via="At Edelman", year="2024",
     platforms="YouTube, X, Instagram, TikTok", cat="League season, year two",
     thumb=("grid", ["vct24-kickoff-teaser", "love-what-you-do-mimi", "frenzy-fire-blind-rankings", "vct24-splashx"]), hero=("v", "vct24-kickoff-teaser"),
     quote="New meta. New faces. New ambitions.",
@@ -453,9 +453,7 @@ P.append(dict(
                                  [("v", "vct24-stage2-teaser", "Stage 2 teaser: You are not ready"), ("v", "vct24-grand-finals-teaser", "2024 Grand Finals teaser")]])],
              compact_label="Also in the season",
              compact=[("Bringing the Pressure with SplashX", "vct24-splashx", "v",
-                       "A joint project with Riot's brand and game teams: an 80s-style water-gun film starring our talent, promoting the new SplashX skin bundle.", "", "splashx"),
-                      ("2025 Kickoff: Take What's Yours", "vct25-kickoff-teaser", "v",
-                       "The teaser for the 2025 season opener. My role: creative input and social campaign planning.", "", "kickoff-2025")]),
+                       "A joint project with Riot's brand and game teams: an 80s-style water-gun film starring our talent, promoting the new SplashX skin bundle.", "", "splashx")]),
         dict(id="always-on", title="Always-on content", intro="The formats fans came back for, refreshed for a second season, and a new way to meet the players.",
              pieces=[dict(id="meet-the-player", kicker="Player documentary series", title="Meet the Player",
                           text=["A series of mini-documentaries about players' lives in and outside VALORANT: the ups and downs of a career, told at home. "

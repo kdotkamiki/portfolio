@@ -9,13 +9,23 @@
 <meta property="og:title" content="Work — Ramtin Totonchi">
 <meta property="og:description" content="Case studies: Google Cloud (at Jellyfish), Riot Games and VALORANT Esports, G2 Esports, and more.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Ramtin Totonchi">
+<meta property="og:url" content="https://ramtintotonchi.com/work.html">
+<meta property="og:image" content="https://ramtintotonchi.com/assets/img/og/site.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Selected work by Ramtin Totonchi">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Work — Ramtin Totonchi">
+<meta name="twitter:description" content="Case studies: Google Cloud (at Jellyfish), Riot Games and VALORANT Esports, G2 Esports, and more.">
+<meta name="twitter:image" content="https://ramtintotonchi.com/assets/img/og/site.jpg">
 <meta name="theme-color" content="#f3f1ec">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css?v=23">
-<script src="assets/js/main.js?v=23" defer></script>
+<link rel="stylesheet" href="assets/css/styles.css?v=25">
+<script src="assets/js/main.js?v=25" defer></script>
 </head>
 <body class="" data-page="work">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -46,13 +56,19 @@
   <section class="grid-12 work-index">
     <div class="index-head">
       <h1>Work<sup>12</sup></h1>
-      <div class="toggle-group" role="group" aria-label="Layout">
-        <button class="toggle" type="button" data-layout="grid" aria-pressed="true">Grid</button>
-        <button class="toggle" type="button" data-layout="list" aria-pressed="false">List</button>
+      <div class="index-controls">
+        <div class="toggle-group filter-group" role="group" aria-label="Filter by client">
+          <button class="toggle" type="button" data-filter="all" aria-pressed="true">All<sup>12</sup></button><button class="toggle" type="button" data-filter="google-cloud" aria-pressed="false">Google Cloud<sup>3</sup></button><button class="toggle" type="button" data-filter="valorant" aria-pressed="false">VALORANT Esports<sup>6</sup></button><button class="toggle" type="button" data-filter="g2" aria-pressed="false">G2 Esports<sup>2</sup></button><button class="toggle" type="button" data-filter="creator" aria-pressed="false">Creator<sup>1</sup></button>
+        </div>
+        <div class="toggle-group" role="group" aria-label="Layout">
+          <button class="toggle" type="button" data-layout="grid" aria-pressed="true">Grid</button>
+          <button class="toggle" type="button" data-layout="list" aria-pressed="false">List</button>
+        </div>
       </div>
+      <p class="visually-hidden" aria-live="polite" data-filter-status></p>
     </div>
     <ul class="work-grid">
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="google-cloud">
       <a href="work/google-cloud-london-summit.html">
         <div class="work-card__top"><span>2026</span><span>B2B event campaign</span></div>
         <figure><img src="assets/img/thumbs/google-cloud-london-summit.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -60,7 +76,7 @@
         <p class="work-card__line">Social coverage that kept Google Cloud&#x27;s London Summit working after the keynote.</p>
       </a>
     </li>
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="google-cloud">
       <a href="work/the-fa-x-google-cloud.html">
         <div class="work-card__top"><span>2026</span><span>Partnership content</span></div>
         <figure><img src="assets/img/thumbs/the-fa-x-google-cloud.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -68,7 +84,7 @@
         <p class="work-card__line">A vertical video series putting England players up against Google Cloud&#x27;s AI tools.</p>
       </a>
     </li>
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="google-cloud">
       <a href="work/luminary-programme.html">
         <div class="work-card__top"><span>2025–now</span><span>Executive social</span></div>
         <figure><img src="assets/img/thumbs/luminary-programme.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -76,7 +92,7 @@
         <p class="work-card__line">An always-on LinkedIn programme keeping Google Cloud&#x27;s leaders visible and credible.</p>
       </a>
     </li>
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="valorant">
       <a href="work/valorant-masters.html">
         <div class="work-card__top"><span>2023–24</span><span>International event campaigns</span></div>
         <figure><img src="assets/img/thumbs/valorant-masters.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -84,15 +100,15 @@
         <p class="work-card__line">Anime-style art and Japanese-localised coverage for Tokyo, and a Madrid hype film.</p>
       </a>
     </li>
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="valorant">
       <a href="work/vct-emea-2024.html">
-        <div class="work-card__top"><span>2024–25</span><span>League season, year two</span></div>
+        <div class="work-card__top"><span>2024</span><span>League season, year two</span></div>
         <figure><img src="assets/img/thumbs/vct-emea-2024.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
         <div class="work-card__bottom"><h3 class="work-card__title">VCT EMEA 2024</h3><span class="work-card__client">Riot Games<br><span class="muted">At Edelman</span></span></div>
         <p class="work-card__line">Year two at Edelman: season teasers, player documentaries and always-on series.</p>
       </a>
     </li>
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="valorant">
       <a href="work/vct-emea-tiktok-launch.html">
         <div class="work-card__top"><span>2024</span><span>Platform launch</span></div>
         <figure><img src="assets/img/thumbs/vct-emea-tiktok-launch.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -100,7 +116,7 @@
         <p class="work-card__line">Launching VCT EMEA on TikTok with native content: 100,000 followers in a year.</p>
       </a>
     </li>
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="valorant">
       <a href="work/vct-emea-2023.html">
         <div class="work-card__top"><span>2023</span><span>League launch year</span></div>
         <figure><img src="assets/img/thumbs/vct-emea-2023.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -108,7 +124,7 @@
         <p class="work-card__line">The launch year of VALORANT&#x27;s EMEA league: films, series and fan moments in Berlin.</p>
       </a>
     </li>
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="valorant">
       <a href="work/push-to-talk.html">
         <div class="work-card__top"><span>2023–24</span><span>Sponsored series</span></div>
         <figure><img src="assets/img/thumbs/push-to-talk.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -116,7 +132,7 @@
         <p class="work-card__line">A Logitech G series that lets fans hear players talk in and out of the game.</p>
       </a>
     </li>
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="valorant">
       <a href="work/vct-emea-bootcamp.html">
         <div class="work-card__top"><span>2023</span><span>Paid and organic sign-up campaign</span></div>
         <figure><img src="assets/img/thumbs/vct-emea-bootcamp.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -124,7 +140,7 @@
         <p class="work-card__line">A personalised fan experience turning each player&#x27;s VALORANT data into a video.</p>
       </a>
     </li>
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="g2">
       <a href="work/g2-esports-x-adidas.html">
         <div class="work-card__top"><span>2021</span><span>Partnership launch</span></div>
         <figure><img src="assets/img/thumbs/g2-esports-x-adidas.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -132,7 +148,7 @@
         <p class="work-card__line">The social launch of adidas as G2 Esports&#x27; official apparel partner.</p>
       </a>
     </li>
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="g2">
       <a href="work/pink-pony-streamathon.html">
         <div class="work-card__top"><span>2021</span><span>Charity live event</span></div>
         <figure><img src="assets/img/thumbs/pink-pony-streamathon.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -140,7 +156,7 @@
         <p class="work-card__line">A three-hour live charity stream from Berlin supporting young people with cancer.</p>
       </a>
     </li>
-    <li class="work-card reveal">
+    <li class="work-card reveal" data-group="creator">
       <a href="work/origin-and-the-creator-years.html">
         <div class="work-card__top"><span>2008–20</span><span>Creator and community</span></div>
         <figure><img src="assets/img/thumbs/origin-and-the-creator-years.webp" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -150,62 +166,62 @@
     </li>
     </ul>
     <ul class="work-list xp">
-    <li class="xp-row" data-preview="assets/img/thumbs/google-cloud-london-summit.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/google-cloud-london-summit.webp" data-group="google-cloud">
       <a href="work/google-cloud-london-summit.html">
         <span class="c1">London Summit 2026</span><span class="c2">Google Cloud · At Jellyfish</span><span class="c3">2026</span><span class="c4" aria-hidden="true">→</span>
       </a>
     </li>
-    <li class="xp-row" data-preview="assets/img/thumbs/the-fa-x-google-cloud.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/the-fa-x-google-cloud.webp" data-group="google-cloud">
       <a href="work/the-fa-x-google-cloud.html">
         <span class="c1">The FA × Google Cloud</span><span class="c2">The FA · Google Cloud · At Jellyfish</span><span class="c3">2026</span><span class="c4" aria-hidden="true">→</span>
       </a>
     </li>
-    <li class="xp-row" data-preview="assets/img/thumbs/luminary-programme.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/luminary-programme.webp" data-group="google-cloud">
       <a href="work/luminary-programme.html">
         <span class="c1">The Luminary Programme</span><span class="c2">Google Cloud · At Jellyfish</span><span class="c3">2025–now</span><span class="c4" aria-hidden="true">→</span>
       </a>
     </li>
-    <li class="xp-row" data-preview="assets/img/thumbs/valorant-masters.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/valorant-masters.webp" data-group="valorant">
       <a href="work/valorant-masters.html">
         <span class="c1">VALORANT Masters</span><span class="c2">Riot Games · In-house, then at Edelman</span><span class="c3">2023–24</span><span class="c4" aria-hidden="true">→</span>
       </a>
     </li>
-    <li class="xp-row" data-preview="assets/img/thumbs/vct-emea-2024.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/vct-emea-2024.webp" data-group="valorant">
       <a href="work/vct-emea-2024.html">
-        <span class="c1">VCT EMEA 2024</span><span class="c2">Riot Games · At Edelman</span><span class="c3">2024–25</span><span class="c4" aria-hidden="true">→</span>
+        <span class="c1">VCT EMEA 2024</span><span class="c2">Riot Games · At Edelman</span><span class="c3">2024</span><span class="c4" aria-hidden="true">→</span>
       </a>
     </li>
-    <li class="xp-row" data-preview="assets/img/thumbs/vct-emea-tiktok-launch.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/vct-emea-tiktok-launch.webp" data-group="valorant">
       <a href="work/vct-emea-tiktok-launch.html">
         <span class="c1">VCT EMEA on TikTok</span><span class="c2">Riot Games · At Edelman</span><span class="c3">2024</span><span class="c4" aria-hidden="true">→</span>
       </a>
     </li>
-    <li class="xp-row" data-preview="assets/img/thumbs/vct-emea-2023.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/vct-emea-2023.webp" data-group="valorant">
       <a href="work/vct-emea-2023.html">
         <span class="c1">VCT EMEA 2023</span><span class="c2">Riot Games · In-house</span><span class="c3">2023</span><span class="c4" aria-hidden="true">→</span>
       </a>
     </li>
-    <li class="xp-row" data-preview="assets/img/thumbs/push-to-talk.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/push-to-talk.webp" data-group="valorant">
       <a href="work/push-to-talk.html">
         <span class="c1">Push to Talk × Logitech G</span><span class="c2">Riot Games · Logitech G · In-house, then at Edelman</span><span class="c3">2023–24</span><span class="c4" aria-hidden="true">→</span>
       </a>
     </li>
-    <li class="xp-row" data-preview="assets/img/thumbs/vct-emea-bootcamp.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/vct-emea-bootcamp.webp" data-group="valorant">
       <a href="work/vct-emea-bootcamp.html">
         <span class="c1">VCT EMEA Bootcamp</span><span class="c2">Riot Games · In-house</span><span class="c3">2023</span><span class="c4" aria-hidden="true">→</span>
       </a>
     </li>
-    <li class="xp-row" data-preview="assets/img/thumbs/g2-esports-x-adidas.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/g2-esports-x-adidas.webp" data-group="g2">
       <a href="work/g2-esports-x-adidas.html">
         <span class="c1">G2 Esports × adidas</span><span class="c2">G2 Esports · adidas · In-house</span><span class="c3">2021</span><span class="c4" aria-hidden="true">→</span>
       </a>
     </li>
-    <li class="xp-row" data-preview="assets/img/thumbs/pink-pony-streamathon.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/pink-pony-streamathon.webp" data-group="g2">
       <a href="work/pink-pony-streamathon.html">
         <span class="c1">Pink Pony Streamathon</span><span class="c2">G2 Esports · Ralph Lauren · In-house</span><span class="c3">2021</span><span class="c4" aria-hidden="true">→</span>
       </a>
     </li>
-    <li class="xp-row" data-preview="assets/img/thumbs/origin-and-the-creator-years.webp">
+    <li class="xp-row" data-preview="assets/img/thumbs/origin-and-the-creator-years.webp" data-group="creator">
       <a href="work/origin-and-the-creator-years.html">
         <span class="c1">Origin, and the Creator Years</span><span class="c2">Independent · Self-employed</span><span class="c3">2008–20</span><span class="c4" aria-hidden="true">→</span>
       </a>

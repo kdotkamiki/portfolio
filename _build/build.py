@@ -22,7 +22,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "23"  # bump to bust caches for CSS/JS
+VER = "25"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -165,7 +165,7 @@ def make_thumb(proj):
 
 
 # ------------------------------------------------------------------ chrome
-def head(title, desc, p, page="", body_class="", noindex=False, canonical=""):
+def head(title, desc, p, page="", body_class="", noindex=False, canonical="", og="assets/img/og/site.jpg", og_alt="Selected work by Ramtin Totonchi"):
     return f"""<!doctype html>
 <html lang="en-GB" class="no-js">
 <head>
@@ -177,6 +177,16 @@ def head(title, desc, p, page="", body_class="", noindex=False, canonical=""):
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Ramtin Totonchi">
+<meta property="og:url" content="{SITE}/{canonical}">
+<meta property="og:image" content="{SITE}/{og}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{e(og_alt)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{e(title)}">
+<meta name="twitter:description" content="{e(desc)}">
+<meta name="twitter:image" content="{SITE}/{og}">
 <meta name="theme-color" content="#f3f1ec">
 <link rel="icon" href="{p}assets/img/favicon.svg" type="image/svg+xml">
 {FONTS}
@@ -248,8 +258,19 @@ def carousel_card(proj, i):
       </li>"""
 
 
+FILTERS = [("all", "All"), ("google-cloud", "Google Cloud"), ("valorant", "VALORANT Esports"), ("g2", "G2 Esports"), ("creator", "Creator")]
+
+
+def group_of(proj):
+    c = proj["client"]
+    if "Google Cloud" in c: return "google-cloud"
+    if "Riot" in c: return "valorant"
+    if "G2" in c: return "g2"
+    return "creator"
+
+
 def work_card(proj, p):
-    return f"""    <li class="work-card reveal">
+    return f"""    <li class="work-card reveal" data-group="{group_of(proj)}">
       <a href="{p}work/{proj['slug']}.html">
         <div class="work-card__top"><span>{e(proj['year'] or proj['via'])}</span><span>{e(proj['cat'])}</span></div>
         <figure><img src="{thumb(proj, p)}" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
@@ -260,7 +281,7 @@ def work_card(proj, p):
 
 
 def work_row(proj, p):
-    return f"""    <li class="xp-row" data-preview="{thumb(proj, p)}">
+    return f"""    <li class="xp-row" data-preview="{thumb(proj, p)}" data-group="{group_of(proj)}">
       <a href="{p}work/{proj['slug']}.html">
         <span class="c1">{e(proj['title'])}</span><span class="c2">{e(proj['client'])} · {e(proj['via'])}</span><span class="c3">{e(proj['year'] or '')}</span><span class="c4" aria-hidden="true">→</span>
       </a>
@@ -311,10 +332,16 @@ def build_work():
   <section class="grid-12 work-index">
     <div class="index-head">
       <h1>Work<sup>{len(PROJECTS):02d}</sup></h1>
-      <div class="toggle-group" role="group" aria-label="Layout">
-        <button class="toggle" type="button" data-layout="grid" aria-pressed="true">Grid</button>
-        <button class="toggle" type="button" data-layout="list" aria-pressed="false">List</button>
+      <div class="index-controls">
+        <div class="toggle-group filter-group" role="group" aria-label="Filter by client">
+          {"".join(f'<button class="toggle" type="button" data-filter="{k}" aria-pressed="{str(k == 'all').lower()}">{lbl}<sup>{sum(1 for pr in PROJECTS if k == "all" or group_of(pr) == k)}</sup></button>' for k, lbl in FILTERS)}
+        </div>
+        <div class="toggle-group" role="group" aria-label="Layout">
+          <button class="toggle" type="button" data-layout="grid" aria-pressed="true">Grid</button>
+          <button class="toggle" type="button" data-layout="list" aria-pressed="false">List</button>
+        </div>
       </div>
+      <p class="visually-hidden" aria-live="polite" data-filter-status></p>
     </div>
     <ul class="work-grid">
 {chr(10).join(work_card(pr, '') for pr in PROJECTS)}
@@ -347,7 +374,7 @@ def build_about():
     body = "\n".join(f'        <p class="reveal">{e(t)}</p>' for t in C.ABOUT_BODY)
     brands = "".join(f"<li>{e(b)}</li>" for b in C.BRANDS)
     marquee = '<div class="marquee__group">' + "".join(f'<span class="wm wm--{i % 5}">{e(b)}</span>' for i, b in enumerate(C.BRANDS)) + "</div>"
-    out = head("About — Ramtin Totonchi", DESC, "", "about", canonical="about.html") + header("", "about") + f"""<main id="main">
+    out = head("About — Ramtin Totonchi", DESC, "", "about", canonical="about.html", og="assets/img/og/about.jpg", og_alt="Ramtin Totonchi in the VCT EMEA studio") + header("", "about") + f"""<main id="main">
   <section class="split-hero split-hero--scroll" data-dark aria-label="Introduction">
     <div class="split-hero__sticky">
       <h1 class="visually-hidden">About Ramtin Totonchi</h1>
@@ -648,7 +675,7 @@ def build_case(i, proj, template=False):
     others = "\n".join(f'      <li><a href="{o["slug"]}.html"><span>{e(o["title"])}</span><span>{e(o["client"].split(" · ")[0])}</span></a></li>' for o in PROJECTS if o is not proj)
     title = proj["title"]
     desc = proj["summary"][:155]
-    out = head(f"{title} — Ramtin Totonchi", desc, p, "case", noindex=template, canonical=f"work/{proj['slug']}.html") + header(p, "work") + f"""<main id="main">
+    out = head(f"{title} — Ramtin Totonchi", desc, p, "case", noindex=template, canonical=f"work/{proj['slug']}.html", og=f"assets/img/og/{proj['slug']}.jpg", og_alt=f"{title}: {proj['cat']}") + header(p, "work") + f"""<main id="main">
   <section class="cs-hero" data-dark aria-labelledby="cs-title">
     <div class="cs-hero__img"><img src="{hero_img}" alt="" width="1920" height="1080" fetchpriority="high"></div>
     <div class="cs-hero__inner">
@@ -710,6 +737,27 @@ def build_404():
     (ROOT / "404.html").write_text(out)
 
 
+
+def make_og():
+    """1200x630 JPEG link-preview images (LinkedIn, X, WhatsApp): one per case study, one for About, one for the site."""
+    out = ROOT / "assets/img/og"; out.mkdir(parents=True, exist_ok=True)
+    W, H = 1200, 630
+    for pr in PROJECTS:
+        _cover(Image.open(ROOT / "assets/img/hero" / f"{pr['slug']}.webp").convert("RGB"), W, H).save(out / f"{pr['slug']}.jpg", "JPEG", quality=84, optimize=True, progressive=True)
+    port = Image.open(ROOT / "assets/img/work/ramtin-portrait.webp").convert("RGB")
+    _cover(port, W, H).save(out / "about.jpg", "JPEG", quality=84, optimize=True, progressive=True)
+    # site-wide: a 2x2 of four projects that show the range (B2B tech, esports, brand partnership)
+    from PIL import ImageDraw
+    picks = ["google-cloud-london-summit", "valorant-masters", "the-fa-x-google-cloud", "g2-esports-x-adidas"]
+    pad, gap = 18, 12
+    cw, ch = (W - 2 * pad - gap) // 2, (H - 2 * pad - gap) // 2
+    canvas = Image.new("RGB", (W, H), (18, 18, 18))
+    for i, s in enumerate(picks):
+        tile = _cover(Image.open(ROOT / "assets/img/hero" / f"{s}.webp").convert("RGB"), cw, ch)
+        mask = Image.new("L", tile.size, 0); ImageDraw.Draw(mask).rounded_rectangle((0, 0, cw - 1, ch - 1), radius=10, fill=255)
+        canvas.paste(tile, (pad + (i % 2) * (cw + gap), pad + (i // 2) * (ch + gap)), mask)
+    canvas.save(out / "site.jpg", "JPEG", quality=84, optimize=True, progressive=True)
+
 REDIRECTS = {  # old slug -> new page (and section) after the October 2026 restructure into year pages
     "love-what-you-do": "vct-emea-2024#meet-the-player", "meet-the-player": "vct-emea-2024#meet-the-player",
     "vct-emea-2024-season-teasers": "vct-emea-2024#teasers", "vct-emea-2024-content-slate": "vct-emea-2024#always-on",
@@ -750,6 +798,8 @@ if __name__ == "__main__":
             except FileNotFoundError as ex: print("thumb pending:", pr["slug"], ex.filename)
     work_dir = ROOT / "work"; work_dir.mkdir(exist_ok=True)
     for old in work_dir.glob("*.html"): old.unlink()
+    if "--thumbs" in sys.argv or not (ROOT / "assets/img/og/site.jpg").exists() or any(not (ROOT / "assets/img/og" / f"{pr['slug']}.jpg").exists() for pr in PROJECTS):
+        make_og()
     build_home(); build_work(); build_about(); build_contact(); build_404(); build_sitemap()
     for i, pr in enumerate(PROJECTS):
         (work_dir / f"{pr['slug']}.html").write_text(build_case(i, pr))
