@@ -333,7 +333,6 @@ P.append(dict(
     summary="Twelve years making my own content, from gaming montages to full-time streaming. It's where I learned what makes people watch, share and come back.",
     challenge=["The challenge was to be the best, and I knew I had what it took. I wanted people to see how good I was, so passion for gaming, "
                "music and creation became the perfect storm, setting me on the path to where I am today.",
-               ("h", "Reflection"),
                "As an independent creator there's no media budget and no brand to borrow attention from. Every view has to be earned through the "
                "work itself, and the community has to want to come back."],
     role=["Creator, producer, editor and community lead, all at once: concept, capture, edit, publishing, scheduling and the whole content pipeline, "
