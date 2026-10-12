@@ -277,6 +277,14 @@
     }));
   }
 
+  /* ---------- Video posters load just before they scroll into view ---------- */
+  const lazyPosters = $$("video[data-poster]");
+  const setPoster = (v) => { v.poster = v.dataset.poster; v.removeAttribute("data-poster"); };
+  if ("IntersectionObserver" in window) {
+    const pio = new IntersectionObserver((ens) => ens.forEach((en) => { if (en.isIntersecting) { setPoster(en.target); pio.unobserve(en.target); } }), { rootMargin: "900px 0px" });
+    lazyPosters.forEach((v) => pio.observe(v));
+  } else lazyPosters.forEach(setPoster);
+
   /* ---------- Scroll-driven effects ---------- */
   const heroes = $$(".split-hero--scroll");
   const lits = $$(".scroll-lit");

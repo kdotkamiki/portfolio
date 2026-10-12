@@ -3,7 +3,7 @@ Static site generator for ramtintotonchi.com. Run:  python3 _build/build.py
 Reads _build/content.py and the media metadata, writes plain HTML to the repo root.
 Nothing in _build/ is needed at runtime.
 """
-import html, json, pathlib, sys
+import html, json, pathlib, re, sys
 from PIL import Image, ImageFilter, ImageEnhance
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -16,17 +16,21 @@ PROJECTS = C.P
 FEATURED = [p for p in PROJECTS if p["featured"]]
 SITE = "https://ramtintotonchi.com"
 TITLE = "Ramtin Totonchi — Social Creative & Strategy Lead"
-DESC = ("Ramtin Totonchi is a London-based social creative and strategy lead: organic-first social campaigns, "
-        "creative direction and content for Google Cloud (at Jellyfish), Riot Games, G2 Esports and more.")
+DESC = ("Ramtin Totonchi, London-based social creative and strategy lead: social-first campaigns and creative direction "
+        "for Google Cloud, Riot Games, G2 Esports and more.")
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "27"  # bump to bust caches for CSS/JS
+VER = "28"  # bump to bust caches for CSS/JS
 
 
 def e(s):
-    return html.escape(str(s), quote=True)
+    s = str(s)
+    s = re.sub(r"(?<=\w)'(?=\w)", "\u2019", s)               # don't, Ramtin's
+    s = re.sub(r"(?<=s)'(?=[\s,.;:)!?]|$)", "\u2019", s)       # players'
+    s = re.sub(r"(?<=\s)'(?=\d)", "\u2019", s)                # '26
+    return html.escape(s, quote=True)
 
 
 # ------------------------------------------------------------------ media helpers
@@ -46,7 +50,7 @@ def figure(item, p, eager=False):
     if kind == "v":
         m = MEDIA[name]
         mins, secs = divmod(m["dur"], 60)
-        inner = (f'<video controls playsinline preload="none" poster="{p}assets/media/{name}.webp" width="{w}" height="{h}" '
+        inner = (f'<video controls playsinline preload="none" {"poster" if eager else "data-poster"}="{p}assets/media/{name}.webp" width="{w}" height="{h}" '
                  f'aria-label="{e(cap)}"><source src="{p}assets/media/{name}.mp4" type="video/mp4"></video>')
         meta = f'<span class="m-dur">{mins}:{secs:02d}</span>'
     else:
@@ -274,7 +278,7 @@ def work_card(proj, p):
       <a href="{p}work/{proj['slug']}.html">
         <div class="work-card__top"><span>{e(proj['year'] or proj['via'])}</span><span>{e(proj['cat'])}</span></div>
         <figure><img src="{thumb(proj, p)}" alt="" width="1920" height="1200" loading="lazy" decoding="async"></figure>
-        <div class="work-card__bottom"><h3 class="work-card__title">{e(proj['title'])}</h3><span class="work-card__client">{e(proj['client'])}<br><span class="muted">{e(proj['via'])}</span></span></div>
+        <div class="work-card__bottom"><h2 class="work-card__title">{e(proj['title'])}</h2><span class="work-card__client">{e(proj['client'])}<br><span class="muted">{e(proj['via'])}</span></span></div>
         <p class="work-card__line">{e(proj['line'])}</p>
       </a>
     </li>"""
@@ -425,7 +429,7 @@ def build_about():
   </section>
 
   <section class="section section--tight section--label grid-12" aria-labelledby="brands-h">
-    <div class="section-head section-head--full"><h2 class="label" id="brands-h">Brands I've worked with</h2></div>
+    <div class="section-head section-head--full"><h2 class="label" id="brands-h">Brands I’ve worked with</h2></div>
   </section>
   <div class="marquee">
     <ul class="visually-hidden">{brands}</ul>
@@ -455,7 +459,7 @@ def build_contact():
         <div class="field"><label for="f-first">First name</label><input id="f-first" name="first_name" autocomplete="given-name" required aria-describedby="e-first_name" data-fs-field><span class="field-error" id="e-first_name" data-error-for="first_name"></span></div>
         <div class="field"><label for="f-last">Last name <span class="opt">(optional)</span></label><input id="f-last" name="last_name" autocomplete="family-name"></div>
         <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email" data-fs-field><span class="field-error" id="e-email" data-error-for="email"></span></div>
-        <div class="field"><label for="f-topic">What's it about?</label>
+        <div class="field"><label for="f-topic">What’s it about?</label>
           <select id="f-topic" name="topic">
             <option>A full-time role</option>
             <option>Social strategy</option>
@@ -468,7 +472,7 @@ def build_contact():
       </form>
       <div class="form-success" tabindex="-1" hidden>
         <p class="form-success__title">Thanks, your message is on its way.</p>
-        <p>I'll get back to you at the email you gave, usually within a couple of working days.</p>
+        <p>I’ll get back to you at the email you gave, usually within a couple of working days.</p>
         <button class="link" type="button" data-form-reset>Send another message →</button>
       </div>
     </div>
@@ -528,7 +532,7 @@ def creator_charts():
             </svg>
           </figure>
         </div>
-        <p class="cs-note">Stats from SullyGnome. Charts redrawn from SullyGnome's 2018 follower and viewership graphs, so values are approximate.</p>
+        <p class="cs-note">Stats from SullyGnome. Charts redrawn from SullyGnome’s 2018 follower and viewership graphs, so values are approximate.</p>
       </div>
     </section>"""
 
@@ -674,7 +678,7 @@ def build_case(i, proj, template=False):
             f'<li><a class="link" href="{s}.html">{e(tt)} →</a></li>' for s, tt in proj["related"]) + "</ul>")
     others = "\n".join(f'      <li><a href="{o["slug"]}.html"><span>{e(o["title"])}</span><span>{e(o["client"].split(" · ")[0])}</span></a></li>' for o in PROJECTS if o is not proj)
     title = proj["title"]
-    desc = proj["summary"][:155]
+    desc = proj["summary"] if len(proj["summary"]) <= 158 else proj["summary"][:152].rsplit(" ", 1)[0].rstrip(",;:") + "…"
     out = head(f"{title} — Ramtin Totonchi", desc, p, "case", noindex=template, canonical=f"work/{proj['slug']}.html", og=f"assets/img/og/{proj['slug']}.jpg", og_alt=f"{title}: {proj['cat']}") + header(p, "work") + f"""<main id="main">
   <section class="cs-hero" data-dark aria-labelledby="cs-title">
     <div class="cs-hero__img"><img src="{hero_img}" alt="" width="1920" height="1080" fetchpriority="high"></div>
