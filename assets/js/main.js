@@ -102,6 +102,7 @@
     const mqVertical = window.matchMedia("(max-width: 760px)");
     const mod = (n, m) => ((n % m) + m) % m;
 
+    const SIDE_OPACITY = 0.4;   // neighbours of the focused project
     let pos = 0, target = 0, radius = 600, vertical = mqVertical.matches;
     let raf = 0, last = 0, front = -1, gridMode = false;
 
@@ -123,8 +124,10 @@
         const card = cards[i];
         const rot = vertical ? `rotateX(${a}deg)` : `rotateY(${-a}deg)`;   // next slide sits right / below
         card.style.transform = `translate(-50%, -50%) translateZ(${radius}px) ${rot} translateZ(${-radius}px)`;
-        const vis = (cos - 0.62) / 0.24;   // front ±1 fully visible, the rest fade out
-        card.style.opacity = Math.max(0, Math.min(1, vis)).toFixed(3);
+        const vis = Math.max(0, Math.min(1, (cos - 0.62) / 0.24));   // cards far round the ring fade out
+        const focus = Math.max(0, 1 - Math.abs(rel));                    // 1 at the centre, 0 one slot away
+        const ease = focus * focus * (3 - 2 * focus);                    // smoothstep, so the hand-off feels soft while dragging
+        card.style.opacity = (vis * (SIDE_OPACITY + (1 - SIDE_OPACITY) * ease)).toFixed(3);
         card.style.zIndex = String(Math.round(cos * 100) + 100);
         const near = Math.abs(rel) < 0.5;
         const reachable = Math.abs(rel) < 1.5;
