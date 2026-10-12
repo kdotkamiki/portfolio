@@ -768,3 +768,25 @@ strong { font-weight: 600; }
   .filter-group::-webkit-scrollbar { display: none; }
   .filter-group .toggle { flex: none; white-space: nowrap; }
 }
+
+/* Carousel focus: the centre project is in colour and framed by brackets; neighbours are black and white.
+   --f (0 to 1) is set per card by the carousel script, so colour flows in as a card reaches the centre. */
+.card { --f: 1; }
+.card figure { filter: grayscale(calc(1 - var(--f))) contrast(calc(0.9 + 0.1 * var(--f))); }
+.card a { position: relative; }
+.card a::before {
+  content: ""; position: absolute; z-index: 1; left: -12px; right: -12px; top: -12px; height: calc(var(--w) * 0.625 + 24px); pointer-events: none;
+  --c: var(--ink); --l: 26px; --t: 2px;
+  background:
+    linear-gradient(var(--c), var(--c)) top left / var(--l) var(--t) no-repeat, linear-gradient(var(--c), var(--c)) top left / var(--t) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / var(--l) var(--t) no-repeat, linear-gradient(var(--c), var(--c)) top right / var(--t) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / var(--l) var(--t) no-repeat, linear-gradient(var(--c), var(--c)) bottom left / var(--t) var(--l) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / var(--l) var(--t) no-repeat, linear-gradient(var(--c), var(--c)) bottom right / var(--t) var(--l) no-repeat;
+  opacity: 0; transform: scale(1.06); transition: opacity 0.45s var(--ease), transform 0.6s var(--ease);
+}
+.card--front a::before { opacity: 1; transform: none; }
+.card .card-meta { margin-top: 22px; }   /* clears the bottom brackets */
+.stage.is-grid .card figure { filter: none; }
+.stage.is-grid .card a::before { display: none; }
+.stage.is-grid .card .card-meta { margin-top: 12px; }
+@media (max-width: 760px) { .card a::before { --l: 20px; left: -9px; right: -9px; top: -9px; height: calc(var(--w) * 0.625 + 18px); } .card .card-meta { margin-top: 18px; } }
