@@ -133,10 +133,10 @@ P.append(dict(
     summary="A vertical video series that put England players in front of Google Cloud's AI tools, so football fans could see what Gemini does by watching players compete with it.",
     challenge=["AI products are abstract, and sports partnership content often ends up as players standing next to a logo. "
                "This had to engage a football audience in a conversation about AI, and feel high-energy and playful rather than like a product demo."],
-    role=[JF,
-          "On this partnership I was part of the core team that developed the hero concepts: pressure-testing each idea for social, "
-          "shaping the formats around what talent time allowed, and owning how the series would land on platform. I then steered the work "
-          "through production, edit and approvals with the client, The FA and our production partners."],
+    role=["As Social Content Manager at Jellyfish, I lead social on the Google Cloud account.",
+          "On this partnership I was part of the core team behind the campaign, leading on Google Cloud's social: pressure-testing the hero "
+          "concepts for social, shaping the formats around what talent time allowed, and making sure every piece met the standard Google Cloud "
+          "expects before it went live. I worked alongside the client, The FA and our production partners through production, edit and approvals."],
     approach=["Product-led storytelling, disguised as play:",
               ("steps", [("Find the tension", "Football fans don't care about AI features, but they love competition, banter and seeing players off-guard."),
                          ("Make the product the game", "Each hero concept turns one Gemini capability into a challenge, so the tech is understood by watching it work, not by being told."),
