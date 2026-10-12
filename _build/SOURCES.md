@@ -24,7 +24,6 @@ Source folder: `Documents/Website` on Ramtin's computer. Nothing on the site is 
 | G2 × adidas | 2.7M views = 2,000,000 (X) + 600,000 (YouTube) + 31,000 + 75,000 (BTS). 60,448 engagements = X 43,000 + 4,700 + 656 + 200; YouTube 10,000 + 373; BTS 1,400 + 119. Rate = 60,448 ÷ 2,706,000 = 2.23% | `G2 Esports/g2 adidas announcement.txt` |
 | Pink Pony | 552,000 live unique viewers; £5,971.44 raised; 10,000 engagements | `G2 Esports/Pink Pony description.txt` |
 | Origin | 61,000 views, 6,500 engagements | Filename of `Origin_Call_of_Duty_61000 views_6500engagement.mp4` |
-| Montages | Blood // Water 49K views, 1,400 likes; Gears of War 3 25K views, 800 likes | Screenshots and filenames |
 | Streaming 2018 | All six tiles and deltas | `Self-Employed (Content Creator)/2018stats.png` |
 | Streaming charts | Redrawn from the two SullyGnome graphs (approximate) | `follower_trend2017-2018.png`, `viewershiptrend2017-2018.png` |
 | About: In numbers | 1,000+ videos delivered, 2020 to 2026; a newly launched YouTube channel scaled to 100K subscribers in year one, earning the Silver Creator Award | Ramtin, in conversation |

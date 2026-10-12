@@ -341,13 +341,13 @@ P.append(dict(
                          ("Show up consistently", "380 streams and 2,187 hours live in 2018 alone."),
                          ("Grow year on year", "Use the data to see what's working and do more of it.")])],
     idea=["Origin, a Call of Duty montage that was groundbreaking for its time and got the attention of notable creators including KSI."],
-    delivered=["Origin and other gaming montages", "Live streaming: 380 streams in 2018", "Community across Discord, YouTube and X", "Brand relationships with OMEN by HP, Intel and Snickers"],
-    results=[("61K", "Views, Origin", "6,500 engagements"), ("49K", "Views, Blood // Water", "1,400 likes"), ("25K", "Views, Gears of War 3 Montage #1", "800 likes")],
+    delivered=["Origin and other gaming montages", "Live streaming: 380 streams in 2018", "Community across Twitch, Discord, YouTube and X", "Brand relationships with OMEN by HP, Intel and Snickers"],
+    results=[("61K", "Views, Origin", "6,500 engagements")],
     results_note="Streaming results for 2018 are below.",
     creator=True,
     skills=["Content creation", "Editing", "Community building", "Live streaming", "Brand partnerships"],
     media={"hero": [("v", "origin", "Origin")],
-           "after_idea": [("i", "origin-ksi-comment", "KSI's comment on Origin"), ("i", "montage-fortnite", "Blood // Water, a Fortnite montage: 49K views, 1,400 likes"), ("i", "montage-gow3", "Gears of War 3 Montage #1: 25K views, 800 likes")]},
+           "after_idea": [("i", "origin-ksi-comment", "KSI's comment on Origin")]},
 ))
 
 

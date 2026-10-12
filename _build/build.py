@@ -54,7 +54,7 @@ def figure(item, p, eager=False):
                  f'aria-label="{e(cap)}"><source src="{p}assets/media/{name}.mp4" type="video/mp4"></video>')
         meta = f'<span class="m-dur">{mins}:{secs:02d}</span>'
     else:
-        shot = name.endswith("tweet") or name.startswith("luminary") or name in ("origin-ksi-comment", "admission-form", "g2-adidas-lockup", "montage-fortnite", "montage-gow3")
+        shot = name.endswith("tweet") or name.startswith("luminary") or name in ("origin-ksi-comment", "admission-form", "g2-adidas-lockup")
         lazy = "" if eager else 'loading="lazy" '
         inner = (f'<img src="{p}assets/img/work/{name}.webp" alt="{e(cap)}" width="{w}" height="{h}" '
                  f'{lazy}decoding="async">')
