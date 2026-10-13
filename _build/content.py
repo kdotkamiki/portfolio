@@ -219,7 +219,7 @@ P.append(dict(
              ("380K", "Engagements", "")],
     results_note="",
     skills=["Platform launch", "Short-form video", "Organic growth", "Production planning", "Talent-led content"],
-    media={"hero": [("v", "tiktok-clip-1", "TikTok-native short filmed at media day"), ("v", "tiktok-clip-2", "TikTok-native short filmed at media day")]},
+    media={"hero": [("v", "tiktok-clip-1", "TikTok-native short filmed at media day (1 of 2)"), ("v", "tiktok-clip-2", "TikTok-native short filmed at media day (2 of 2)")]},
 ))
 
 P.append(dict(
@@ -474,7 +474,7 @@ P.append(dict(
                           stats=[("+25%", "Views and engagement", "vs the 2023 series")],
                           media=[[("v", "frenzy-fire-blind-rankings", "Frenzy Fire: Blind Rankings"), ("v", "frenzy-fire-2024", "Frenzy Fire: He Said That?")]])],
              compact_label="Also in the season",
-             compact=[("Run It Back", "run-it-back-amy", "v",
+             compact=[("Run It Back, episode four", "run-it-back-amy", "v",
                        "The play-analysis series continued into 2024. Episode four: Amy, VCT Game Changers EMEA.", "", "run-it-back")],
              related_label="Also from 2024", related=[("push-to-talk", "Push to Talk × Logitech G"), ("vct-emea-tiktok-launch", "VCT EMEA on TikTok")]),
     ],
@@ -517,8 +517,8 @@ P.append(dict(
                                "content calendar and rollout across channels, and owned performance tracking after launch.",
                           stats=[("1M", "Views, Join Us", "10K+ engagements"), ("100K", "Views, opening teaser", "3K engagements")],
                           media=[[("v", "join-us", "Join Us")],
-                                 [("i", "join-us-still-1", "Players photographed for Join Us"), ("i", "join-us-still-0", "Players photographed for Join Us")],
-                                 [("i", "join-us-still-2", "Players photographed for Join Us"), ("i", "join-us-still-3", "Players photographed for Join Us")],
+                                 [("i", "join-us-still-1", "Players photographed for Join Us (1 of 4)"), ("i", "join-us-still-0", "Players photographed for Join Us (2 of 4)")],
+                                 [("i", "join-us-still-2", "Players photographed for Join Us (3 of 4)"), ("i", "join-us-still-3", "Players photographed for Join Us (4 of 4)")],
                                  [("v", "vct23-opening-teaser", "VCT EMEA 2023 opening teaser")]]),
                      dict(id="unlocked", kicker="Long-form documentary series", title="Unlocked",
                           text=["A ten-episode documentary series, one per partner team, filmed in each team's hometown and headquarters ahead of the league "

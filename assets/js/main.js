@@ -8,6 +8,7 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const escHTML = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
   /* ---------- London clock ---------- */
   const clocks = $$("[data-clock]");
@@ -44,6 +45,7 @@
       menuBtn.setAttribute("aria-expanded", String(open));
       menuBtn.querySelector(".menu-label").textContent = open ? "Close" : "Menu";
       menu.inert = !open;
+      $$("main, footer, .skip-link").forEach((el) => { el.inert = open; });
       if (open) menu.querySelector("a")?.focus({ preventScroll: true });
       else if (focusBack) menuBtn.focus();
     };
@@ -57,8 +59,8 @@
   /* ---------- Word split + reveal ---------- */
   $$(".split-words").forEach((el) => {
     const text = el.textContent.trim();
-    el.setAttribute("aria-label", text);
-    el.innerHTML = text.split(/\s+/).map((w, i) => `<span class="w" aria-hidden="true" style="--i:${i}"><span>${w}</span></span>`).join(" ");
+    el.innerHTML = `<span class="visually-hidden">${escHTML(text)}</span>` +
+      text.split(/\s+/).map((w, i) => `<span class="w" aria-hidden="true" style="--i:${i}"><span>${escHTML(w)}</span></span>`).join(" ");
   });
   const revealables = $$(".reveal, .split-words");
   if ("IntersectionObserver" in window && !reduceMotion) {
@@ -139,6 +141,8 @@
       if (f !== front) {
         cards[front]?.classList.remove("card--front");
         cards[f].classList.add("card--front");
+        const ae = document.activeElement;
+        if (!gridMode && ae && ae.closest && ae.closest(".card") && ae.closest(".card") !== cards[f]) cards[f].querySelector("a").focus({ preventScroll: true });
         front = f;
         setCounter(f + 1);
       }
@@ -170,10 +174,13 @@
       e.preventDefault();
       const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       const now = performance.now();
-      const notch = e.deltaMode === 1 || (Math.abs(d) >= 50 && Number.isInteger(d));
-      if (notch) { if (now > notchLock) { go(Math.sign(d)); notchLock = now + 260; } lastWheel = now; return; }
-      if (now - lastWheel > 220) { wheelUsed = false; wheelAcc = 0; }
+      const gap = now - lastWheel;
       lastWheel = now;
+      if (gap > 220) { wheelUsed = false; wheelAcc = 0; }               // a quiet gap ends the gesture
+      // A separate mouse-wheel notch (line mode, or a big step after a pause) moves one slide immediately.
+      // Anything arriving inside a gesture (trackpad swipes and their momentum) is ignored once the gesture has moved.
+      const notch = e.deltaMode === 1 || (gap > 160 && Math.abs(d) >= 50);
+      if (notch) { if (!wheelUsed && now > notchLock) { go(Math.sign(d)); notchLock = now + 160; } wheelUsed = true; return; }
       if (wheelUsed) return;
       wheelAcc += d;
       if (Math.abs(wheelAcc) > 30) { go(Math.sign(wheelAcc)); wheelUsed = true; wheelAcc = 0; }
@@ -205,11 +212,12 @@
         let t = Math.round(pos);
         if (Math.abs(vel) > 0.35 && t === Math.round(startPos)) t -= Math.sign(vel);   // a flick always moves one slide
         target = t; kick();
-      }
+        setTimeout(() => { moved = 0; }, 60);   // the click that follows a drag is swallowed; later clicks and Enter work
+      } else { target = Math.round(pos); kick(); }   // tiny nudges snap back
     };
     stage.addEventListener("pointerup", endDrag);
     stage.addEventListener("pointercancel", endDrag);
-    stage.addEventListener("lostpointercapture", endDrag);
+    stage.addEventListener("lostpointercapture", (e) => { if (e.target === stage) endDrag(e); });
 
     // Clicks: a drag never opens a link; a side card comes to the front instead of opening.
     stage.addEventListener("click", (e) => {
@@ -239,21 +247,25 @@
     const setView = (view) => {
       gridMode = view === "grid";
       stage.classList.toggle("is-grid", gridMode);
+      stage.closest(".home-main")?.classList.toggle("is-grid-mode", gridMode);
+      stage.scrollTop = 0; stage.scrollLeft = 0;
+      header?.classList.remove("is-solid");
       toggles.forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.view === view)));
       $$("[data-step]").forEach((b) => (b.hidden = gridMode));
       stage.setAttribute("aria-roledescription", gridMode ? "grid" : "carousel");
       if (gridMode) {
         cancelAnimationFrame(raf); raf = 0;
         cards.forEach((c) => { c.querySelector("a").tabIndex = 0; c.removeAttribute("aria-hidden"); });
-      } else { measure(); render(); }
+      } else { measure(); render(); kick(); }
     };
+    stage.addEventListener("scroll", () => { if (gridMode) header?.classList.toggle("is-solid", stage.scrollTop > 8); else if (stage.scrollTop) stage.scrollTop = 0; }, { passive: true });
     toggles.forEach((t) => t.addEventListener("click", () => setView(t.dataset.view)));
 
     const onResize = () => { if (!gridMode) { measure(); render(); } };
     window.addEventListener("resize", onResize);
     mqVertical.addEventListener?.("change", onResize);
 
-    measure(); render(); announce();
+    measure(); render();
     // Reduced motion keeps the carousel layout; it just moves instantly (see the easing in loop() and the reduced-motion CSS).
   }
 
@@ -268,10 +280,12 @@
     // Filter by client: hides cards in both the grid and the list
     const fbtns = $$("[data-filter]", workIndex), status = $("[data-filter-status]", workIndex);
     const items = $$("[data-group]", workIndex);
+    $$(".work-grid > [data-group]", workIndex).forEach((it, i) => it.classList.toggle("is-even", i % 2 === 1));
     fbtns.forEach((b) => b.addEventListener("click", () => {
       const f = b.dataset.filter;
       fbtns.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
       items.forEach((it) => { it.hidden = !(f === "all" || it.dataset.group === f); if (!it.hidden) it.classList.add("is-in"); });
+      $$(".work-grid > [data-group]:not([hidden])", workIndex).forEach((it, i) => it.classList.toggle("is-even", i % 2 === 1));
       const n = $$(".work-grid [data-group]:not([hidden])", workIndex).length;
       if (status) status.textContent = `Showing ${n} project${n === 1 ? "" : "s"}${f === "all" ? "" : ": " + b.firstChild.textContent.trim()}`;
     }));
@@ -291,8 +305,9 @@
   const parallax = $(".cs-hero__img img");
   lits.forEach((el) => {
     const lines = el.innerHTML.split(/<br\s*\/?>/i);
-    el.setAttribute("aria-label", lines.join(" ").replace(/\s+/g, " ").trim());
-    el.innerHTML = lines.map((ln) => ln.trim().split(/\s+/).map((w) => `<span class="w" aria-hidden="true">${w}</span>`).join(" ")).join("<br>");
+    const plain = lines.join(" ").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+    el.innerHTML = `<span class="visually-hidden">${plain}</span>` +
+      lines.map((ln) => ln.trim().split(/\s+/).map((w) => `<span class="w" aria-hidden="true">${w}</span>`).join(" ")).join("<br>");
   });
   if (!reduceMotion && (heroes.length || lits.length || parallax)) {
     const mqMobile = window.matchMedia("(max-width: 760px)");
@@ -332,7 +347,10 @@
     let x = 0, y = 0, cx = 0, cy = 0, running = false, active = false;
     const follow = () => {
       cx += (x - cx) * 0.2; cy += (y - cy) * 0.2;
-      box.style.transform = `translate(${cx + 24}px, ${cy - 90}px)`;
+      const bw = box.offsetWidth || 300, bh = box.offsetHeight || 190, top = (header ? header.offsetHeight : 0) + 8;
+      let bx = cx + 24; if (bx + bw > innerWidth - 12) bx = cx - 24 - bw;
+      let by = Math.max(top, cy - 90); if (by + bh > innerHeight - 12) by = innerHeight - 12 - bh;
+      box.style.transform = `translate(${bx}px, ${by}px)`;
       if (active || Math.abs(x - cx) > 0.5) requestAnimationFrame(follow); else running = false;
     };
     previewRows.forEach((row) => {
@@ -346,6 +364,14 @@
     });
     window.addEventListener("scroll", () => { active = false; box.classList.remove("on"); }, { passive: true });
   }
+
+  /* ---------- Brand marquee: pause / play ---------- */
+  $$("[data-marquee-toggle]").forEach((b) => b.addEventListener("click", () => {
+    const m = document.getElementById(b.getAttribute("aria-controls"));
+    const paused = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", String(paused)); b.textContent = paused ? "Play" : "Pause";
+    m?.classList.toggle("is-paused", paused);
+  }));
 
   /* ---------- Count-up numbers ---------- */
   const counters = $$("[data-count]");
@@ -394,7 +420,11 @@
       let first = null;
       Object.keys(messages).forEach((name) => {
         const f = form.elements[name]; const v = f.validity; let msg = "";
+        const val = f.value.trim();
         for (const k of Object.keys(messages[name])) if (v[k]) { msg = messages[name][k]; break; }
+        if (!msg && !val) msg = messages[name].valueMissing;
+        if (!msg && name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)) msg = messages.email.typeMismatch;
+        if (!msg && name === "message" && val.length < 10) msg = messages.message.tooShort;
         setError(name, msg);
         if (msg && !first) first = f;
       });
@@ -417,6 +447,7 @@
       try {
         const res = await fetch(form.action, { method: "POST", body: data, headers: { Accept: "application/json" } });
         if (res.ok) {
+          setBusy(false);
           form.reset(); form.hidden = true;
           if (success) { success.hidden = false; success.focus(); }
           return;
@@ -428,10 +459,15 @@
         const general = errs.filter((er) => !er.field || !messages[er.field]).map((er) => er.message).join(" ");
         status.classList.add("is-error");
         status.innerHTML = general ? `${general} You can also message me on <a href="https://www.linkedin.com/in/rtotonchi4412">LinkedIn</a>.` : (shown ? "Please check the highlighted fields." : fallback);
+        setBusy(false);
+        const bad = form.querySelector('[aria-invalid="true"]');
+        (bad || btn).focus();
+        return;
       } catch (_) {
         status.classList.add("is-error");
         status.innerHTML = fallback;
-      } finally { setBusy(false); }
+      }
+      setBusy(false); btn.focus();
     });
 
     $("[data-form-reset]", success || document)?.addEventListener("click", () => {

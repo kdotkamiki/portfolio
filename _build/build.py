@@ -17,12 +17,12 @@ FEATURED = [p for p in PROJECTS if p["featured"]]
 SITE = "https://ramtintotonchi.com"
 TITLE = "Ramtin Totonchi — Social Creative & Strategy Lead"
 DESC = ("Ramtin Totonchi, London-based social creative and strategy lead: social-first campaigns and creative direction "
-        "for Google Cloud, Riot Games, G2 Esports and more.")
+        "for Google Cloud, Riot Games and G2 Esports.")
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;'
          'family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet">')
-VER = "29"  # bump to bust caches for CSS/JS
+VER = "30"  # bump to bust caches for CSS/JS
 
 
 def e(s):
@@ -54,11 +54,14 @@ def figure(item, p, eager=False):
                  f'aria-label="{e(cap)}"><source src="{p}assets/media/{name}.mp4" type="video/mp4"></video>')
         meta = f'<span class="m-dur">{mins}:{secs:02d}</span>'
     else:
-        shot = name.endswith("tweet") or name.startswith("luminary") or name in ("origin-ksi-comment", "admission-form", "g2-adidas-lockup")
+        shot = name.endswith("tweet") or name.startswith("luminary") or name in ("origin-ksi-comment", "admission-form")
         lazy = "" if eager else 'loading="lazy" '
         inner = (f'<img src="{p}assets/img/work/{name}.webp" alt="{e(cap)}" width="{w}" height="{h}" '
                  f'{lazy}decoding="async">')
         meta = ""
+        if not shot and w < 1400:
+            return (f'<figure class="m m--{shape} m--capped" style="--ar:{ar:.4f};--cap:{round(w * 1.25)}px"><div class="m-frame">{inner}</div>'
+                    f'<figcaption>{e(cap)}</figcaption></figure>')
         if shot:
             shape += " is-shot"
             return (f'<figure class="m m--{shape}" style="--ar:{ar:.4f};--maxw:{w}px"><div class="m-frame">{inner}</div>'
@@ -208,7 +211,7 @@ def header(p, current=""):
   <a class="wordmark" href="{p}index.html"><span>Ramtin</span> <span>Totonchi</span></a>
   <nav class="site-nav" aria-label="Main">
     <ul>
-      <li><a href="{p}work.html"{cur('work')}>Work <sup>{len(PROJECTS):02d}</sup></a></li>
+      <li><a href="{p}work.html"{cur('work')}>Work <sup aria-hidden="true">{len(PROJECTS):02d}</sup><span class="visually-hidden"> ({len(PROJECTS)} projects)</span></a></li>
       <li><a href="{p}about.html"{cur('about')}>About</a></li>
       <li><a href="{p}contact.html"{cur('contact')}>Contact</a></li>
     </ul>
@@ -220,7 +223,7 @@ def header(p, current=""):
   <nav aria-label="Mobile">
     <ul>
       <li><a href="{p}index.html"{cur('home')}>Home</a></li>
-      <li><a href="{p}work.html"{cur('work')}>Work <sup>{len(PROJECTS):02d}</sup></a></li>
+      <li><a href="{p}work.html"{cur('work')}>Work <sup aria-hidden="true">{len(PROJECTS):02d}</sup><span class="visually-hidden"> ({len(PROJECTS)} projects)</span></a></li>
       <li><a href="{p}about.html"{cur('about')}>About</a></li>
       <li><a href="{p}contact.html"{cur('contact')}>Contact</a></li>
     </ul>
@@ -254,7 +257,7 @@ def carousel_card(proj, i):
     return f"""      <li class="card" data-title="{e(proj['title'])}">
         <a href="work/{proj['slug']}.html" draggable="false">
           <figure>
-            <img src="{thumb(proj, '')}" alt="" width="1920" height="1200" loading="{'eager' if i < 3 or i > len(FEATURED) - 3 else 'lazy'}" decoding="async" draggable="false">
+            <img src="{thumb(proj, '')}" alt="" width="1920" height="1200" loading="eager" decoding="async" draggable="false">
             <span class="card-quote" aria-hidden="true">{e(proj['quote'])}</span>
           </figure>
           <span class="card-meta"><span>{e(proj['title'])}</span><span>{e(proj['client'].split(' · ')[0])}</span></span>
@@ -295,7 +298,7 @@ def work_row(proj, p):
 # ------------------------------------------------------------------ pages
 def build_home():
     n = len(FEATURED)
-    out = head(TITLE, DESC, "", "home", "home") + header("", "home") + f"""<main id="main" class="home-main">
+    out = head(TITLE, DESC, "", "home", "home") + header("", "home") + f"""<main id="main" tabindex="-1" class="home-main">
   <h1 class="visually-hidden">Ramtin Totonchi, social creative and strategy lead</h1>
   <p class="intro split-words">{e(C.HOME_INTRO)}</p>
 
@@ -332,10 +335,10 @@ GROUPS = [("Jellyfish", "At Jellyfish, on the Google Cloud account"), ("Edelman"
 
 
 def build_work():
-    out = head("Work — Ramtin Totonchi", "Case studies: Google Cloud (at Jellyfish), Riot Games and VALORANT Esports, G2 Esports, and more.", "", "work", canonical="work.html") + header("", "work") + f"""<main id="main" class="page-top">
+    out = head("Work — Ramtin Totonchi", "Case studies: Google Cloud (at Jellyfish), Riot Games and VALORANT Esports, G2 Esports, and more.", "", "work", canonical="work.html") + header("", "work") + f"""<main id="main" tabindex="-1" class="page-top">
   <section class="grid-12 work-index">
     <div class="index-head">
-      <h1>Work<sup>{len(PROJECTS):02d}</sup></h1>
+      <h1>Work<sup aria-hidden="true">{len(PROJECTS):02d}</sup><span class="visually-hidden"> ({len(PROJECTS)} projects)</span></h1>
       <div class="index-controls">
         <div class="toggle-group filter-group" role="group" aria-label="Filter by client">
           {"".join(f'<button class="toggle" type="button" data-filter="{k}" aria-pressed="{str(k == 'all').lower()}">{lbl}<sup>{sum(1 for pr in PROJECTS if k == "all" or group_of(pr) == k)}</sup></button>' for k, lbl in FILTERS)}
@@ -378,7 +381,7 @@ def build_about():
     body = "\n".join(f'        <p class="reveal">{e(t)}</p>' for t in C.ABOUT_BODY)
     brands = "".join(f"<li>{e(b)}</li>" for b in C.BRANDS)
     marquee = '<div class="marquee__group">' + "".join(f'<span class="wm wm--{i % 5}">{e(b)}</span>' for i, b in enumerate(C.BRANDS)) + "</div>"
-    out = head("About — Ramtin Totonchi", DESC, "", "about", canonical="about.html", og="assets/img/og/about.jpg", og_alt="Ramtin Totonchi in the VCT EMEA studio") + header("", "about") + f"""<main id="main">
+    out = head("About — Ramtin Totonchi", "Twelve years as a creator, then social and creative leadership at G2 Esports, Riot Games, Edelman and Jellyfish.", "", "about", canonical="about.html", og="assets/img/og/about.jpg", og_alt="Ramtin Totonchi in the VCT EMEA studio") + header("", "about") + f"""<main id="main" tabindex="-1">
   <section class="split-hero split-hero--scroll" data-dark aria-label="Introduction">
     <div class="split-hero__sticky">
       <h1 class="visually-hidden">About Ramtin Totonchi</h1>
@@ -431,10 +434,11 @@ def build_about():
   <section class="section section--tight section--label grid-12" aria-labelledby="brands-h">
     <div class="section-head section-head--full"><h2 class="label" id="brands-h">Brands I’ve worked with</h2></div>
   </section>
-  <div class="marquee">
+  <div class="marquee" id="brand-marquee">
     <ul class="visually-hidden">{brands}</ul>
     <div class="marquee__track" aria-hidden="true">{marquee}{marquee}</div>
   </div>
+  <button class="marquee-toggle" type="button" data-marquee-toggle aria-controls="brand-marquee" aria-pressed="false">Pause</button>
   <div class="marquee-gap"></div>
 </main>
 """ + footer("")
@@ -443,7 +447,7 @@ def build_about():
 
 def build_contact():
     li = f'<a class="link" href="{e(C.LINKEDIN)}">LinkedIn →</a>' if C.LINKEDIN else ""
-    out = head("Contact — Ramtin Totonchi", "Get in touch with Ramtin Totonchi about senior social and creative leadership roles or projects.", "", "contact", canonical="contact.html") + header("", "contact") + f"""<main id="main">
+    out = head("Contact — Ramtin Totonchi", "Get in touch with Ramtin Totonchi about senior social and creative leadership roles or projects.", "", "contact", canonical="contact.html") + header("", "contact") + f"""<main id="main" tabindex="-1">
   <section class="say-hello" data-dark aria-labelledby="contact-h">
     <h1 class="say-hello__title split-words" id="contact-h">Say Hello</h1>
   </section>
@@ -678,8 +682,8 @@ def build_case(i, proj, template=False):
             f'<li><a class="link" href="{s}.html">{e(tt)} →</a></li>' for s, tt in proj["related"]) + "</ul>")
     others = "\n".join(f'      <li><a href="{o["slug"]}.html"><span>{e(o["title"])}</span><span>{e(o["client"].split(" · ")[0])}</span></a></li>' for o in PROJECTS if o is not proj)
     title = proj["title"]
-    desc = proj["summary"] if len(proj["summary"]) <= 158 else proj["summary"][:152].rsplit(" ", 1)[0].rstrip(",;:") + "…"
-    out = head(f"{title} — Ramtin Totonchi", desc, p, "case", noindex=template, canonical=f"work/{proj['slug']}.html", og=f"assets/img/og/{proj['slug']}.jpg", og_alt=f"{title}: {proj['cat']}") + header(p, "work") + f"""<main id="main">
+    desc = proj["summary"] if len(proj["summary"]) <= 158 else proj["line"]
+    out = head(f"{title} — Ramtin Totonchi", desc, p, "case", noindex=template, canonical=f"work/{proj['slug']}.html", og=f"assets/img/og/{proj['slug']}.jpg", og_alt=f"{title}: {proj['cat']}") + header(p, "work") + f"""<main id="main" tabindex="-1">
   <section class="cs-hero" data-dark aria-labelledby="cs-title">
     <div class="cs-hero__img"><img src="{hero_img}" alt="" width="1920" height="1080" fetchpriority="high"></div>
     <div class="cs-hero__inner">
@@ -728,7 +732,7 @@ def build_case(i, proj, template=False):
 
 
 def build_404():
-    out = head("Not found — Ramtin Totonchi", DESC, "/", "404", noindex=True) + header("/", "") + """<main id="main" class="notfound">
+    out = head("Not found — Ramtin Totonchi", DESC, "/", "404", noindex=True) + header("/", "") + """<main id="main" tabindex="-1" class="notfound">
   <div>
     <h1>404</h1>
     <p>This page wandered off the feed.</p>
@@ -777,7 +781,8 @@ def build_redirect(new):
     page, _, anchor = new.partition("#")
     frag = f"#{anchor}" if anchor else ""
     return f"""<!doctype html>
-<html lang="en-GB"><head><meta charset="utf-8"><title>Moved</title>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Moved</title>
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <meta name="robots" content="noindex"><link rel="canonical" href="{SITE}/work/{page}.html">
 <meta http-equiv="refresh" content="0; url={page}.html{frag}"></head>
 <body><p><a href="{page}.html{frag}">This case study has moved.</a></p></body></html>
